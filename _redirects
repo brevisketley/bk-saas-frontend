@@ -1,2 +1,3 @@
 / /login 301
+/bk-saas-frontend/* /:splat 301
 /* /index.html 200
