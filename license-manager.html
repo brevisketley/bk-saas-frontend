@@ -54,7 +54,23 @@
 <main>
 
   <div class="card">
+    <h2>Your EAs / Products</h2>
+    <div class="row" style="align-items:flex-end;">
+      <div><label>EA Name</label><input type="text" id="newProdName" placeholder="Gold Scalper Pro" /></div>
+      <div><label>Price (USD)</label><input type="number" id="newProdPrice" placeholder="99" /></div>
+      <div><label>Duration (days)</label><input type="number" id="newProdDuration" value="30" /></div>
+    </div>
+    <button class="submit" style="margin-top:12px;" onclick="createProduct()">+ Add EA</button>
+    <div id="prodResult" style="margin-top:10px; font-size:13px;"></div>
+  </div>
+
+  <div class="card">
     <h2>Generate License</h2>
+
+    <label>EA / Product</label>
+    <select id="productId">
+      <option value="">— General / Unspecified —</option>
+    </select>
 
     <div class="row">
       <div>
@@ -104,10 +120,10 @@
     <h2>All Licenses</h2>
     <table>
       <thead>
-        <tr><th>Key</th><th>Status</th><th>Plan</th><th>Client</th><th>Expiry</th><th>Actions</th></tr>
+        <tr><th>Key</th><th>Status</th><th>EA</th><th>Plan</th><th>Client</th><th>Expiry</th><th>Actions</th></tr>
       </thead>
       <tbody id="licenseTableBody">
-        <tr><td colspan="6" class="muted">Loading...</td></tr>
+        <tr><td colspan="7" class="muted">Loading...</td></tr>
       </tbody>
     </table>
   </div>
@@ -142,6 +158,44 @@ document.querySelectorAll('.assign-btn').forEach(btn => {
   });
 });
 
+async function loadProducts() {
+  try {
+    const res = await fetch(`${API_URL}/product/all`, { headers: { 'x-tenant-domain': TENANT_DOMAIN } });
+    const data = await res.json();
+    const select = document.getElementById('productId');
+    select.innerHTML = '<option value="">— General / Unspecified —</option>' +
+      (data.products || []).map(p => `<option value="${p.id}">${p.name} ${p.price ? `($${p.price})` : ''}</option>`).join('');
+  } catch (e) { /* ignore */ }
+}
+
+async function createProduct() {
+  const name = document.getElementById('newProdName').value.trim();
+  const price = parseFloat(document.getElementById('newProdPrice').value) || 0;
+  const duration = parseInt(document.getElementById('newProdDuration').value) || 30;
+  const resultBox = document.getElementById('prodResult');
+
+  if (!name) { resultBox.textContent = 'Enter an EA name first.'; return; }
+
+  try {
+    const res = await fetch(`${API_URL}/product/create`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-tenant-domain': TENANT_DOMAIN },
+      body: JSON.stringify({ name, price, duration, currency: 'USD' })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      resultBox.textContent = 'Failed: ' + (data.error || 'unknown error');
+    } else {
+      resultBox.textContent = `✅ Added "${data.name}"`;
+      document.getElementById('newProdName').value = '';
+      document.getElementById('newProdPrice').value = '';
+      loadProducts();
+    }
+  } catch (e) {
+    resultBox.textContent = 'Network error';
+  }
+}
+
 async function loadAdminInfo() {
   const token = localStorage.getItem('saas_token');
   if (!token) return;
@@ -164,9 +218,11 @@ async function generateLicense() {
 
   const plan = document.getElementById('plan').value;
   const expiryDays = parseInt(document.getElementById('expiryDays').value) || 30;
+  const productId = document.getElementById('productId').value;
   const assignTo = document.querySelector('.assign-btn.active').dataset.assign;
 
   const body = { plan, expiryDays };
+  if (productId) body.productId = productId;
 
   if (assignTo === 'admin' && currentAdmin) {
     body.userId = currentAdmin.id;
@@ -290,11 +346,12 @@ async function loadLicenses() {
     });
     const data = await res.json();
     if (!data.licenses || data.licenses.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6" class="muted">No licenses found</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="7" class="muted">No licenses found</td></tr>';
       return;
     }
     tbody.innerHTML = data.licenses.map(l => {
       const client = l.user ? (l.user.email || 'Unnamed') : 'Unassigned';
+      const ea = l.product ? l.product.name : '<span class="muted">—</span>';
       const expiry = l.expiry ? new Date(l.expiry).toLocaleDateString() : 'N/A';
       const canEmail = l.user && l.user.email;
       const actions = canEmail
@@ -304,13 +361,14 @@ async function loadLicenses() {
         <tr>
           <td class="key-cell" onclick="copyToClipboard('${l.key}')" title="Click to copy">📋 ${l.key}</td>
           <td><span class="badge ${l.status}">${l.status}</span></td>
+          <td>${ea}</td>
           <td>${l.plan}</td>
           <td>${client}</td>
           <td>${expiry}</td>
           <td>${actions}</td>
         </tr>
         <tr id="assignRow-${l.id}" style="display:none;">
-          <td colspan="6" style="background:#f8fafc;">
+          <td colspan="7" style="background:#f8fafc;">
             <div style="display:flex; gap:10px; align-items:flex-end; padding:8px 0; flex-wrap:wrap;">
               <div style="flex:1; min-width:160px;">
                 <label style="margin-top:0;">Client Name</label>
@@ -331,13 +389,14 @@ async function loadLicenses() {
       `;
     }).join('');
   } catch (e) {
-    tbody.innerHTML = '<tr><td colspan="6" class="muted">Failed to load licenses</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" class="muted">Failed to load licenses</td></tr>';
   }
 }
 
 loadAdminInfo();
 loadLicenses();
 loadClientList();
+loadProducts();
 </script>
 
 </body>
