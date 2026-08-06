@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>License Manager — BK Corp Club</title>
+<style>
+  :root { --primary:#2563eb; --accent:#1d4ed8; --bg:#f8fafc; --card:#ffffff; --border:#e5e7eb; --text:#1f2937; --muted:#6b7280; --green:#16a34a; --red:#dc2626; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:var(--bg); color:var(--text); }
+  header { background:#fff; border-bottom:1px solid var(--border); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; }
+  header h1 { font-size:18px; margin:0; display:flex; align-items:center; gap:8px; }
+  header a { color:var(--primary); text-decoration:none; font-size:14px; }
+  main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:20px; margin-bottom:20px; }
+  .card h2 { margin-top:0; font-size:16px; }
+  label { display:block; font-size:13px; font-weight:600; margin-bottom:4px; margin-top:14px; }
+  input, select { width:100%; padding:9px 10px; border:1px solid var(--border); border-radius:6px; font-size:14px; }
+  .row { display:flex; gap:16px; }
+  .row > div { flex:1; }
+  .assign-options { display:flex; gap:10px; margin-top:6px; }
+  .assign-btn { flex:1; padding:10px; border:1px solid var(--border); border-radius:6px; text-align:center; cursor:pointer; font-size:13px; background:#fff; }
+  .assign-btn.active { border-color:var(--primary); background:#eff6ff; color:var(--primary); font-weight:600; }
+  .checkbox-row { display:flex; align-items:center; gap:8px; margin-top:14px; }
+  .checkbox-row input { width:auto; }
+  button.submit { margin-top:18px; width:100%; padding:11px; background:var(--primary); color:#fff; border:none; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer; }
+  button.submit:hover { background:var(--accent); }
+  button.submit:disabled { opacity:0.6; cursor:not-allowed; }
+  #genResult { margin-top:14px; padding:12px; border-radius:6px; font-size:13px; display:none; }
+  #genResult.ok { background:#f0fdf4; border:1px solid #bbf7d0; color:#166534; display:block; }
+  #genResult.err { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; display:block; }
+  table { width:100%; border-collapse: collapse; font-size:13px; }
+  th, td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--border); }
+  th { color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; }
+  .key-cell { font-family: monospace; cursor:pointer; display:flex; align-items:center; gap:6px; }
+  .key-cell:hover { color:var(--primary); }
+  .badge { padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600; }
+  .badge.active { background:#f0fdf4; color:var(--green); }
+  .badge.inactive, .badge.suspended, .badge.expired { background:#fef2f2; color:var(--red); }
+  .action-btn { background:none; border:1px solid var(--border); border-radius:5px; padding:4px 8px; cursor:pointer; font-size:12px; margin-right:4px; }
+  .action-btn:hover { background:#f3f4f6; }
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#111827; color:#fff; padding:10px 18px; border-radius:6px; font-size:13px; opacity:0; transition:opacity 0.2s; pointer-events:none; }
+  .toast.show { opacity:1; }
+  .muted { color:var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔑 License Manager — BK Corp Club</h1>
+  <a href="/bk-saas-frontend/admin">← Back to Admin Dashboard</a>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>Generate License</h2>
+
+    <div class="row">
+      <div>
+        <label>Plan</label>
+        <select id="plan">
+          <option value="basic">Basic</option>
+          <option value="pro">Pro</option>
+          <option value="institutional">Institutional</option>
+        </select>
+      </div>
+      <div>
+        <label>Expiry (days)</label>
+        <input type="number" id="expiryDays" value="30" min="1" />
+      </div>
+    </div>
+
+    <label>Assign to</label>
+    <div class="assign-options">
+      <div class="assign-btn active" data-assign="admin">Me (Admin)</div>
+      <div class="assign-btn" data-assign="unassigned">Unassigned</div>
+      <div class="assign-btn" data-assign="client">Specific Client</div>
+    </div>
+
+    <div id="clientFields" style="display:none;">
+      <div class="row">
+        <div>
+          <label>Client Name</label>
+          <input type="text" id="clientName" placeholder="Jane Trader" />
+        </div>
+        <div>
+          <label>Client Email</label>
+          <input type="email" id="clientEmail" placeholder="client@example.com" />
+        </div>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="sendEmail" checked />
+        <label style="margin:0;">Email the client their welcome message + license key</label>
+      </div>
+    </div>
+
+    <button class="submit" id="genBtn" onclick="generateLicense()">Generate License</button>
+    <div id="genResult"></div>
+  </div>
+
+  <div class="card">
+    <h2>All Licenses</h2>
+    <table>
+      <thead>
+        <tr><th>Key</th><th>Status</th><th>Plan</th><th>Client</th><th>Expiry</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="licenseTableBody">
+        <tr><td colspan="6" class="muted">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API_URL = 'https://bk-saas-backend.onrender.com';
+const TENANT_DOMAIN = 'bkcorp';
+let currentAdmin = null;
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => showToast('Copied: ' + text));
+}
+
+// Assign-to toggle
+document.querySelectorAll('.assign-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.assign-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('clientFields').style.display =
+      btn.dataset.assign === 'client' ? 'block' : 'none';
+  });
+});
+
+async function loadAdminInfo() {
+  const token = localStorage.getItem('saas_token');
+  if (!token) return;
+  try {
+    const res = await fetch(`${API_URL}/auth/me`, {
+      headers: { 'Authorization': 'Bearer ' + token, 'x-tenant-domain': TENANT_DOMAIN }
+    });
+    const data = await res.json();
+    if (data.user) currentAdmin = data.user;
+  } catch (e) { /* ignore */ }
+}
+
+async function generateLicense() {
+  const btn = document.getElementById('genBtn');
+  const resultBox = document.getElementById('genResult');
+  resultBox.className = '';
+  resultBox.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Generating...';
+
+  const plan = document.getElementById('plan').value;
+  const expiryDays = parseInt(document.getElementById('expiryDays').value) || 30;
+  const assignTo = document.querySelector('.assign-btn.active').dataset.assign;
+
+  const body = { plan, expiryDays };
+
+  if (assignTo === 'admin' && currentAdmin) {
+    body.userId = currentAdmin.id;
+  } else if (assignTo === 'client') {
+    const clientEmail = document.getElementById('clientEmail').value.trim();
+    const clientName = document.getElementById('clientName').value.trim();
+    if (!clientEmail) {
+      resultBox.className = 'err';
+      resultBox.textContent = 'Please enter a client email address.';
+      btn.disabled = false;
+      btn.textContent = 'Generate License';
+      return;
+    }
+    body.clientEmail = clientEmail;
+    body.clientName = clientName;
+    body.sendEmail = document.getElementById('sendEmail').checked;
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/license/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-tenant-domain': TENANT_DOMAIN },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      resultBox.className = 'err';
+      resultBox.textContent = data.error || 'License generation failed.';
+    } else {
+      resultBox.className = 'ok';
+      let msg = `✅ License created: ${data.key}`;
+      if (data.assignedClient) msg += ` — assigned to ${data.assignedClient.email}`;
+      if (body.sendEmail) {
+        msg += data.emailSent ? ' — welcome email sent ✅' : ` — email NOT sent (${data.emailError || 'unknown error'})`;
+      }
+      resultBox.textContent = msg;
+      document.getElementById('clientEmail').value = '';
+      document.getElementById('clientName').value = '';
+      loadLicenses();
+    }
+  } catch (e) {
+    resultBox.className = 'err';
+    resultBox.textContent = 'Network error: ' + e.message;
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Generate License';
+}
+
+async function resendEmail(licenseId, btnEl) {
+  btnEl.textContent = 'Sending...';
+  btnEl.disabled = true;
+  try {
+    const res = await fetch(`${API_URL}/license/${licenseId}/send-email`, {
+      method: 'POST',
+      headers: { 'x-tenant-domain': TENANT_DOMAIN }
+    });
+    const data = await res.json();
+    if (res.ok) showToast('Email sent ✅');
+    else showToast('Failed: ' + (data.error || 'unknown error'));
+  } catch (e) {
+    showToast('Network error');
+  }
+  btnEl.textContent = 'Email';
+  btnEl.disabled = false;
+}
+
+async function loadLicenses() {
+  const tbody = document.getElementById('licenseTableBody');
+  try {
+    const res = await fetch(`${API_URL}/license/all`, {
+      headers: { 'x-tenant-domain': TENANT_DOMAIN }
+    });
+    const data = await res.json();
+    if (!data.licenses || data.licenses.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="muted">No licenses found</td></tr>';
+      return;
+    }
+    tbody.innerHTML = data.licenses.map(l => {
+      const client = l.user ? (l.user.email || 'Unnamed') : 'Unassigned';
+      const expiry = l.expiry ? new Date(l.expiry).toLocaleDateString() : 'N/A';
+      const canEmail = l.user && l.user.email;
+      return `
+        <tr>
+          <td class="key-cell" onclick="copyToClipboard('${l.key}')" title="Click to copy">📋 ${l.key}</td>
+          <td><span class="badge ${l.status}">${l.status}</span></td>
+          <td>${l.plan}</td>
+          <td>${client}</td>
+          <td>${expiry}</td>
+          <td>
+            ${canEmail ? `<button class="action-btn" onclick="resendEmail('${l.id}', this)">Email</button>` : ''}
+          </td>
+        </tr>
+      `;
+    }).join('');
+  } catch (e) {
+    tbody.innerHTML = '<tr><td colspan="6" class="muted">Failed to load licenses</td></tr>';
+  }
+}
+
+loadAdminInfo();
+loadLicenses();
+</script>
+
+</body>
+</html>
