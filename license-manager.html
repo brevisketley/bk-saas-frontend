@@ -86,7 +86,8 @@
         </div>
         <div>
           <label>Client Email</label>
-          <input type="email" id="clientEmail" placeholder="client@example.com" />
+          <input type="email" id="clientEmail" list="clientList" placeholder="client@example.com" />
+          <datalist id="clientList"></datalist>
         </div>
       </div>
       <div class="checkbox-row">
@@ -234,6 +235,53 @@ async function resendEmail(licenseId, btnEl) {
   btnEl.disabled = false;
 }
 
+async function loadClientList() {
+  try {
+    const res = await fetch(`${API_URL}/admin/customers`, {
+      headers: { 'x-tenant-domain': TENANT_DOMAIN }
+    });
+    const data = await res.json();
+    const list = document.getElementById('clientList');
+    if (data.customers) {
+      list.innerHTML = data.customers
+        .filter(c => c.email)
+        .map(c => `<option value="${c.email}">${c.firstName || ''} ${c.lastName || ''}</option>`)
+        .join('');
+    }
+  } catch (e) { /* ignore */ }
+}
+
+function toggleAssignRow(licenseId) {
+  const row = document.getElementById(`assignRow-${licenseId}`);
+  row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+}
+
+async function assignLicense(licenseId) {
+  const email = document.getElementById(`assignEmail-${licenseId}`).value.trim();
+  const name = document.getElementById(`assignName-${licenseId}`).value.trim();
+  const sendEmail = document.getElementById(`assignSendEmail-${licenseId}`).checked;
+
+  if (!email) { showToast('Enter a client email first'); return; }
+
+  try {
+    const res = await fetch(`${API_URL}/license/${licenseId}/assign`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-tenant-domain': TENANT_DOMAIN },
+      body: JSON.stringify({ clientEmail: email, clientName: name, sendEmail })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      showToast('Failed: ' + (data.error || 'unknown error'));
+      return;
+    }
+    showToast(sendEmail ? (data.emailSent ? 'Assigned + email sent ✅' : 'Assigned, but email failed') : 'License assigned ✅');
+    loadLicenses();
+    loadClientList();
+  } catch (e) {
+    showToast('Network error');
+  }
+}
+
 async function loadLicenses() {
   const tbody = document.getElementById('licenseTableBody');
   try {
@@ -249,6 +297,9 @@ async function loadLicenses() {
       const client = l.user ? (l.user.email || 'Unnamed') : 'Unassigned';
       const expiry = l.expiry ? new Date(l.expiry).toLocaleDateString() : 'N/A';
       const canEmail = l.user && l.user.email;
+      const actions = canEmail
+        ? `<button class="action-btn" onclick="resendEmail('${l.id}', this)">Email</button>`
+        : `<button class="action-btn" onclick="toggleAssignRow('${l.id}')">Assign</button>`;
       return `
         <tr>
           <td class="key-cell" onclick="copyToClipboard('${l.key}')" title="Click to copy">📋 ${l.key}</td>
@@ -256,8 +307,25 @@ async function loadLicenses() {
           <td>${l.plan}</td>
           <td>${client}</td>
           <td>${expiry}</td>
-          <td>
-            ${canEmail ? `<button class="action-btn" onclick="resendEmail('${l.id}', this)">Email</button>` : ''}
+          <td>${actions}</td>
+        </tr>
+        <tr id="assignRow-${l.id}" style="display:none;">
+          <td colspan="6" style="background:#f8fafc;">
+            <div style="display:flex; gap:10px; align-items:flex-end; padding:8px 0; flex-wrap:wrap;">
+              <div style="flex:1; min-width:160px;">
+                <label style="margin-top:0;">Client Name</label>
+                <input type="text" id="assignName-${l.id}" placeholder="Jane Trader" />
+              </div>
+              <div style="flex:1; min-width:180px;">
+                <label style="margin-top:0;">Client Email</label>
+                <input type="email" id="assignEmail-${l.id}" list="clientList" placeholder="client@example.com" />
+              </div>
+              <div class="checkbox-row" style="margin-top:0;">
+                <input type="checkbox" id="assignSendEmail-${l.id}" checked />
+                <label style="margin:0;">Send welcome email</label>
+              </div>
+              <button class="action-btn" style="background:var(--primary); color:#fff; border-color:var(--primary);" onclick="assignLicense('${l.id}')">Confirm</button>
+            </div>
           </td>
         </tr>
       `;
@@ -269,6 +337,7 @@ async function loadLicenses() {
 
 loadAdminInfo();
 loadLicenses();
+loadClientList();
 </script>
 
 </body>
