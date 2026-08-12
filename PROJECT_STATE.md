@@ -1,57 +1,53 @@
 # BK Corp Club SaaS — Project State
 
 ## Purpose
-This repository is the frontend for the BK Corp Club multi-tenant SaaS / EA licensing platform. The objective is a production-ready frontend + backend licensing system that can authenticate users, manage EA licenses, validate licenses from the EA, enforce activation limits, and operate reliably in production.
+Production frontend + backend EA licensing SaaS for BK Corp Club. The target is an end-to-end customer-to-revenue system, not a frontend mockup.
 
 ## Source of Truth
-GitHub repository: `brevisketley/bk-saas-frontend`
-Default branch: `main`
+- Frontend: `brevisketley/bk-saas-frontend` / `main`
+- Backend: `brevisketley/bk-saas-backend` / `main`
+- Production backend Render service: `bk-saas-backend` (`srv-d9or1sks728c73fo351g`)
+- Render workspace: `Brevis's workspace` (`tea-d8sshan7f7vs73bg54h0`)
+- Production backend URL: `https://bk-saas-backend.onrender.com`
+- Render service is allocated exclusively to this EA Licensing/SaaS project.
 
-The repository currently contains a Vite/React frontend, EA files, a license-manager page, API-related frontend structure, and deployment configuration. The backend implementation and its deployment location must be verified from the current project/repository state before assuming anything is complete.
+## Verified architecture findings
+- Frontend is React/Vite and contains dashboard, storefront, checkout success/cancel, customer signup, admin dashboard, rep dashboard, settings and API client bundles.
+- Backend is a Fastify/Prisma SaaS backend on Render.
+- Backend uses PostgreSQL through Prisma.
+- Backend contains licensing, checkout/payment, orders, subscriptions, users, products and email infrastructure.
+- Shared MT5 licensing client exists in backend repo at `mql5/BKCorpLicense.mqh`.
+- Frontend repository contains an `ea-files/` directory, but the currently exposed EA artifact is a compiled `.ex5` (`ff58ca0c-1b6e-406d-95bc-e8ae24bb27bd-V75_EA.ex5`), not production `.mq5` source. A compiled EX5 cannot be safely modified to integrate the licensing client.
 
-## Current Known State
-- Frontend repository is accessible and writable.
-- React + Vite frontend is present.
-- `src/api/` is documented as the API client area.
-- `src/contexts/` contains authentication context.
-- `src/pages/` contains page components.
-- `license-manager.html` exists.
-- `ea-files/` exists.
-- `_redirects` exists for frontend routing/deployment.
-- `.env` exists; secrets must never be copied into project documentation or committed in plaintext.
+## Licensing security architecture implemented in backend
+- Five activation slots by default.
+- MT5 account binding with one active device per account per licence.
+- Broker binding.
+- Device fingerprint binding.
+- Server-observed public IP/session controls.
+- Short-lived hashed session tokens.
+- Five-minute heartbeat renewal.
+- Deactivation/revocation.
+- Protected security-status endpoint.
+- Production route guard for setup/legacy/diagnostic routes.
+- Production fail-closed secret preflight.
 
-## Primary Objective
-Deliver a fully operational EA licensing SaaS platform, not merely a functioning frontend mockup.
+## Current truth about completion
+Implemented is not the same as verified. The following are still release gates:
+- Live v2 licensing endpoint smoke tests.
+- 1-5 activation and sixth rejection tests.
+- Account/device/broker/IP/session attack tests.
+- Heartbeat expiry/revocation tests.
+- First real `.mq5` EA integration and compile/end-to-end test.
+- Remaining EA rollout.
+- Safe Prisma migration strategy replacing `db push --accept-data-loss`.
+- Automated security/API tests.
+- Payment -> licence issuance -> email -> activation proof.
+- Customer licence management UX verification.
+- Lead intake/vetting/outreach/conversion workflow in dashboard.
 
-The completed system must be verified end-to-end across:
-1. Public website / frontend
-2. User authentication
-3. Tenant/account management
-4. License creation and management
-5. License activation
-6. EA-to-license-server validation
-7. MQL5 login/account binding as required by the product specification
-8. IP/device/activation controls as required by the product specification
-9. Subscription/payment integration when applicable
-10. Admin/license-manager functionality
-11. Backend API
-12. Database/persistence
-13. Security and authorization
-14. Production deployment
-15. Monitoring/error handling
-16. End-to-end production testing
+## Operating rule
+Every meaningful change must be tested, cross-reviewed, deployed where applicable, verified, then state/handoff/queue updated. After each material change restart the checklist from the beginning. Only evidence-backed VERIFIED items count as complete.
 
-## Non-Negotiable Operating Rule
-Never mark a feature COMPLETE merely because code exists. A feature is complete only after implementation, integration, testing, failure-path testing where applicable, and verification in the target environment.
-
-## Agent Handoff Rule
-Any AI agent working on this project must read `AGENT_RULES.md`, `PROJECT_STATE.md`, `TASK_QUEUE.md`, and `HANDOFF.md` before making changes. After meaningful work it must update the state and handoff files so another agent can continue without relying on chat history.
-
-## Current Status
-STATUS: ACTIVE — CONTINUOUS BUILD / VERIFICATION REQUIRED
-
-## Immediate Priority
-Audit the existing frontend and identify the actual backend/API/database/deployment architecture. Then continue implementation from the highest-priority incomplete item in `TASK_QUEUE.md`.
-
-## Last Updated
-2026-08-12 — shared multi-agent handoff system initialized.
+## Last updated
+2026-08-12 — architecture audit continued; actual backend and Render service confirmed; compiled EA artifact found but source remains unavailable; shared swarm control plane established.
