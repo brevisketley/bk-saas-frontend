@@ -1,66 +1,66 @@
 # BK Corp Club SaaS — Task Queue
 
-Tasks are ordered by business/technical dependency. Agents should execute the highest-priority incomplete task, then re-evaluate the queue rather than stopping simply because one task is finished.
+Last updated: 2026-08-12
 
-## P0 — Architecture & Reality Audit
-- [ ] Inspect the entire frontend codebase and document actual implemented functionality.
-- [ ] Identify the backend repository/service used by the frontend.
-- [ ] Identify database technology and current schema.
-- [ ] Identify deployed frontend URL and deployment provider.
-- [ ] Identify deployed backend/API URL and deployment provider.
-- [ ] Verify environment-variable configuration without exposing secrets.
-- [ ] Map frontend API calls to backend endpoints.
-- [ ] Identify broken, mocked, placeholder, or incomplete flows.
-- [ ] Record findings in `PROJECT_STATE.md` and `HANDOFF.md`.
+## End objective
+Production-verified frontend + backend EA licensing and revenue operating system: purchase -> licence issuance -> customer email -> EA activation -> continuous heartbeat/security -> renewal/revocation -> dashboard management, plus lead intake/vetting/outreach/conversion tracking.
 
-## P0 — Core Licensing Platform
-- [ ] Authentication and authorization fully verified.
-- [ ] Multi-tenant isolation verified.
-- [ ] User/account management verified.
-- [ ] License creation verified.
-- [ ] License status lifecycle verified.
-- [ ] License activation endpoint verified.
-- [ ] License validation endpoint verified from an EA-compatible client flow.
-- [ ] Activation limits enforced server-side.
-- [ ] Required MQL5 login/account binding enforced server-side.
-- [ ] Required IP/device restrictions enforced server-side where specified.
-- [ ] License expiry and suspension behavior verified.
-- [ ] Admin/license-manager workflows verified.
+## P0 — Architecture reality
+- [x] Frontend repository identified.
+- [x] Backend repository identified: `brevisketley/bk-saas-backend`.
+- [x] Backend Render service identified and exclusive project allocation confirmed.
+- [x] PostgreSQL/Prisma backend schema identified.
+- [x] Frontend feature/deployment structure audited at repository level.
+- [ ] Map every frontend API call to backend endpoint and verify responses.
+- [ ] Identify all broken/mock/placeholder flows.
+
+## P0 — Licensing
+- [x] Backend v2 activation/heartbeat/deactivation architecture implemented.
+- [x] Five activation slots configured.
+- [x] MT5 account/device/broker/IP/session controls implemented.
+- [x] Shared MT5 licensing client created.
+- [ ] Live smoke tests with controlled licence.
+- [ ] 1-5 activation and sixth rejection proof.
+- [ ] Account-sharing/device/broker/IP/session attack tests.
+- [ ] Heartbeat expiry/revocation/deactivation proof.
+- [ ] Actual production `.mq5` source integration. Current frontend repo contains only a compiled `.ex5` artifact, which cannot be safely edited for source integration.
+- [ ] Compile and end-to-end test first real EA.
+- [ ] Roll out licensing core to remaining EAs.
 
 ## P0 — Security
-- [ ] No secrets committed to source control.
-- [ ] Authentication tokens handled securely.
-- [ ] Authorization enforced server-side, not only in the frontend.
-- [ ] Tenant boundaries tested against cross-tenant access.
-- [ ] Input validation implemented.
-- [ ] Rate limiting / abuse protection assessed and implemented where required.
-- [ ] CORS and production security configuration verified.
-- [ ] Error responses do not leak sensitive implementation details.
+- [ ] Cross-tenant authorization tests.
+- [ ] Input/rate-limit/error leakage tests.
+- [ ] Production secret/fallback audit.
+- [ ] Legacy/setup/diagnostic route verification.
+- [ ] Safe Prisma migration workflow replacing `db push --accept-data-loss`.
+- [ ] Dependency vulnerability review.
+- [ ] Automated security/API regression CI.
 
-## P1 — Commercial / SaaS Operations
-- [ ] Subscription/payment flow verified if part of current scope.
-- [ ] License provisioning after payment verified.
-- [ ] Subscription cancellation/expiry behavior verified.
-- [ ] Customer-facing license/account experience completed.
-- [ ] Transactional email requirements identified and implemented where required.
+## P1 — Commerce
+- [ ] Verify production checkout/payment path.
+- [ ] Verify payment webhook idempotency.
+- [ ] Verify order -> licence issuance exactly once.
+- [ ] Verify licence email delivery.
+- [ ] Verify customer download/activation instructions.
+- [ ] Verify renewal/cancellation/expiry lifecycle.
 
-## P1 — Production Readiness
-- [ ] Production frontend deployment verified.
-- [ ] Production backend deployment verified.
-- [ ] Production database connectivity verified.
-- [ ] HTTPS and domain configuration verified.
-- [ ] Health checks added/verified.
-- [ ] Logging and error monitoring verified.
-- [ ] Build succeeds from a clean environment.
-- [ ] End-to-end smoke test passes.
+## P1 — Dashboard / customer operations
+- [ ] Verify admin licence manager against live API.
+- [ ] Verify customer licence/account experience.
+- [ ] Add/verify lead intake.
+- [ ] Add lead qualification state machine: new -> vetted -> contacted -> engaged -> qualified -> converted/disqualified.
+- [ ] Add follow-up tasks and ownership.
+- [ ] Track outreach consent and source.
+- [ ] Track lead -> customer -> licence conversion.
 
-## P2 — Quality & Optimization
-- [ ] Responsive UI audit.
-- [ ] UX polish and consistency audit.
-- [ ] Performance audit.
-- [ ] Accessibility baseline audit.
-- [ ] Documentation updated.
-- [ ] Automated tests expanded for critical licensing paths.
+## P2 — Growth
+- [ ] Connect campaign assets to measurable funnel stages.
+- [ ] Create dashboard acquisition/conversion reporting.
+- [ ] Add leads to dashboard rather than relying on chat for lead operations.
+- [ ] Only activate broader acquisition once the customer/licence workflow is verified.
 
-## Completion Gate
-The project is NOT COMPLETE until the critical P0 flows are implemented and verified end-to-end in the production environment, with evidence recorded in `HANDOFF.md` and `PROJECT_STATE.md`.
+## Continuous swarm rule
+After every material change: inspect full system -> cross-review -> test -> fix -> deploy -> verify -> update PROJECT_STATE/HANDOFF/TASK_QUEUE -> restart at the top. Never mark an item complete without evidence.
+
+## Completion gate
+The project is 100% only when all critical P0/P1 release gates are production verified and the full purchase-to-activation-to-management journey works without manual intervention from this chat.
