@@ -1,60 +1,39 @@
-# BK Corp Club SaaS — AI Handoff Sheet
+# BK Corp Club SaaS — AI Handoff
 
-## Handoff Protocol
-This file is the operational handoff between AI agents working on the same project. It must always describe the repository as it actually exists, not what an agent intended to build.
+## Current state
+The architecture audit is no longer blocked: the actual backend has been identified and is deployed on Render.
 
-## Current Agent
-Agent: ChatGPT
-Status: INITIALIZATION / READY FOR CONTINUOUS BUILD
-Date: 2026-08-12
+- Frontend: `brevisketley/bk-saas-frontend`
+- Backend: `brevisketley/bk-saas-backend`
+- Render service: `srv-d9or1sks728c73fo351g` in `Brevis's workspace`
+- Backend URL: `https://bk-saas-backend.onrender.com`
+- Backend database: PostgreSQL via Prisma
 
-## Project
-BK Corp Club SaaS — EA Licensing Platform
-Repository: `brevisketley/bk-saas-frontend`
-Branch: `main`
+## Work completed in this loop
+- Confirmed backend repository/service from actual project state.
+- Confirmed Render service is dedicated to this EA Licensing project.
+- Confirmed backend licensing security layer exists: five slots, MT5 account binding, device/broker/IP/session controls, heartbeat and revocation.
+- Added backend production preflight and route guard.
+- Added cross-repository `PROJECT_CONTROL_PLANE.md` and restructured task queues around a verified end state.
+- Audited frontend tree and confirmed dashboard/storefront/checkout/customer/admin/rep assets exist.
+- Confirmed `ea-files/` currently contains a compiled `.ex5` artifact, not production `.mq5` source.
 
-## What Has Been Established
-- Shared project-state documentation has been created.
-- Shared task queue has been created.
-- Multi-agent operating rules are being established.
-- Existing repository contains a React/Vite frontend structure, API client area, authentication context, pages, license manager page, EA files, and frontend deployment routing configuration.
+## Not production-complete
+- Live v2 licensing tests still need evidence.
+- Actual `.mq5` source is the EA integration blocker; the compiled EX5 cannot be safely modified to add the shared licensing client.
+- Payment -> automatic licence -> email -> activation needs end-to-end proof.
+- Dashboard licence manager needs live API verification.
+- Lead intake/vetting/outreach/conversion workflow needs implementation/verification so the system can operate without chat as the operating system.
+- Safe Prisma migration workflow and automated security tests remain outstanding.
 
-## What Has NOT Yet Been Verified
-- Exact backend repository/service.
-- Backend deployment.
-- Database and schema.
-- Production API URL.
-- Full frontend/backend integration.
-- End-to-end EA license validation.
-- Production licensing flow.
-- Current security posture.
-- Current production deployment health.
+## Execution rule
+Continue, don't stall. Work independent lanes in parallel, cross-review, red-team security-sensitive changes, fix failures, deploy and verify, then restart the checklist. Only evidence-backed production verification is COMPLETE.
 
-## Last Completed Action
-Initialized the shared handoff/state system in GitHub.
-
-## Current Highest-Priority Work
-Perform a full repository and deployment architecture audit. Inspect the actual code and configuration before changing functionality. Determine the real frontend/backend/database relationships and then execute the highest-priority incomplete task from `TASK_QUEUE.md`.
-
-## Known Constraints
-- Do not expose or copy secrets from `.env` or deployment configuration into documentation.
-- Do not rewrite working functionality without first understanding its purpose and dependencies.
-- Do not change the intended EA licensing/business rules without explicit product justification.
-- Do not declare completion based solely on source-code presence.
-
-## Verification Required Before Handoff
-- [ ] Code reviewed for the completed task.
-- [ ] Build/test executed.
-- [ ] Relevant failure paths tested.
-- [ ] Deployment state checked where applicable.
-- [ ] `PROJECT_STATE.md` updated.
-- [ ] `TASK_QUEUE.md` updated.
-- [ ] This `HANDOFF.md` updated.
-- [ ] Next concrete action stated.
-
-## Next Agent Instruction
-Read `AGENT_RULES.md`, `PROJECT_STATE.md`, and `TASK_QUEUE.md`. Inspect the repository and actual running architecture. Continue the build; do not merely report findings. Fix issues discovered during the audit where safe and within scope, test the fixes, and leave a precise handoff for the next agent.
-
-## Handoff History
-### 2026-08-12 — ChatGPT
-Initialized shared AI handoff infrastructure. No claim is made that the licensing platform is production-complete.
+## Exact next actions
+1. Verify latest Render deployment and health.
+2. Run controlled v2 endpoint tests and attack tests.
+3. Cross-check frontend API client against live backend routes and fix mismatches.
+4. Locate actual `.mq5` source outside the current connected GitHub/File Library scope if necessary; document exact blocker.
+5. Finish payment/licence provisioning and dashboard verification.
+6. Implement lead workflow in the dashboard while licensing gates are being tested.
+7. Restart full-system audit after each material change.
