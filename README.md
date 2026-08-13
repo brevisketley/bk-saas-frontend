@@ -2,7 +2,7 @@
 
 Modern React + Vite frontend for BK Corp Club multi-tenant SaaS platform.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 18+ installed
@@ -15,9 +15,9 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open `http://localhost:5173` in your browser.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -29,23 +29,21 @@ src/
 └── index.css     # Global styles
 ```
 
-## 🔐 Default Login
+## Security
 
-- **Tenant ID**: `bk-corp-club`
-- **Email**: `admin@bkcorpclub.com`
-- **Password**: `Admin@2024!`
+Development/admin credentials are not documented in the repository. Use the configured environment/bootstrap process for authorized access.
 
-## 📦 Build
+## Build
 
 ```bash
 npm run build
 ```
 
-## 🔍 Features
+## Features
 
-- ✅ Multi-tenant authentication
-- ✅ Dashboard with real-time stats
-- ✅ API client with interceptors
-- ✅ Protected routes
-- ✅ Responsive design
-- ✅ Error handling
+- Multi-tenant authentication
+- Dashboard with real-time stats
+- API client with interceptors
+- Protected routes
+- Responsive design
+- Error handling
