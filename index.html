@@ -5,24 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="BK Corp Club Licensing — subscription-driven software licensing, activation and entitlement infrastructure for software vendors and developers." />
     <title>BK Corp Club Licensing</title>
+    <style>
+      body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f9fafb;color:#111827}
+      .fallback{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box}
+      .fallback-card{width:100%;max-width:420px;background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:32px;box-shadow:0 8px 30px rgba(0,0,0,.06);text-align:center}
+      .fallback-card h1{margin:0 0 8px;font-size:24px}.fallback-card p{margin:0;color:#6b7280}.fallback-form{margin-top:24px;text-align:left}.fallback-form label{display:block;font-size:14px;font-weight:600;margin:14px 0 6px}.fallback-form input{box-sizing:border-box;width:100%;height:44px;border:1px solid #d1d5db;border-radius:9px;padding:0 12px;font-size:15px}.fallback-form button{width:100%;height:44px;margin-top:18px;border:0;border-radius:9px;background:#2563eb;color:#fff;font-weight:600}.fallback-note{margin-top:14px;font-size:12px;color:#9ca3af}
+    </style>
     <script type="text/javascript">
-      // Preserve the existing GitHub Pages deep-link recovery behaviour when
-      // the frontend is served from that environment.
-      (function(l) {
-        if (l.search[1] === '/') {
-          var decoded = l.search.slice(1).split('&').map(function(s) {
-            return s.replace(/~and~/g, '&');
-          }).join('?');
-          window.history.replaceState(null, null,
-            l.pathname.slice(0, -1) + decoded + l.hash
-          );
-        }
-      }(window.location));
+      (function(l){if(l.search[1]==='/'){var decoded=l.search.slice(1).split('&').map(function(s){return s.replace(/~and~/g,'&')}).join('?');window.history.replaceState(null,null,l.pathname.slice(0,-1)+decoded+l.hash)}}(window.location));
     </script>
     <script type="module" crossorigin src="/assets/index-DhaHI4J3.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CXrYC43P.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main class="fallback">
+        <section class="fallback-card" aria-label="Licensing SaaS login">
+          <h1>BK Corp Club</h1>
+          <p>Licensing Platform</p>
+          <form class="fallback-form" onsubmit="return false">
+            <label for="fallback-email">Email</label>
+            <input id="fallback-email" type="email" autocomplete="username" placeholder="Email address">
+            <label for="fallback-password">Password</label>
+            <input id="fallback-password" type="password" autocomplete="current-password" placeholder="Password">
+            <button type="submit">Sign In</button>
+          </form>
+          <div class="fallback-note">Loading secure application…</div>
+        </section>
+      </main>
+    </div>
   </body>
 </html>
