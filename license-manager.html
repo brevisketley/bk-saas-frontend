@@ -140,6 +140,11 @@ const API_URL = 'https://bk-saas-backend.onrender.com';
 const TENANT_DOMAIN = 'bkcorp';
 let currentAdmin = null;
 
+function authHeaders(extra = {}) {
+  const token = localStorage.getItem('saas_token');
+  return { ...extra, 'x-tenant-domain': TENANT_DOMAIN, ...(token ? { 'Authorization': 'Bearer ' + token } : {}) };
+}
+
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -183,7 +188,7 @@ async function createProduct() {
   try {
     const res = await fetch(`${API_URL}/product/create`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-tenant-domain': TENANT_DOMAIN },
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({ name, price, duration, currency: 'USD', downloadUrl: downloadUrl || null })
     });
     const data = await res.json();
@@ -249,7 +254,7 @@ async function generateLicense() {
   try {
     const res = await fetch(`${API_URL}/license/generate`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-tenant-domain': TENANT_DOMAIN },
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(body)
     });
     const data = await res.json();
@@ -284,7 +289,7 @@ async function resendEmail(licenseId, btnEl) {
   try {
     const res = await fetch(`${API_URL}/license/${licenseId}/send-email`, {
       method: 'POST',
-      headers: { 'x-tenant-domain': TENANT_DOMAIN }
+      headers: authHeaders()
     });
     const data = await res.json();
     if (res.ok) showToast('Email sent ✅');
@@ -299,7 +304,7 @@ async function resendEmail(licenseId, btnEl) {
 async function loadClientList() {
   try {
     const res = await fetch(`${API_URL}/admin/customers`, {
-      headers: { 'x-tenant-domain': TENANT_DOMAIN }
+      headers: authHeaders()
     });
     const data = await res.json();
     const list = document.getElementById('clientList');
@@ -327,7 +332,7 @@ async function assignLicense(licenseId) {
   try {
     const res = await fetch(`${API_URL}/license/${licenseId}/assign`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-tenant-domain': TENANT_DOMAIN },
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({ clientEmail: email, clientName: name, sendEmail })
     });
     const data = await res.json();
@@ -347,7 +352,7 @@ async function loadLicenses() {
   const tbody = document.getElementById('licenseTableBody');
   try {
     const res = await fetch(`${API_URL}/license/all`, {
-      headers: { 'x-tenant-domain': TENANT_DOMAIN }
+      headers: authHeaders()
     });
     const data = await res.json();
     if (!data.licenses || data.licenses.length === 0) {
