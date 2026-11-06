@@ -106,3 +106,46 @@ jobs:
             ]
           }, null, 2));
           NODE
+
+      - name: Install browser test runtime
+        run: |
+          npm install --prefix /tmp/ea-browser-check playwright@1.55.0
+          /tmp/ea-browser-check/node_modules/.bin/playwright install --with-deps chromium
+      - name: Run browser-level login and protected-route regression
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { chromium } from '/tmp/ea-browser-check/node_modules/playwright/index.mjs';
+
+          const frontend = 'https://bk-saas-licensing-frontend.onrender.com';
+          const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
+          const page = await browser.newPage();
+          const pageErrors = [];
+          page.on('pageerror', error => pageErrors.push(error.message));
+
+          try {
+            await page.goto(frontend + '/login', { waitUntil: 'domcontentloaded' });
+            await page.locator('#loginForm').waitFor({ state: 'visible', timeout: 15000 });
+            await page.locator('#email').fill('browser-smoke-invalid-user@example.invalid');
+            await page.locator('#password').fill('Invalid-browser-smoke-password');
+            await page.locator('#submit').click();
+            await page.locator('#message').waitFor({ state: 'visible', timeout: 15000 });
+            const message = await page.locator('#message').innerText();
+            assert.match(message, /invalid credentials/i, `Login form did not display the expected authentication rejection: ${message}`);
+
+            for (const path of ['/admin', '/dashboard', '/rep-dashboard']) {
+              await page.goto(frontend + path, { waitUntil: 'domcontentloaded' });
+              await page.waitForTimeout(1800);
+              const currentPath = new URL(page.url()).pathname;
+              const redirectedToLogin = currentPath === '/login' || currentPath === '/login/index.html';
+              assert.ok(redirectedToLogin, `Unauthenticated route ${path} did not redirect to login (current path: ${currentPath})`);
+              assert.ok(await page.locator('body').innerText().then(t => /sign in|welcome back|licensing platform/i.test(t)),
+                `Login UI missing after redirect from ${path}`);
+            }
+
+            assert.deepEqual(pageErrors, [], `Browser JavaScript errors: ${pageErrors.join('; ')}`);
+            console.log(JSON.stringify({ ok: true, checks: ['browser-login-invalid-credentials', 'admin-route-requires-login', 'dashboard-route-requires-login', 'rep-route-requires-login', 'no-browser-runtime-errors'] }, null, 2));
+          } finally {
+            await browser.close();
+          }
+          NODE
