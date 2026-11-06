@@ -26,8 +26,18 @@ jobs:
           const backend = 'https://bk-saas-backend.onrender.com';
 
           async function get(url) {
-            const response = await fetch(url, { redirect: 'follow' });
-            const body = await response.text();
+            const isFrontend = url.startsWith(frontend);
+            let response;
+            let body = '';
+            for (let attempt = 0; attempt < (isFrontend ? 13 : 1); attempt += 1) {
+              response = await fetch(url, { redirect: 'follow', cache: 'no-store' });
+              body = await response.text();
+              if (response.status === 200) return { response, body };
+              // Render static deploys start asynchronously after a push; retry temporary 404s
+              // on frontend routes/assets while the new commit propagates.
+              if (!isFrontend || response.status !== 404 || attempt === 12) break;
+              await new Promise(resolve => setTimeout(resolve, 5000));
+            }
             assert.equal(response.status, 200, `GET ${url} returned ${response.status}`);
             return { response, body };
           }
