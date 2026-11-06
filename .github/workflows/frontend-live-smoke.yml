@@ -65,7 +65,7 @@ jobs:
           await get(new URL(js, frontend).toString());
           await get(new URL(css, frontend).toString());
 
-          for (const path of ['/admin', '/dashboard', '/register', '/onboarding', '/rep-dashboard']) {
+          for (const path of ['/admin', '/dashboard', '/register', '/buy', '/checkout/success', '/checkout/cancelled', '/onboarding', '/reseller', '/rep-dashboard', '/settings']) {
             const route = await get(frontend + path);
             assert.match(route.body, /id="root"/, `SPA route ${path} did not return the app shell`);
             assert.ok(route.body.includes(js), `SPA route ${path} is missing the current JavaScript bundle`);
