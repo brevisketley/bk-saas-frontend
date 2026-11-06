@@ -1,0 +1,98 @@
+name: Frontend Live Smoke Test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend-live-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Test live frontend routes, assets, auth handoff and backend readiness
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+
+          const frontend = 'https://bk-saas-licensing-frontend.onrender.com';
+          const backend = 'https://bk-saas-backend.onrender.com';
+
+          async function get(url) {
+            const response = await fetch(url, { redirect: 'follow' });
+            const body = await response.text();
+            assert.equal(response.status, 200, `GET ${url} returned ${response.status}`);
+            return { response, body };
+          }
+
+          const root = await get(frontend + '/');
+          assert.match(root.body, /loginForm|__BK_LICENSING_APP_LOADED__|id="root"/, 'Root route did not return the licensing app/login shell');
+
+          const login = await get(frontend + '/login');
+          assert.match(login.body, /id="loginForm"/, 'Direct login route did not serve the functional login page');
+          assert.match(login.body, /auth\/login/, 'Login form is not connected to the authentication endpoint');
+          assert.match(login.body, /reset-password\.html/, 'Login page is missing password recovery');
+          for (const key of ['saas_token', 'saas_tenant_id', 'saas_tenant_domain']) {
+            assert.ok(login.body.includes(key), `Login page does not persist ${key} for the app session`);
+          }
+
+          const reset = await get(frontend + '/reset-password.html');
+          assert.match(reset.body, /auth\/reset-password/, 'Password reset page is not wired to the reset endpoint');
+          assert.match(reset.body, /token/, 'Password reset page does not handle its reset token');
+
+          const shell = await get(frontend + '/index.html');
+          const js = shell.body.match(/src="([^"]+\.js)"/)?.[1];
+          const css = shell.body.match(/href="([^"]+\.css)"/)?.[1];
+          assert.ok(js, 'SPA JavaScript asset was not referenced by index.html');
+          assert.ok(css, 'SPA CSS asset was not referenced by index.html');
+          await get(new URL(js, frontend).toString());
+          await get(new URL(css, frontend).toString());
+
+          for (const path of ['/admin', '/dashboard', '/register', '/onboarding', '/rep-dashboard']) {
+            const route = await get(frontend + path);
+            assert.match(route.body, /id="root"/, `SPA route ${path} did not return the app shell`);
+            assert.ok(route.body.includes(js), `SPA route ${path} is missing the current JavaScript bundle`);
+          }
+
+          const health = await get(backend + '/health');
+          assert.match(health.body, /"status":"ok"/, 'Backend health check failed');
+          const ready = await get(backend + '/ready');
+          assert.match(ready.body, /"status":"ready"/, 'Backend readiness check failed');
+          assert.match(ready.body, /"database":"ok"/, 'Backend database readiness check failed');
+
+          const badLogin = await fetch(backend + '/auth/login', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json', 'x-tenant-domain': 'bkcorp' },
+            body: JSON.stringify({ email: 'frontend-smoke-invalid-user@example.invalid', password: 'invalid-smoke-password' })
+          });
+          assert.equal(badLogin.status, 401, `Invalid credentials should be rejected with 401, got ${badLogin.status}`);
+
+          const badReset = await fetch(backend + '/auth/reset-password', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json', 'x-tenant-domain': 'bkcorp' },
+            body: JSON.stringify({})
+          });
+          assert.equal(badReset.status, 400, `Malformed password reset should be rejected with 400, got ${badReset.status}`);
+
+          console.log(JSON.stringify({
+            ok: true,
+            checks: [
+              'root-route',
+              'direct-login-route',
+              'password-recovery-route',
+              'login-session-storage-contract',
+              'spa-js-and-css-assets',
+              'admin-dashboard-registration-onboarding-rep-routes',
+              'backend-health-and-database-readiness',
+              'invalid-login-rejected',
+              'malformed-password-reset-rejected'
+            ]
+          }, null, 2));
+          NODE
