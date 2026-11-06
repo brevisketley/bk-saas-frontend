@@ -33,7 +33,7 @@
       const data=await res.json().catch(()=>({}));
       if(!res.ok) throw new Error(data.error||'Login failed');
       if(!data.token) throw new Error('Authentication service returned no session token');
-      localStorage.setItem('bk_auth_token',data.token); localStorage.setItem('bk_tenant_id',data.user?.tenantId||''); localStorage.setItem('bk_user',JSON.stringify(data.user||{}));
+      localStorage.setItem('saas_token',data.token); localStorage.setItem('saas_tenant_id',data.user?.tenantId||''); localStorage.setItem('saas_tenant_domain','bkcorp'); localStorage.setItem('bk_user',JSON.stringify(data.user||{}));
       show('Login successful. Opening your dashboard…',true); status.textContent='Authenticated';
       const role=data.user?.role; window.location.href=role==='admin'?'/admin':role==='rep'?'/rep-dashboard':'/dashboard';
     }catch(err){show(err.message||'Unable to sign in. Please try again.',false);status.textContent='Secure connection available';button.disabled=false;button.textContent='Sign In'}
