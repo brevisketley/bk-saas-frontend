@@ -33,6 +33,16 @@
         }
       }, 8000);
     </script>
+    <script>
+      (function () {
+        var path = window.location.pathname.replace(/\\/+$/, '') || '/';
+        var protectedPaths = ['/admin', '/dashboard', '/rep-dashboard', '/settings', '/rep', '/licenses', '/customers', '/products', '/billing', '/pricing', '/profile', '/reports'];
+        if (protectedPaths.indexOf(path) === -1) return;
+        var token = '';
+        try { token = window.localStorage.getItem('saas_token') || ''; } catch (_) {}
+        if (!token) window.location.replace('/login');
+      })();
+    </script>
     <script type="module" crossorigin src="/assets/index-DhaHI4J3.js" onload="window.__BK_LICENSING_APP_LOADED__=true"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CXrYC43P.css">
   </head>
