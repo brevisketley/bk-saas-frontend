@@ -208,14 +208,32 @@ async function createProduct() {
 
 async function loadAdminInfo() {
   const token = localStorage.getItem('saas_token');
-  if (!token) return;
+  if (!token) {
+    window.location.replace('/login');
+    return false;
+  }
   try {
     const res = await fetch(`${API_URL}/auth/me`, {
       headers: { 'Authorization': 'Bearer ' + token, 'x-tenant-domain': TENANT_DOMAIN }
     });
     const data = await res.json();
-    if (data.user) currentAdmin = data.user;
-  } catch (e) { /* ignore */ }
+    if (!res.ok || !data.user) {
+      localStorage.removeItem('saas_token');
+      localStorage.removeItem('saas_tenant_id');
+      localStorage.removeItem('saas_tenant_domain');
+      window.location.replace('/login');
+      return false;
+    }
+    if (!['admin', 'superadmin'].includes(data.user.role)) {
+      window.location.replace('/dashboard');
+      return false;
+    }
+    currentAdmin = data.user;
+    return true;
+  } catch (e) {
+    window.location.replace('/login');
+    return false;
+  }
 }
 
 async function generateLicense() {
@@ -403,10 +421,11 @@ async function loadLicenses() {
   }
 }
 
-loadAdminInfo();
-loadLicenses();
-loadClientList();
-loadProducts();
+(async function initializeLicenseManager() {
+  const authorized = await loadAdminInfo();
+  if (!authorized) return;
+  await Promise.all([loadLicenses(), loadClientList(), loadProducts()]);
+})();
 </script>
 
 </body>
