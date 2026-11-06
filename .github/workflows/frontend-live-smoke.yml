@@ -133,6 +133,21 @@ jobs:
             const message = await page.locator('#message').innerText();
             assert.match(message, /invalid credentials/i, `Login form did not display the expected authentication rejection: ${message}`);
 
+            await page.goto(frontend + '/reset-password.html', { waitUntil: 'domcontentloaded' });
+            await page.locator('#email').fill('browser-smoke-no-user@example.invalid');
+            await page.locator('#submit').click();
+            await page.locator('#message.show').waitFor({ state: 'visible', timeout: 15000 });
+            assert.match(await page.locator('#message').innerText(), /if the account exists/i,
+              'Password recovery did not return the generic safe response');
+
+            await page.goto(frontend + '/reset-password.html?token=' + 'a'.repeat(64) + '&tenant=bkcorp', { waitUntil: 'domcontentloaded' });
+            await page.locator('#password').fill('Invalid-reset-test-password');
+            await page.locator('#confirm').fill('Invalid-reset-test-password');
+            await page.locator('#submit').click();
+            await page.locator('#message.show').waitFor({ state: 'visible', timeout: 15000 });
+            assert.match(await page.locator('#message').innerText(), /invalid|expired/i,
+              'Invalid password-reset token was not rejected in the browser');
+
             for (const path of ['/admin', '/dashboard', '/rep-dashboard']) {
               await page.goto(frontend + path, { waitUntil: 'domcontentloaded' });
               await page.waitForTimeout(1800);
