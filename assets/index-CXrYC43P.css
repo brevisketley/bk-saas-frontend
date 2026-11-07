@@ -159,3 +159,92 @@
 .min-h-screen.bg-gray-50 .fixed.inset-0 table th {
   color: #bae6fd !important;
 }
+
+
+/* BK Code Club — cinematic admin interface refinement */
+.min-h-screen.bg-gray-50 {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 12% 2%, rgba(6, 182, 212, .20), transparent 34%),
+    radial-gradient(ellipse at 88% 10%, rgba(99, 102, 241, .20), transparent 32%),
+    radial-gradient(ellipse at 52% 100%, rgba(14, 116, 144, .10), transparent 45%),
+    #050816 !important;
+}
+.min-h-screen.bg-gray-50::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .34;
+  background-image:
+    linear-gradient(rgba(56, 189, 248, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, .055) 1px, transparent 1px),
+    radial-gradient(circle at 76% 28%, rgba(34, 211, 238, .16), transparent 22%),
+    radial-gradient(circle at 20% 76%, rgba(99, 102, 241, .14), transparent 26%);
+  background-size: 54px 54px, 54px 54px, auto, auto;
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+.min-h-screen.bg-gray-50 > header,
+.min-h-screen.bg-gray-50 > .max-w-7xl {
+  position: relative;
+  z-index: 1;
+}
+.min-h-screen.bg-gray-50 header.bg-white {
+  background: linear-gradient(100deg, rgba(5, 13, 29, .97), rgba(9, 21, 43, .94)) !important;
+  box-shadow: 0 8px 36px rgba(0, 0, 0, .22), 0 1px 0 rgba(34, 211, 238, .16);
+}
+.min-h-screen.bg-gray-50 header img[alt="BK Code Club"] {
+  object-fit: contain;
+  box-shadow: 0 0 24px rgba(34, 211, 238, .20);
+}
+.min-h-screen.bg-gray-50 header button[data-variant="outline"],
+.min-h-screen.bg-gray-50 button[data-variant="outline"]:hover,
+.min-h-screen.bg-gray-50 header button {
+  color: #e0f2fe !important;
+  border: 1px solid rgba(56, 189, 248, .36) !important;
+  background: rgba(8, 24, 46, .92) !important;
+}
+.min-h-screen.bg-gray-50 header button:hover,
+.min-h-screen.bg-gray-50 button[data-variant="outline"]:hover,
+.min-h-screen.bg-gray-50 button[data-variant="ghost"]:hover {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(8, 145, 178, .72), rgba(79, 70, 229, .62)) !important;
+  border-color: rgba(103, 232, 249, .85) !important;
+  box-shadow: 0 0 20px rgba(34, 211, 238, .20) !important;
+}
+.min-h-screen.bg-gray-50 [role="tab"]:hover,
+.min-h-screen.bg-gray-50 [role="tab"]:focus-visible {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(8, 145, 178, .48), rgba(79, 70, 229, .40)) !important;
+  border-color: rgba(103, 232, 249, .78) !important;
+}
+.min-h-screen.bg-gray-50 [data-slot="card"] {
+  box-shadow: 0 14px 38px rgba(0, 0, 0, .20), inset 0 1px 0 rgba(148, 220, 255, .045);
+  backdrop-filter: blur(12px);
+}
+.min-h-screen.bg-gray-50 .w-10.h-10.rounded-lg {
+  border: 1px solid rgba(103, 232, 249, .24);
+  background: linear-gradient(145deg, rgba(8, 145, 178, .22), rgba(79, 70, 229, .18)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 0 18px rgba(34, 211, 238, .08);
+}
+.min-h-screen.bg-gray-50 table th {
+  color: #bae6fd !important;
+}
+.min-h-screen.bg-gray-50 table tbody tr:hover {
+  background: rgba(34, 211, 238, .075) !important;
+}
+.min-h-screen.bg-gray-50 button:focus-visible,
+.min-h-screen.bg-gray-50 a:focus-visible {
+  outline: 2px solid #67e8f9 !important;
+  outline-offset: 3px !important;
+}
+@media (max-width: 640px) {
+  .min-h-screen.bg-gray-50 header .max-w-7xl {
+    gap: .5rem;
+  }
+  .min-h-screen.bg-gray-50 header button {
+    padding-inline: .55rem;
+  }
+}
