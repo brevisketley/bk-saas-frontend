@@ -336,3 +336,11 @@
 .min-h-screen.bg-white .group:hover button {
   color:#f8fafc !important; background:rgba(8,145,178,.28) !important;
 }
+
+/* Public EA storefront — cinematic brand surface */
+.min-h-screen.bg-gray-50 {background:radial-gradient(ellipse at 12% 10%,rgba(8,145,178,.20),transparent 35%),radial-gradient(ellipse at 88% 12%,rgba(79,70,229,.18),transparent 36%),linear-gradient(145deg,#030712,#08152b 52%,#10143a)!important;color:#e2e8f0}
+.min-h-screen.bg-gray-50 > header {background:rgba(3,10,24,.88)!important;border-color:rgba(56,189,248,.22)!important;backdrop-filter:blur(18px)}
+.min-h-screen.bg-gray-50 > header * {color:#e2e8f0}
+.min-h-screen.bg-gray-50 .bg-white {background:rgba(8,22,42,.90)!important;border-color:rgba(56,189,248,.20)!important}
+.min-h-screen.bg-gray-50 .text-gray-900,.min-h-screen.bg-gray-50 .text-gray-800,.min-h-screen.bg-gray-50 .text-gray-700,.min-h-screen.bg-gray-50 .text-gray-600 {color:#dbeafe!important}
+.min-h-screen.bg-gray-50 button:hover {filter:brightness(1.12)}
