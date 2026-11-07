@@ -122,7 +122,7 @@
 }
 /* Customer Workspace is rendered inside the dashboard tree. Force it to the
    viewport layer rather than allowing a tab/ancestor stacking context to trap it. */
-.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] {
+.min-h-screen.bg-gray-50 .fixed.inset-0 {
   position: fixed !important;
   inset: 0 !important;
   top: 0 !important;
@@ -139,7 +139,7 @@
   overscroll-behavior: contain !important;
   background: #050816 !important;
 }
-.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] > div {
+.min-h-screen.bg-gray-50 .fixed.inset-0 > div {
   position: relative !important;
   z-index: 1 !important;
   margin-top: 0 !important;
@@ -147,15 +147,15 @@
   background: #081426 !important;
   color: #f1f5f9 !important;
 }
-.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] .bg-gray-50 {
+.min-h-screen.bg-gray-50 .fixed.inset-0 .bg-gray-50 {
   background: #10213a !important;
   color: #f1f5f9 !important;
 }
-.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] .text-gray-500,
-.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] .text-gray-600,
-.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] .text-gray-700 {
+.min-h-screen.bg-gray-50 .fixed.inset-0 .text-gray-500,
+.min-h-screen.bg-gray-50 .fixed.inset-0 .text-gray-600,
+.min-h-screen.bg-gray-50 .fixed.inset-0 .text-gray-700 {
   color: #cbd5e1 !important;
 }
-.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] table th {
+.min-h-screen.bg-gray-50 .fixed.inset-0 table th {
   color: #bae6fd !important;
 }
