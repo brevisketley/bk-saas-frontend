@@ -97,3 +97,65 @@
   outline: 2px solid #67e8f9 !important;
   outline-offset: 2px !important;
 }
+
+
+/* BK Corp Club verified admin surface + customer overlay correction — 2026-11-07 */
+/* The dashboard uses shadcn card tokens rather than bg-white. Keep these
+   information surfaces dark so their light typography has sufficient contrast. */
+.min-h-screen.bg-gray-50 [data-slot="card"],
+.min-h-screen.bg-gray-50 .bg-card {
+  background: linear-gradient(145deg, rgba(13, 27, 49, .98), rgba(8, 17, 34, .98)) !important;
+  color: #f1f5f9 !important;
+  border-color: rgba(56, 189, 248, .24) !important;
+}
+.min-h-screen.bg-gray-50 [data-slot="card"] .text-gray-900,
+.min-h-screen.bg-gray-50 [data-slot="card"] .text-gray-800,
+.min-h-screen.bg-gray-50 [data-slot="card"] .text-gray-700,
+.min-h-screen.bg-gray-50 [data-slot="card"] .text-gray-600,
+.min-h-screen.bg-gray-50 [data-slot="card"] .text-gray-500,
+.min-h-screen.bg-gray-50 .bg-card .text-gray-900,
+.min-h-screen.bg-gray-50 .bg-card .text-gray-800,
+.min-h-screen.bg-gray-50 .bg-card .text-gray-700,
+.min-h-screen.bg-gray-50 .bg-card .text-gray-600,
+.min-h-screen.bg-gray-50 .bg-card .text-gray-500 {
+  color: #dbeafe !important;
+}
+/* Customer Workspace is rendered inside the dashboard tree. Force it to the
+   viewport layer rather than allowing a tab/ancestor stacking context to trap it. */
+.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 2147483647 !important;
+  isolation: isolate !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-height: 100dvh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  background: #050816 !important;
+}
+.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] > div {
+  position: relative !important;
+  z-index: 1 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  background: #081426 !important;
+  color: #f1f5f9 !important;
+}
+.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] .bg-gray-50 {
+  background: #10213a !important;
+  color: #f1f5f9 !important;
+}
+.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] .text-gray-500,
+.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] .text-gray-600,
+.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] .text-gray-700 {
+  color: #cbd5e1 !important;
+}
+.min-h-screen.bg-gray-50 .fixed.inset-0.z-\\[100\\] table th {
+  color: #bae6fd !important;
+}
