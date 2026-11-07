@@ -13,3 +13,87 @@
 .min-h-screen.bg-gray-50 button:hover{box-shadow:0 0 22px rgba(34,211,238,.14)}
 .min-h-screen.bg-gray-50 table tr:hover{background:rgba(34,211,238,.055)!important}
 .min-h-screen.bg-gray-50 .text-blue-600{color:#67e8f9!important}
+
+
+/* BK Corp Club commercial contrast and customer workspace stacking fix — 2026-11-07 */
+.min-h-screen.bg-gray-50 [role="tab"] {
+  color: #cbd5e1 !important;
+  background-color: rgba(15, 27, 49, .88) !important;
+  border-color: rgba(56, 189, 248, .22) !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+.min-h-screen.bg-gray-50 [role="tab"]:hover,
+.min-h-screen.bg-gray-50 [role="tab"]:focus-visible {
+  color: #ffffff !important;
+  background-color: rgba(8, 145, 178, .28) !important;
+  outline: 2px solid rgba(34, 211, 238, .72) !important;
+  outline-offset: 2px !important;
+}
+.min-h-screen.bg-gray-50 [role="tab"][data-state="active"],
+.min-h-screen.bg-gray-50 [role="tab"][aria-selected="true"] {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(8, 145, 178, .48), rgba(79, 70, 229, .42)) !important;
+  border-color: rgba(34, 211, 238, .58) !important;
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, .2), 0 0 18px rgba(34, 211, 238, .1) !important;
+}
+.min-h-screen.bg-gray-50 .text-gray-900,
+.min-h-screen.bg-gray-50 .text-gray-800,
+.min-h-screen.bg-gray-50 .text-gray-700,
+.min-h-screen.bg-gray-50 .text-gray-600,
+.min-h-screen.bg-gray-50 .text-gray-500 {
+  color: #e2e8f0 !important;
+}
+.min-h-screen.bg-gray-50 .text-gray-400 {
+  color: #a7b6ca !important;
+}
+.min-h-screen.bg-gray-50 .text-gray-300 {
+  color: #cbd5e1 !important;
+}
+.min-h-screen.bg-gray-50 .border-gray-50,
+.min-h-screen.bg-gray-50 .border-gray-100,
+.min-h-screen.bg-gray-50 .border-gray-200,
+.min-h-screen.bg-gray-50 .border-gray-300 {
+  border-color: rgba(56, 189, 248, .18) !important;
+}
+.min-h-screen.bg-gray-50 > .fixed.inset-0 {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  isolation: isolate !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  background: #050816 !important;
+  color: #f1f5f9 !important;
+}
+.min-h-screen.bg-gray-50 > .fixed.inset-0 > div {
+  position: relative;
+  z-index: 1;
+}
+.min-h-screen.bg-gray-50 > .fixed.inset-0 .text-gray-900,
+.min-h-screen.bg-gray-50 > .fixed.inset-0 .text-gray-800,
+.min-h-screen.bg-gray-50 > .fixed.inset-0 .text-gray-700,
+.min-h-screen.bg-gray-50 > .fixed.inset-0 .text-gray-600,
+.min-h-screen.bg-gray-50 > .fixed.inset-0 .text-gray-500 {
+  color: #e2e8f0 !important;
+}
+.min-h-screen.bg-gray-50 > .fixed.inset-0 .bg-gray-50,
+.min-h-screen.bg-gray-50 > .fixed.inset-0 .bg-white {
+  background: rgba(15, 27, 49, .92) !important;
+  color: #e2e8f0 !important;
+}
+.min-h-screen.bg-gray-50 > .fixed.inset-0 input,
+.min-h-screen.bg-gray-50 > .fixed.inset-0 select,
+.min-h-screen.bg-gray-50 > .fixed.inset-0 textarea {
+  color: #f1f5f9 !important;
+  background: #0b1730 !important;
+  border-color: rgba(56, 189, 248, .35) !important;
+}
+.min-h-screen.bg-gray-50 button:focus-visible,
+.min-h-screen.bg-gray-50 a:focus-visible,
+.min-h-screen.bg-gray-50 input:focus-visible,
+.min-h-screen.bg-gray-50 select:focus-visible,
+.min-h-screen.bg-gray-50 textarea:focus-visible {
+  outline: 2px solid #67e8f9 !important;
+  outline-offset: 2px !important;
+}
