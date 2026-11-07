@@ -1,5 +1,5 @@
-/ /login 301
-/login /login/index.html 200
+/ /login/index.html 302
+/login /login/index.html 301
 /login/ /login/index.html 200
 /bk-saas-frontend/* /:splat 301
 /admin /index.html 200
