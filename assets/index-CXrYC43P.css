@@ -497,3 +497,30 @@ body{
  .min-h-screen.bg-gray-50 .rounded-xl,.min-h-screen.bg-gray-50 .rounded-2xl{transition:border-color .2s ease,box-shadow .2s ease}
  .min-h-screen.bg-gray-50 .rounded-xl:hover,.min-h-screen.bg-gray-50 .rounded-2xl:hover{border-color:rgba(94,231,245,.34)}
 }
+
+
+/* Button contrast repair — customer workspace + EA management.
+   Outline buttons must be legible at rest, not only on hover. */
+.min-h-screen.bg-gray-50 [data-slot="button"][data-variant="outline"],
+.min-h-screen.bg-gray-50 [data-slot="button"].border.bg-background,
+.min-h-screen.bg-gray-50 .fixed.inset-0 [data-slot="button"][data-variant="outline"]{
+  background:linear-gradient(110deg,rgba(10,39,65,.98),rgba(22,31,68,.98)) !important;
+  color:#eafaff !important;
+  border:1px solid rgba(94,231,245,.48) !important;
+  box-shadow:0 4px 15px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.07) !important;
+  opacity:1 !important;
+}
+.min-h-screen.bg-gray-50 [data-slot="button"][data-variant="outline"] *,
+.min-h-screen.bg-gray-50 .fixed.inset-0 [data-slot="button"][data-variant="outline"] *{
+  color:inherit !important;
+}
+.min-h-screen.bg-gray-50 [data-slot="button"][data-variant="outline"]:hover,
+.min-h-screen.bg-gray-50 .fixed.inset-0 [data-slot="button"][data-variant="outline"]:hover{
+  background:linear-gradient(110deg,#07516a,#303d87) !important;
+  color:#fff !important;border-color:rgba(103,232,249,.85) !important;
+  box-shadow:0 0 0 1px rgba(94,231,245,.16),0 8px 22px rgba(0,0,0,.3) !important;
+  filter:none !important;
+}
+.min-h-screen.bg-gray-50 [data-slot="button"][data-variant="outline"]:disabled{
+  opacity:.48 !important;cursor:not-allowed;filter:saturate(.65);
+}
