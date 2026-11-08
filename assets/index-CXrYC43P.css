@@ -344,3 +344,32 @@
 .min-h-screen.bg-gray-50 .bg-white {background:rgba(8,22,42,.90)!important;border-color:rgba(56,189,248,.20)!important}
 .min-h-screen.bg-gray-50 .text-gray-900,.min-h-screen.bg-gray-50 .text-gray-800,.min-h-screen.bg-gray-50 .text-gray-700,.min-h-screen.bg-gray-50 .text-gray-600 {color:#dbeafe!important}
 .min-h-screen.bg-gray-50 button:hover {filter:brightness(1.12)}
+
+/* BK SaaS control plane — consistent dark cinematic admin surfaces and stable EA hover */
+.min-h-screen.bg-gray-50 .border.border-gray-100.rounded-xl,
+.min-h-screen.bg-gray-50 .border.border-gray-100.rounded-xl > div:first-child {
+  transition: background-color .18s ease,border-color .18s ease,box-shadow .18s ease,color .18s ease;
+}
+.min-h-screen.bg-gray-50 .border.border-gray-100.rounded-xl > div:first-child:hover {
+  background:linear-gradient(115deg,rgba(8,35,59,.98),rgba(22,31,69,.98)) !important;
+  color:#e0f2fe !important;
+  border-color:rgba(103,232,249,.42) !important;
+  box-shadow:inset 3px 0 0 rgba(34,211,238,.72),0 8px 24px rgba(0,0,0,.18);
+}
+.min-h-screen.bg-gray-50 .border.border-gray-100.rounded-xl > div:first-child:hover * {
+  color:#e0f2fe !important;
+}
+.min-h-screen.bg-gray-50 .border.border-gray-100.rounded-xl > div:first-child:hover button {
+  background:rgba(8,145,178,.22) !important;
+  color:#f8fafc !important;
+}
+.min-h-screen.bg-gray-50 .border.border-gray-100.rounded-xl {
+  background:rgba(7,20,39,.82) !important;
+  border-color:rgba(56,189,248,.22) !important;
+}
+.min-h-screen.bg-gray-50 .bg-gray-50 { background-color:rgba(10,25,46,.86) !important; }
+.min-h-screen.bg-gray-50 input,.min-h-screen.bg-gray-50 select,.min-h-screen.bg-gray-50 textarea {
+  background-color:rgba(2,8,23,.76); color:#e2e8f0; border-color:rgba(125,211,252,.24);
+}
+.min-h-screen.bg-gray-50 input::placeholder,.min-h-screen.bg-gray-50 textarea::placeholder { color:#7892ad; }
+.min-h-screen.bg-gray-50 table tbody tr:hover { background:rgba(8,145,178,.12) !important; }
