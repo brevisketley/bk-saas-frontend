@@ -1,0 +1,43 @@
+name: HQ Console Validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'hq/**'
+      - '.github/workflows/hq-console-ci.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-hq-console:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate HQ console structure and browser script
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { spawnSync } from 'node:child_process';
+          import assert from 'node:assert/strict';
+          const html = readFileSync('hq/index.html', 'utf8');
+          assert.match(html, /BK CORP CLUB/);
+          assert.match(html, /saas_token/);
+          assert.match(html, /x-tenant-domain/);
+          for (const route of ['/admin/hq/overview','/admin/hq/projects','/admin/hq/assignments','/admin/hq/agents','/admin/hq/systems','/admin/hq/revenue','/admin/hq/audit-events']) {
+            assert.ok(html.includes(route), 'Missing API route: ' + route);
+          }
+          assert.match(html, /Your session does not have BK Corp Club HQ administrator access/);
+          assert.match(html, /No demo data is being shown/);
+          const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]);
+          assert.ok(scripts.length > 0, 'No inline browser script found');
+          writeFileSync('/tmp/hq-console.js', scripts.join('\n'));
+          const check = spawnSync('node', ['--check', '/tmp/hq-console.js'], { encoding: 'utf8' });
+          assert.equal(check.status, 0, check.stderr || check.stdout);
+          console.log('HQ console validation passed');
+          NODE
