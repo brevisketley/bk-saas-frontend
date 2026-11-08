@@ -373,3 +373,127 @@
 }
 .min-h-screen.bg-gray-50 input::placeholder,.min-h-screen.bg-gray-50 textarea::placeholder { color:#7892ad; }
 .min-h-screen.bg-gray-50 table tbody tr:hover { background:rgba(8,145,178,.12) !important; }
+
+
+/* =========================================================
+   BK CORP CLUB — CINEMATIC CONTROL-ROOM DESIGN SYSTEM
+   Global app-wide visual layer; preserves all existing routes
+   ========================================================= */
+:root{
+  --bk-void:#030713;--bk-deep:#071326;--bk-panel:rgba(8,20,39,.88);
+  --bk-panel-2:rgba(12,29,53,.86);--bk-line:rgba(80,190,232,.23);
+  --bk-cyan:#5ee7f5;--bk-blue:#4b9cff;--bk-violet:#8874ff;
+  --bk-text:#edf7ff;--bk-muted:#9ab1ca;
+}
+html,body,#root{min-height:100%;background:var(--bk-void)}
+body{
+ background:
+ radial-gradient(ellipse at 14% 0%,rgba(0,190,220,.12),transparent 34%),
+ radial-gradient(ellipse at 88% 18%,rgba(93,65,230,.13),transparent 35%),
+ linear-gradient(145deg,#020611 0%,#071326 48%,#0b1030 100%) fixed !important;
+ color:var(--bk-text);
+}
+.min-h-screen.bg-gray-50{
+ position:relative;isolation:isolate;overflow-x:clip;
+ background:
+ radial-gradient(ellipse at 10% 0%,rgba(0,196,225,.13),transparent 32%),
+ radial-gradient(ellipse at 94% 12%,rgba(103,80,255,.15),transparent 34%),
+ linear-gradient(145deg,#030814 0%,#07152a 52%,#0a1029 100%) !important;
+ color:#edf7ff !important;
+}
+.min-h-screen.bg-gray-50:before{
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.18;
+ background-image:linear-gradient(rgba(117,190,235,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(117,190,235,.08) 1px,transparent 1px);
+ background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 85%);
+}
+.min-h-screen.bg-gray-50 header,
+.min-h-screen.bg-gray-50 nav{
+ background:rgba(3,10,24,.82) !important;border-color:rgba(94,231,245,.18) !important;
+ backdrop-filter:blur(22px);box-shadow:0 12px 40px rgba(0,0,0,.2);
+}
+.min-h-screen.bg-gray-50 .bg-white,
+.min-h-screen.bg-gray-50 .bg-white\/50,
+.min-h-screen.bg-gray-50 .bg-white\/80{
+ background:linear-gradient(145deg,rgba(13,32,57,.94),rgba(7,17,36,.94)) !important;
+ border-color:rgba(83,190,231,.23) !important;color:#eaf6ff !important;
+ box-shadow:0 14px 38px rgba(0,0,0,.20),inset 0 1px rgba(255,255,255,.035);
+}
+.min-h-screen.bg-gray-50 .rounded-xl,
+.min-h-screen.bg-gray-50 .rounded-2xl{
+ border-color:rgba(83,190,231,.20);
+}
+.min-h-screen.bg-gray-50 .text-gray-950,
+.min-h-screen.bg-gray-50 .text-gray-900,
+.min-h-screen.bg-gray-50 .text-gray-800,
+.min-h-screen.bg-gray-50 .text-gray-700,
+.min-h-screen.bg-gray-50 .text-gray-600{
+ color:#e3f1ff !important;
+}
+.min-h-screen.bg-gray-50 .text-gray-500,
+.min-h-screen.bg-gray-50 .text-gray-400{color:#91a9c4 !important}
+.min-h-screen.bg-gray-50 button,
+.min-h-screen.bg-gray-50 [role="button"]{
+ transition:transform .18s ease,box-shadow .18s ease,background .18s ease,border-color .18s ease;
+}
+.min-h-screen.bg-gray-50 button:hover,
+.min-h-screen.bg-gray-50 [role="button"]:hover{
+ filter:brightness(1.12);box-shadow:0 7px 24px rgba(0,0,0,.2);
+}
+.min-h-screen.bg-gray-50 button.bg-blue-600,
+.min-h-screen.bg-gray-50 button.bg-indigo-600,
+.min-h-screen.bg-gray-50 a.bg-blue-600{
+ background:linear-gradient(105deg,#087f9f,#3f53bd 58%,#6250bd) !important;
+ border:1px solid rgba(117,230,255,.34) !important;color:white !important;
+ box-shadow:0 8px 26px rgba(0,150,205,.20);
+}
+.min-h-screen.bg-gray-50 input,
+.min-h-screen.bg-gray-50 select,
+.min-h-screen.bg-gray-50 textarea{
+ background:rgba(2,9,23,.78) !important;color:#edf7ff !important;
+ border-color:rgba(109,190,232,.27) !important;
+}
+.min-h-screen.bg-gray-50 input:focus,
+.min-h-screen.bg-gray-50 select:focus,
+.min-h-screen.bg-gray-50 textarea:focus{
+ outline:none;border-color:rgba(94,231,245,.8) !important;
+ box-shadow:0 0 0 3px rgba(34,211,238,.12),0 0 22px rgba(34,211,238,.08);
+}
+.min-h-screen.bg-gray-50 input::placeholder,
+.min-h-screen.bg-gray-50 textarea::placeholder{color:#718aa7 !important}
+.min-h-screen.bg-gray-50 table{color:#dcecff}
+.min-h-screen.bg-gray-50 thead{background:rgba(12,32,57,.94) !important}
+.min-h-screen.bg-gray-50 tbody tr{border-color:rgba(93,170,218,.13) !important}
+.min-h-screen.bg-gray-50 tbody tr:hover{background:rgba(11,105,145,.16) !important}
+.min-h-screen.bg-gray-50 [role="tablist"]{
+ background:rgba(2,9,23,.65);border:1px solid rgba(83,190,231,.16);
+ border-radius:14px;padding:5px;
+}
+.min-h-screen.bg-gray-50 [role="tab"]{color:#a9bfd6 !important;border-radius:10px}
+.min-h-screen.bg-gray-50 [role="tab"][aria-selected="true"]{
+ color:#eaffff !important;background:linear-gradient(110deg,rgba(8,145,178,.32),rgba(79,70,229,.28)) !important;
+ box-shadow:inset 0 0 0 1px rgba(94,231,245,.24),0 5px 18px rgba(0,0,0,.18);
+}
+.min-h-screen.bg-gray-50 .border-gray-100,
+.min-h-screen.bg-gray-50 .border-gray-200{border-color:rgba(83,190,231,.19) !important}
+.min-h-screen.bg-gray-50 .bg-gray-50,
+.min-h-screen.bg-gray-50 .bg-gray-100{background:rgba(8,22,42,.72) !important}
+.min-h-screen.bg-gray-50 .shadow,
+.min-h-screen.bg-gray-50 .shadow-sm,
+.min-h-screen.bg-gray-50 .shadow-md{box-shadow:0 12px 36px rgba(0,0,0,.22) !important}
+.min-h-screen.bg-gray-50 .border.border-gray-100.rounded-xl{
+ background:linear-gradient(145deg,rgba(12,29,52,.94),rgba(6,17,36,.94)) !important;
+ border-color:rgba(75,181,224,.22) !important;
+}
+.min-h-screen.bg-gray-50 .border.border-gray-100.rounded-xl > div:first-child:hover{
+ background:linear-gradient(115deg,rgba(7,42,65,.99),rgba(30,35,78,.99)) !important;
+ color:#effcff !important;border-color:rgba(94,231,245,.55) !important;
+ box-shadow:inset 3px 0 0 #53e4f4,0 10px 30px rgba(0,0,0,.28),0 0 25px rgba(34,211,238,.09);
+}
+.min-h-screen.bg-gray-50 .border.border-gray-100.rounded-xl > div:first-child:hover *{color:#effcff !important}
+.min-h-screen.bg-gray-50 .border.border-gray-100.rounded-xl > div:first-child:hover button{
+ background:rgba(8,145,178,.28) !important;color:#fff !important;
+}
+@media(prefers-reduced-motion:no-preference){
+ .min-h-screen.bg-gray-50 .rounded-xl,.min-h-screen.bg-gray-50 .rounded-2xl{transition:border-color .2s ease,box-shadow .2s ease}
+ .min-h-screen.bg-gray-50 .rounded-xl:hover,.min-h-screen.bg-gray-50 .rounded-2xl:hover{border-color:rgba(94,231,245,.34)}
+}
