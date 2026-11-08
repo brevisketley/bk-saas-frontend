@@ -36,7 +36,7 @@
     <script>
       (function () {
         var path = window.location.pathname; while (path.length > 1 && path.charAt(path.length - 1) === '/') path = path.slice(0, -1);
-        var protectedPaths = ['/admin', '/dashboard', '/rep-dashboard', '/settings', '/rep', '/licenses', '/customers', '/products', '/billing', '/pricing', '/profile', '/reports'];
+        var protectedPaths = ['/', '/admin', '/dashboard', '/rep-dashboard', '/settings', '/rep', '/licenses', '/customers', '/products', '/billing', '/pricing', '/profile', '/reports'];
         if (protectedPaths.indexOf(path) === -1) return;
         var token = '';
         try { token = window.localStorage.getItem('saas_token') || ''; } catch (_) {}
@@ -52,12 +52,12 @@
         <section class="fallback-card" aria-label="Licensing SaaS login">
           <h1>BK Code Club</h1>
           <p>Licensing Platform</p>
-          <form class="fallback-form" onsubmit="return false">
+          <form class="fallback-form" action="/login/" method="get">
             <label for="fallback-email">Email</label>
-            <input id="fallback-email" type="email" autocomplete="username" placeholder="Email address">
+            <input id="fallback-email" type="email" autocomplete="username" placeholder="Email address" disabled>
             <label for="fallback-password">Password</label>
-            <input id="fallback-password" type="password" autocomplete="current-password" placeholder="Password">
-            <button type="submit">Sign In</button>
+            <input id="fallback-password" type="password" autocomplete="current-password" placeholder="Password" disabled>
+            <button type="submit">Open Secure Sign In</button>
           </form>
           <div id="boot-error" class="fallback-error" role="alert"></div>
           <div class="fallback-note">Loading secure application…</div>
