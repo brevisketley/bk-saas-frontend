@@ -557,3 +557,192 @@ body{
 @media(max-width:700px){
  .min-h-screen.bg-gray-50:after{background-size:auto,auto,min(82vw,420px);background-position:center,center,100% 35%;opacity:.07}
 }
+
+
+/* =========================================================
+   BK CORP CLUB — EXPERIENCE-GRADE CINEMATIC UI
+   Applies to every React route (public, login, customer, rep,
+   admin and tenant workspaces), not only gray admin screens.
+   ========================================================= */
+:root{
+ color-scheme:dark;
+ --bk-ink:#030814;--bk-glass:rgba(7,19,39,.86);
+ --bk-glass-hi:rgba(13,32,59,.91);--bk-edge:rgba(91,211,244,.25);
+ --bk-cyan:#67e8f9;--bk-blue:#60a5fa;--bk-violet:#a78bfa;
+ --bk-copy:#eaf5ff;--bk-dim:#9ab1ca;
+}
+html,body,#root{min-height:100%;background:#030814}
+body{
+ color:var(--bk-copy)!important;
+ background:
+  radial-gradient(ellipse at 12% 8%,rgba(0,203,232,.20),transparent 31%),
+  radial-gradient(ellipse at 88% 14%,rgba(105,74,245,.20),transparent 34%),
+  radial-gradient(ellipse at 52% 100%,rgba(16,102,184,.14),transparent 42%),
+  linear-gradient(145deg,#020611 0%,#07152b 48%,#0a0d25 100%) fixed!important;
+}
+body:before{
+ content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.19;
+ background-image:linear-gradient(rgba(125,211,252,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(125,211,252,.075) 1px,transparent 1px);
+ background-size:54px 54px;
+ mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.75) 58%,transparent 100%);
+}
+body:after{
+ content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.085;
+ background:
+  radial-gradient(ellipse at 80% 36%,rgba(34,211,238,.20),transparent 28%),
+  radial-gradient(ellipse at 18% 82%,rgba(124,58,237,.18),transparent 30%),
+  url("/assets/bk-code-club-mark.svg") no-repeat 86% 48%/min(48vw,640px);
+ filter:saturate(1.2);
+}
+#root{position:relative;z-index:1}
+#root .min-h-screen,
+#root .min-h-screen.bg-white,
+#root .min-h-screen.bg-gray-50{
+ position:relative;isolation:isolate;overflow-x:clip;
+ min-height:100vh;
+ color:var(--bk-copy)!important;
+ background:
+  radial-gradient(ellipse at 10% 0%,rgba(0,196,225,.13),transparent 34%),
+  radial-gradient(ellipse at 94% 12%,rgba(103,80,255,.15),transparent 35%),
+  linear-gradient(145deg,#030814 0%,#07152a 53%,#0a1029 100%)!important;
+}
+#root .min-h-screen:before{
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.15;
+ background-image:linear-gradient(rgba(117,190,235,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(117,190,235,.07) 1px,transparent 1px);
+ background-size:52px 52px;
+}
+#root .min-h-screen header,
+#root .min-h-screen nav{
+ background:rgba(3,10,24,.82)!important;
+ color:#edf7ff!important;border-color:rgba(94,231,245,.2)!important;
+ backdrop-filter:blur(24px) saturate(145%);
+ box-shadow:0 14px 42px rgba(0,0,0,.24),inset 0 -1px rgba(94,231,245,.07);
+}
+#root .min-h-screen header a,
+#root .min-h-screen nav a{color:#dff7ff}
+#root .min-h-screen h1,
+#root .min-h-screen h2,
+#root .min-h-screen h3,
+#root .min-h-screen h4{
+ color:#f0f8ff!important;
+ font-family:"Space Grotesk",Inter,ui-sans-serif,system-ui,sans-serif;
+ letter-spacing:-.035em;
+}
+#root .min-h-screen p,
+#root .min-h-screen label,
+#root .min-h-screen small{color:inherit}
+#root .min-h-screen .text-gray-950,
+#root .min-h-screen .text-gray-900,
+#root .min-h-screen .text-gray-800,
+#root .min-h-screen .text-gray-700,
+#root .min-h-screen .text-gray-600,
+#root .min-h-screen .text-slate-900,
+#root .min-h-screen .text-slate-800{color:#e4f2ff!important}
+#root .min-h-screen .text-gray-500,
+#root .min-h-screen .text-gray-400,
+#root .min-h-screen .text-slate-500,
+#root .min-h-screen .text-slate-400{color:#9ab1ca!important}
+#root .min-h-screen .bg-white,
+#root .min-h-screen .bg-white\/50,
+#root .min-h-screen .bg-white\/80,
+#root .min-h-screen .bg-gray-50,
+#root .min-h-screen .bg-gray-100,
+#root .min-h-screen .bg-slate-50,
+#root .min-h-screen .bg-slate-100{
+ background:linear-gradient(145deg,rgba(13,32,57,.94),rgba(6,16,35,.96))!important;
+ color:#eaf6ff!important;
+}
+#root .min-h-screen .rounded-xl,
+#root .min-h-screen .rounded-2xl,
+#root .min-h-screen .rounded-lg,
+#root .min-h-screen [data-slot="card"]{
+ border-color:rgba(83,190,231,.24)!important;
+ box-shadow:0 20px 55px rgba(0,0,0,.27),inset 0 1px rgba(255,255,255,.055),0 0 28px rgba(34,211,238,.045);
+}
+#root .min-h-screen .rounded-xl.bg-white,
+#root .min-h-screen .rounded-2xl.bg-white,
+#root .min-h-screen .rounded-lg.bg-white,
+#root .min-h-screen [data-slot="card"]{
+ background:linear-gradient(145deg,rgba(13,32,57,.96),rgba(6,16,35,.96))!important;
+ backdrop-filter:blur(18px) saturate(135%);
+}
+#root .min-h-screen .rounded-xl:hover,
+#root .min-h-screen .rounded-2xl:hover,
+#root .min-h-screen [data-slot="card"]:hover{
+ border-color:rgba(103,232,249,.42)!important;
+ box-shadow:0 24px 64px rgba(0,0,0,.34),0 0 30px rgba(34,211,238,.075),inset 0 1px rgba(255,255,255,.07);
+}
+#root .min-h-screen input,
+#root .min-h-screen select,
+#root .min-h-screen textarea{
+ background:rgba(2,8,23,.82)!important;color:#f1f8ff!important;
+ border:1px solid rgba(125,211,252,.28)!important;
+}
+#root .min-h-screen input::placeholder,
+#root .min-h-screen textarea::placeholder{color:#7892ad!important}
+#root .min-h-screen input:focus,
+#root .min-h-screen select:focus,
+#root .min-h-screen textarea:focus{
+ outline:none;border-color:rgba(94,231,245,.82)!important;
+ box-shadow:0 0 0 3px rgba(34,211,238,.13),0 0 24px rgba(34,211,238,.10)!important;
+}
+#root .min-h-screen button,
+#root .min-h-screen [role="button"]{
+ transition:transform .2s ease,box-shadow .2s ease,filter .2s ease,border-color .2s ease;
+}
+#root .min-h-screen button:not(:disabled):hover,
+#root .min-h-screen [role="button"]:not([aria-disabled="true"]):hover{
+ filter:brightness(1.12);box-shadow:0 10px 28px rgba(0,0,0,.25),0 0 22px rgba(34,211,238,.09);
+}
+#root .min-h-screen button.bg-blue-600,
+#root .min-h-screen button.bg-indigo-600,
+#root .min-h-screen a.bg-blue-600,
+#root .min-h-screen [data-slot="button"]:not([data-variant="outline"]){
+ background:linear-gradient(105deg,#087f9f 0%,#3155bd 58%,#684bc0 100%)!important;
+ color:#fff!important;border:1px solid rgba(117,230,255,.38)!important;
+ box-shadow:0 10px 30px rgba(8,145,178,.22),inset 0 1px rgba(255,255,255,.16);
+}
+#root .min-h-screen [data-slot="button"][data-variant="outline"]{
+ color:#eafaff!important;background:linear-gradient(110deg,rgba(10,39,65,.98),rgba(22,31,68,.98))!important;
+ border:1px solid rgba(94,231,245,.48)!important;
+}
+#root .min-h-screen [data-slot="button"][data-variant="outline"] *{color:inherit!important}
+#root .min-h-screen table{color:#dcecff!important}
+#root .min-h-screen thead{background:rgba(12,32,57,.96)!important}
+#root .min-h-screen tbody tr{border-color:rgba(93,170,218,.16)!important}
+#root .min-h-screen tbody tr:hover{background:rgba(11,105,145,.18)!important}
+#root .min-h-screen [role="tablist"]{
+ background:rgba(2,9,23,.72)!important;border:1px solid rgba(83,190,231,.2);
+ border-radius:14px;padding:5px;
+}
+#root .min-h-screen [role="tab"]{color:#a9bfd6!important}
+#root .min-h-screen [role="tab"][aria-selected="true"]{
+ color:#eaffff!important;background:linear-gradient(110deg,rgba(8,145,178,.35),rgba(79,70,229,.30))!important;
+ box-shadow:inset 0 0 0 1px rgba(94,231,245,.25),0 5px 18px rgba(0,0,0,.2);
+}
+#root .min-h-screen .bg-blue-50,
+#root .min-h-screen .bg-indigo-50,
+#root .min-h-screen .bg-purple-50,
+#root .min-h-screen .bg-green-50,
+#root .min-h-screen .bg-yellow-50,
+#root .min-h-screen .bg-red-50{
+ background:linear-gradient(135deg,rgba(8,145,178,.18),rgba(79,70,229,.17))!important;
+}
+#root .min-h-screen .text-blue-600,
+#root .min-h-screen .text-indigo-600,
+#root .min-h-screen .text-purple-600{color:#7deaff!important}
+#root .min-h-screen .text-green-600{color:#75efc3!important}
+#root .min-h-screen .text-yellow-600{color:#ffd77b!important}
+#root .min-h-screen .text-red-600{color:#ff9eae!important}
+@media(max-width:700px){
+ body:after{background-size:min(82vw,420px);background-position:100% 38%;opacity:.055}
+ #root .min-h-screen header{backdrop-filter:blur(16px)}
+}
+@media(prefers-reduced-motion:no-preference){
+ #root .min-h-screen .rounded-xl,
+ #root .min-h-screen .rounded-2xl,
+ #root .min-h-screen [data-slot="card"]{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+ #root .min-h-screen .rounded-xl:hover,
+ #root .min-h-screen .rounded-2xl:hover,
+ #root .min-h-screen [data-slot="card"]:hover{transform:translateY(-2px)}
+}
