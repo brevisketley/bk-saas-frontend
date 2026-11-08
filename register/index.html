@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="BK Corp Club Licensing — secure software licensing infrastructure." />
     <title>BK Corp Club Licensing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f9fafb;color:#111827}
-      #root{min-height:100vh}
-      .fallback{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box}
-      .fallback-card{width:100%;max-width:420px;background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:32px;box-shadow:0 8px 30px rgba(0,0,0,.06);text-align:center}
-      .fallback-card h1{margin:0 0 8px;font-size:24px}.fallback-card p{margin:0;color:#6b7280}
-      .fallback-form{margin-top:24px;text-align:left}.fallback-form label{display:block;font-size:14px;font-weight:600;margin:14px 0 6px}.fallback-form input{box-sizing:border-box;width:100%;height:44px;border:1px solid #d1d5db;border-radius:9px;padding:0 12px;font-size:15px}.fallback-form button{width:100%;height:44px;margin-top:18px;border:0;border-radius:9px;background:#2563eb;color:#fff;font-weight:600;cursor:pointer}.fallback-note{margin-top:14px;font-size:12px;color:#9ca3af}
-      .fallback-error{display:none;margin-top:16px;padding:10px;border-radius:8px;background:#fef2f2;color:#b91c1c;font-size:13px}
+      :root{color-scheme:dark;--bk-cyan:#62edff;--bk-muted:#9db4ce}
+      *{box-sizing:border-box}
+      html,body{min-height:100%;background:#030713}
+      body{margin:0;font-family:'DM Sans',Inter,system-ui,sans-serif;color:#edf7ff;background:radial-gradient(ellipse at 15% 10%,rgba(0,205,232,.18),transparent 34%),radial-gradient(ellipse at 86% 18%,rgba(94,65,239,.22),transparent 36%),linear-gradient(145deg,#020611,#07162d 54%,#0c1030)}
+      body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:linear-gradient(rgba(113,190,235,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(113,190,235,.08) 1px,transparent 1px);background-size:52px 52px}
+      body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.09;background:url('/assets/bk-code-club-mark.svg') no-repeat 84% 48%/min(52vw,620px)}
+      #root{min-height:100vh;position:relative;z-index:1}
+      .fallback{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+      .fallback-card{width:100%;max-width:460px;background:linear-gradient(145deg,rgba(10,29,54,.96),rgba(5,12,31,.97));border:1px solid rgba(103,232,249,.34);border-radius:24px;padding:38px;box-shadow:0 35px 100px rgba(0,0,0,.55),0 0 65px rgba(34,211,238,.12);text-align:center;backdrop-filter:blur(22px)}
+      .fallback-card h1{font:700 28px 'Space Grotesk';margin:0 0 8px;color:#f2f8ff}.fallback-card p{margin:0;color:#9db4ce}
+      .fallback-form{margin-top:24px;text-align:left}.fallback-form label{display:block;font-size:12px;font-weight:700;margin:14px 0 6px;color:#dbeafe}.fallback-form input{width:100%;height:48px;border:1px solid rgba(125,211,252,.28);border-radius:10px;padding:0 13px;background:rgba(2,8,23,.76);color:#f8fafc;font-size:15px}.fallback-form button{width:100%;height:49px;margin-top:18px;border:1px solid rgba(103,232,249,.55);border-radius:11px;background:linear-gradient(105deg,#087f9f,#3155bd 58%,#684bc0);color:#fff;font-weight:800;cursor:pointer}.fallback-note{margin-top:14px;font-size:12px;color:#89a6c5}
+      .fallback-error{display:none;margin-top:16px;padding:10px;border-radius:8px;background:rgba(127,29,29,.28);color:#fecaca;border:1px solid rgba(248,113,113,.25);font-size:13px}
     </style>
     <script>
       window.__BK_LICENSING_BOOT__ = { startedAt: Date.now() };
@@ -44,7 +50,7 @@
       })();
     </script>
     <script type="module" crossorigin src="/assets/index-DhaHI4J3.js" onload="window.__BK_LICENSING_APP_LOADED__=true"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CXrYC43P.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-CXrYC43P.css?v=20261108-experience-v3">
   </head>
   <body>
     <div id="root">
