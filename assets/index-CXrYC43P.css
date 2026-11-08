@@ -524,3 +524,36 @@ body{
 .min-h-screen.bg-gray-50 [data-slot="button"][data-variant="outline"]:disabled{
   opacity:.48 !important;cursor:not-allowed;filter:saturate(.65);
 }
+
+
+/* BK CORP CLUB — brand-forward cinematic environment */
+.min-h-screen.bg-gray-50{background-color:#030713!important}
+.min-h-screen.bg-gray-50:after{
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.105;
+ background-image:
+  radial-gradient(ellipse at 76% 28%,rgba(16,204,236,.16),transparent 32%),
+  radial-gradient(ellipse at 88% 78%,rgba(116,83,255,.15),transparent 34%),
+  url("/assets/bk-code-club-mark.svg");
+ background-repeat:no-repeat,no-repeat,no-repeat;
+ background-size:auto,auto,min(48vw,620px);
+ background-position:center,center,82% 48%;
+ filter:saturate(1.1);
+}
+.min-h-screen.bg-gray-50 main,.min-h-screen.bg-gray-50 header,.min-h-screen.bg-gray-50 nav{position:relative}
+.min-h-screen.bg-gray-50 .bg-white,
+.min-h-screen.bg-gray-50 .rounded-xl.bg-white,
+.min-h-screen.bg-gray-50 .rounded-2xl.bg-white{
+ backdrop-filter:blur(18px);
+}
+.min-h-screen.bg-gray-50 h1,
+.min-h-screen.bg-gray-50 h2,
+.min-h-screen.bg-gray-50 h3{font-family:"Space Grotesk",Inter,ui-sans-serif,system-ui,sans-serif;letter-spacing:-.025em}
+.min-h-screen.bg-gray-50 [data-slot="card"],
+.min-h-screen.bg-gray-50 .rounded-2xl.border,
+.min-h-screen.bg-gray-50 .rounded-xl.border{
+ box-shadow:0 20px 55px rgba(0,0,0,.27),inset 0 1px rgba(255,255,255,.045),0 0 30px rgba(34,211,238,.035);
+}
+.min-h-screen.bg-gray-50 button:not(:disabled):active{transform:translateY(1px) scale(.99)}
+@media(max-width:700px){
+ .min-h-screen.bg-gray-50:after{background-size:auto,auto,min(82vw,420px);background-position:center,center,100% 35%;opacity:.07}
+}
