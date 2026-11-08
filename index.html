@@ -40,7 +40,8 @@
         if (protectedPaths.indexOf(path) === -1) return;
         var token = '';
         try { token = window.localStorage.getItem('saas_token') || ''; } catch (_) {}
-        if (!token) window.location.replace('/login');
+        if (!token) { try { token = window.sessionStorage.getItem('saas_token') || ''; } catch (_) {} }
+        if (!token) window.location.replace('/login/');
       })();
     </script>
     <script type="module" crossorigin src="/assets/index-DhaHI4J3.js?v=20261107-tenant-profile-6" onload="window.__BK_LICENSING_APP_LOADED__=true"></script>
