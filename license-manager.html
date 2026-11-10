@@ -75,6 +75,7 @@
       <option value="">Select the EA this licence belongs to (required)</option>
     </select>
     <p class="muted" style="font-size:12px;margin:6px 0 0;">Each licence is locked to this EA. It cannot activate a different EA.</p>
+    <p id="productIdentityHint" class="muted" style="font-size:12px;margin:6px 0 14px;">Select an EA to view its immutable product UUID.</p>
 
     <div class="row">
       <div>
@@ -167,6 +168,17 @@ document.querySelectorAll('.assign-btn').forEach(btn => {
   });
 });
 
+function updateSelectedProductIdentity() {
+  const select = document.getElementById('productId');
+  const hint = document.getElementById('productIdentityHint');
+  if (!select || !hint) return;
+  if (!select.value) {
+    hint.textContent = 'Select an EA to view its immutable product UUID.';
+    return;
+  }
+  hint.textContent = 'EA Product UUID: ' + select.value + '. This exact UUID must be embedded in the matching EA build as EA_PRODUCT_ID.';
+}
+
 async function loadProducts() {
   try {
     const res = await fetch(`${API_URL}/product/all`, { headers: { 'x-tenant-domain': TENANT_DOMAIN } });
@@ -177,6 +189,8 @@ async function loadProducts() {
       activeProducts.map(p => {
           return `<option value="${p.id}">${p.name} ${p.price ? `(${p.price})` : ''}</option>`;
       }).join('');
+    select.onchange = updateSelectedProductIdentity;
+    updateSelectedProductIdentity();
   } catch (e) { /* ignore */ }
 }
 
@@ -199,7 +213,7 @@ async function createProduct() {
     if (!res.ok) {
       resultBox.textContent = 'Failed: ' + (data.error || 'unknown error');
     } else {
-      resultBox.textContent = `✅ Added "${data.name}"`;
+      resultBox.textContent = `EA added: "${data.name}". Product UUID: ${data.id}. Embed this UUID in the matching EA build as EA_PRODUCT_ID.`;
       document.getElementById('newProdName').value = '';
       document.getElementById('newProdPrice').value = '';
       document.getElementById('newProdDownloadUrl').value = '';
