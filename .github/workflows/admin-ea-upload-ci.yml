@@ -1,0 +1,44 @@
+name: Admin EA File Upload CI
+
+on:
+  pull_request:
+    paths:
+      - 'assets/AdminDashboard-*.js'
+      - 'assets/api-*.js'
+      - '.github/workflows/admin-ea-upload-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/AdminDashboard-*.js'
+      - 'assets/api-*.js'
+      - '.github/workflows/admin-ea-upload-ci.yml'
+
+jobs:
+  validate-ea-file-save:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate admin bundle JavaScript syntax
+        run: |
+          node --input-type=module --check < assets/AdminDashboard-M2HbKczL.js
+          node --input-type=module --check < assets/api-DWbDjSf3.js
+      - name: Validate explicit product-scoped save control
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          admin = Path('assets/AdminDashboard-M2HbKczL.js').read_text()
+          api = Path('assets/api-DWbDjSf3.js').read_text()
+          for required in [
+              'saveEaFile=async',
+              'Save EA File',
+              'setEaFiles',
+              'EA file saved successfully',
+              'W(s,t)'
+          ]:
+              assert required in admin, f'Missing EA file save workflow: {required}'
+          assert '`/product/${e}/upload`' in api, 'Product-scoped upload API missing'
+          print('EA file save workflow: PASS')
+          PY
