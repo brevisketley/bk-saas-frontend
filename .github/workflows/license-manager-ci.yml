@@ -1,0 +1,67 @@
+name: License Manager CI
+
+on:
+  pull_request:
+    paths:
+      - 'license-manager.html'
+      - '.github/workflows/license-manager-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'license-manager.html'
+      - '.github/workflows/license-manager-ci.yml'
+
+jobs:
+  validate-license-manager:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate mandatory EA allocation controls
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html = Path('license-manager.html').read_text()
+          required = [
+              'id="productId" required',
+              'Select the EA this licence belongs to (required)',
+              "const body = { plan, expiryDays, productId }",
+              "if (!productId)",
+              "p.status === 'active'",
+              '<th>EA</th>'
+          ]
+          for item in required:
+              assert item in html, f'Missing required EA licensing control: {item}'
+          assert 'General / Unspecified' not in html, 'Unassigned EA option must not be available'
+          print('EA allocation controls: PASS')
+          PY
+      - name: Check embedded JavaScript syntax
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          class Scripts(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.active = False
+                  self.parts = []
+                  self.current = []
+              def handle_starttag(self, tag, attrs):
+                  if tag == 'script':
+                      self.active = True
+                      self.current = []
+              def handle_endtag(self, tag):
+                  if tag == 'script' and self.active:
+                      self.parts.append(''.join(self.current))
+                      self.active = False
+              def handle_data(self, data):
+                  if self.active:
+                      self.current.append(data)
+          parser = Scripts()
+          parser.feed(Path('license-manager.html').read_text())
+          Path('/tmp/license-manager-inline.js').write_text('\n'.join(parser.parts))
+          assert parser.parts, 'No inline JavaScript found'
+          PY
+          node --check /tmp/license-manager-inline.js
