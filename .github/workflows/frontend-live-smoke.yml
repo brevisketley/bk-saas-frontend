@@ -147,7 +147,7 @@ jobs:
               await page.goto(frontend + path, { waitUntil: 'domcontentloaded' });
               await page.waitForTimeout(1800);
               const currentPath = new URL(page.url()).pathname;
-              const normalizedPath = currentPath.replace(/\\/+$/, '') || '/';
+              const normalizedPath = currentPath.replace(/\/+$/, '') || '/';
               const redirectedToLogin = normalizedPath === '/login' || normalizedPath === '/login/index.html';
               assert.ok(redirectedToLogin, `Unauthenticated route ${path} did not redirect to login (current path: ${currentPath})`);
               assert.ok(await page.locator('body').innerText().then(t => /sign in|welcome back|licensing platform/i.test(t)),
@@ -157,7 +157,7 @@ jobs:
             await page.goto(frontend + '/license-manager.html', { waitUntil: 'domcontentloaded' });
             await page.waitForTimeout(1200);
             const legacyPath = new URL(page.url()).pathname;
-            const normalizedLegacyPath = legacyPath.replace(/\\/+$/, '') || '/';
+            const normalizedLegacyPath = legacyPath.replace(/\/+$/, '') || '/';
             assert.ok(normalizedLegacyPath === '/login' || normalizedLegacyPath === '/login/index.html',
               `Unauthenticated legacy License Manager did not redirect to login (current path: ${legacyPath})`);
 
