@@ -56,7 +56,7 @@
   <div class="card">
     <h2>Your EAs / Products</h2>
     <div class="row" style="align-items:flex-end;">
-      <div><label>EA Name</label><input type="text" id="newProdName" placeholder="Gold Scalper Pro" /></div>
+      <div><label>EA Name</label><input type="text" id="newProdName" placeholder="Gold Quantum Sniper EA" /></div>
       <div><label>Price (USD)</label><input type="number" id="newProdPrice" placeholder="99" /></div>
       <div><label>Duration (days)</label><input type="number" id="newProdDuration" value="30" /></div>
     </div>
@@ -71,9 +71,10 @@
     <h2>Generate License</h2>
 
     <label>EA / Product</label>
-    <select id="productId">
-      <option value="">— General / Unspecified —</option>
+    <select id="productId" required>
+      <option value="">Select the EA this licence belongs to (required)</option>
     </select>
+    <p class="muted" style="font-size:12px;margin:6px 0 0;">Each licence is locked to this EA. It cannot activate a different EA.</p>
 
     <div class="row">
       <div>
@@ -171,8 +172,11 @@ async function loadProducts() {
     const res = await fetch(`${API_URL}/product/all`, { headers: { 'x-tenant-domain': TENANT_DOMAIN } });
     const data = await res.json();
     const select = document.getElementById('productId');
-    select.innerHTML = '<option value="">— General / Unspecified —</option>' +
-      (data.products || []).map(p => `<option value="${p.id}">${p.name} ${p.price ? `($${p.price})` : ''}</option>`).join('');
+    const activeProducts = (data.products || []).filter(p => p.status === 'active');
+    select.innerHTML = '<option value="">Select the EA this licence belongs to (required)</option>' +
+      activeProducts.map(p => {
+          return `<option value="${p.id}">${p.name} ${p.price ? `(${p.price})` : ''}</option>`;
+      }).join('');
   } catch (e) { /* ignore */ }
 }
 
@@ -183,7 +187,7 @@ async function createProduct() {
   const downloadUrl = document.getElementById('newProdDownloadUrl').value.trim();
   const resultBox = document.getElementById('prodResult');
 
-  if (!name) { resultBox.textContent = 'Enter an EA name first.'; return; }
+  if (!name) { resultBox.textContent = 'Enter an EA product name first.'; return; }
 
   try {
     const res = await fetch(`${API_URL}/product/create`, {
@@ -249,8 +253,15 @@ async function generateLicense() {
   const productId = document.getElementById('productId').value;
   const assignTo = document.querySelector('.assign-btn.active').dataset.assign;
 
-  const body = { plan, expiryDays };
-  if (productId) body.productId = productId;
+  if (!productId) {
+    resultBox.className = 'err';
+    resultBox.textContent = 'Select the EA this licence must belong to before generating it.';
+    btn.disabled = false;
+    btn.textContent = 'Generate License';
+    return;
+  }
+
+  const body = { plan, expiryDays, productId };
 
   if (assignTo === 'admin' && currentAdmin) {
     body.userId = currentAdmin.id;
