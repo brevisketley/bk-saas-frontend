@@ -23,8 +23,8 @@ jobs:
           node-version: '20'
       - name: Validate admin bundle JavaScript syntax
         run: |
-          node --check assets/AdminDashboard-M2HbKczL.js
-          node --check assets/api-DWbDjSf3.js
+          node --input-type=module --check < assets/AdminDashboard-M2HbKczL.js
+          node --input-type=module --check < assets/api-DWbDjSf3.js
       - name: Validate explicit product-scoped save control
         run: |
           python - <<'PY'
