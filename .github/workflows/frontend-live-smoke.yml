@@ -47,10 +47,14 @@ jobs:
 
           const login = await get(frontend + '/login');
           assert.match(login.body, /id="loginForm"/, 'Direct login route did not serve the functional login page');
-          assert.match(login.body, /auth\/login/, 'Login form is not connected to the authentication endpoint');
+          assert.match(login.body, /login-v2\.js/, 'Login page is missing its authentication script');
           assert.match(login.body, /reset-password\.html/, 'Login page is missing password recovery');
+          const loginScriptPath = login.body.match(/src="([^"]*login-v2\.js[^"]*)"/)?.[1];
+          assert.ok(loginScriptPath, 'Login authentication script URL was not found');
+          const loginScript = await get(new URL(loginScriptPath, frontend).toString());
+          assert.match(loginScript.body, /auth\/login/, 'Login script is not connected to the authentication endpoint');
           for (const key of ['saas_token', 'saas_tenant_id', 'saas_tenant_domain']) {
-            assert.ok(login.body.includes(key), `Login page does not persist ${key} for the app session`);
+            assert.ok(loginScript.body.includes(key), `Login script does not persist ${key} for the app session`);
           }
 
           const reset = await get(frontend + '/reset-password.html');
