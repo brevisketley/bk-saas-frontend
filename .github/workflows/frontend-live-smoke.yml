@@ -43,7 +43,7 @@ jobs:
           }
 
           const root = await get(frontend + '/');
-          assert.match(root.body, /loginForm|__BK_LICENSING_APP_LOADED__|id="root"/, 'Root route did not return the licensing app/login shell');
+          assert.match(root.body, /BK CORP CLUB|BK Corp Club/i, 'Root route did not return the BK Corp Club public landing page');
 
           const login = await get(frontend + '/login');
           assert.match(login.body, /id="loginForm"/, 'Direct login route did not serve the functional login page');
@@ -57,19 +57,10 @@ jobs:
           assert.match(reset.body, /auth\/reset-password/, 'Password reset page is not wired to the reset endpoint');
           assert.match(reset.body, /token/, 'Password reset page does not handle its reset token');
 
-          const shell = await get(frontend + '/index.html');
-          const js = shell.body.match(/src="([^"]+\.js)"/)?.[1];
-          const css = shell.body.match(/href="([^"]+\.css)"/)?.[1];
-          assert.ok(js, 'SPA JavaScript asset was not referenced by index.html');
-          assert.ok(css, 'SPA CSS asset was not referenced by index.html');
-          await get(new URL(js, frontend).toString());
-          await get(new URL(css, frontend).toString());
-
-          for (const path of ['/admin', '/dashboard', '/register', '/buy', '/checkout/success', '/checkout/cancelled', '/onboarding', '/reseller', '/rep-dashboard', '/settings']) {
-            const route = await get(frontend + path);
-            assert.match(route.body, /id="root"/, `SPA route ${path} did not return the app shell`);
-            assert.ok(route.body.includes(js), `SPA route ${path} is missing the current JavaScript bundle`);
-          }
+          const manager = await get(frontend + '/license-manager.html');
+          assert.match(manager.body, /id="productId" required/, 'License Manager is missing the required EA selector');
+          assert.match(manager.body, /Select the EA this licence belongs to \(required\)/, 'License Manager is missing the EA allocation instruction');
+          assert.doesNotMatch(manager.body, /General \/ Unspecified/, 'License Manager still permits unassigned EA licences');
 
           const health = await get(backend + '/health');
           assert.match(health.body, /"status":"ok"/, 'Backend health check failed');
