@@ -87,8 +87,9 @@
         </select>
       </div>
       <div>
-        <label>Expiry (days)</label>
-        <input type="number" id="expiryDays" value="30" min="1" />
+        <label>Licence expiry date</label>
+        <input type="date" id="expiryDate" required />
+        <p class="muted" style="font-size:11px;margin:5px 0 0;">The licence remains valid through the selected date.</p>
       </div>
     </div>
 
@@ -263,9 +264,17 @@ async function generateLicense() {
   btn.textContent = 'Generating...';
 
   const plan = document.getElementById('plan').value;
-  const expiryDays = parseInt(document.getElementById('expiryDays').value) || 30;
+  const expiryDate = document.getElementById('expiryDate').value;
   const productId = document.getElementById('productId').value;
   const assignTo = document.querySelector('.assign-btn.active').dataset.assign;
+
+  if (!expiryDate || new Date(expiryDate + 'T23:59:59') <= new Date()) {
+    resultBox.className = 'err';
+    resultBox.textContent = 'Choose a future licence expiry date.';
+    btn.disabled = false;
+    btn.textContent = 'Generate License';
+    return;
+  }
 
   if (!productId) {
     resultBox.className = 'err';
@@ -275,7 +284,7 @@ async function generateLicense() {
     return;
   }
 
-  const body = { plan, expiryDays, productId };
+  const body = { plan, expiryDate, productId };
 
   if (assignTo === 'admin' && currentAdmin) {
     body.userId = currentAdmin.id;
@@ -447,6 +456,13 @@ async function loadLicenses() {
 }
 
 (async function initializeLicenseManager() {
+  const expiryInput = document.getElementById('expiryDate');
+  const today = new Date();
+  const minimum = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+  const defaultExpiry = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+  const toLocalDate = d => [d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-');
+  expiryInput.min = toLocalDate(minimum);
+  expiryInput.value = toLocalDate(defaultExpiry);
   const authorized = await loadAdminInfo();
   if (!authorized) return;
   await Promise.all([loadLicenses(), loadClientList(), loadProducts()]);
