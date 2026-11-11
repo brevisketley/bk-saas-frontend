@@ -68,6 +68,17 @@
   </div>
 
   <div class="card">
+    <h2>Secure EA File Upload</h2>
+    <p class="muted" style="font-size:12px;">Upload the compiled MT5 .ex5 file into private licensing storage. Customers can download it only when they hold an active licence for that EA.</p>
+    <label>EA / Product</label>
+    <select id="uploadProductId" required><option value="">Select an EA</option></select>
+    <label>Compiled MT5 EA file (.ex5)</label>
+    <input type="file" id="eaFile" accept=".ex5,application/octet-stream" />
+    <button class="submit" id="uploadEaBtn" onclick="uploadEaFile()">Upload securely</button>
+    <div id="uploadResult" style="margin-top:10px;font-size:13px;"></div>
+  </div>
+
+  <div class="card">
     <h2>Generate License</h2>
 
     <label>EA / Product</label>
@@ -184,12 +195,15 @@ async function loadProducts() {
   try {
     const res = await fetch(`${API_URL}/product/all`, { headers: { 'x-tenant-domain': TENANT_DOMAIN } });
     const data = await res.json();
-    const select = document.getElementById('productId');
     const activeProducts = (data.products || []).filter(p => p.status === 'active');
+    const select = document.getElementById('productId');
     select.innerHTML = '<option value="">Select the EA this licence belongs to (required)</option>' +
-      activeProducts.map(p => {
-          return `<option value="${p.id}">${p.name} ${p.price ? `(${p.price})` : ''}</option>`;
-      }).join('');
+      activeProducts.map(p => `<option value="${p.id}">${p.name} ${p.price ? `(${p.price})` : ''}</option>`).join('');
+    const uploadSelect = document.getElementById('uploadProductId');
+    if (uploadSelect) {
+      uploadSelect.innerHTML = '<option value="">Select an EA</option>' +
+        activeProducts.map(p => `<option value="${p.id}">${p.name} — ${p.hasSecureFile ? 'private file uploaded' : 'file not uploaded'}</option>`).join('');
+    }
     select.onchange = updateSelectedProductIdentity;
     updateSelectedProductIdentity();
   } catch (e) { /* ignore */ }
@@ -222,6 +236,42 @@ async function createProduct() {
     }
   } catch (e) {
     resultBox.textContent = 'Network error';
+  }
+}
+
+async function uploadEaFile() {
+  const productId = document.getElementById('uploadProductId').value;
+  const fileInput = document.getElementById('eaFile');
+  const result = document.getElementById('uploadResult');
+  const button = document.getElementById('uploadEaBtn');
+  const file = fileInput.files && fileInput.files[0];
+  result.textContent = '';
+  if (!productId) { result.textContent = 'Select the EA product first.'; return; }
+  if (!file) { result.textContent = 'Choose the compiled .ex5 file first.'; return; }
+  if (!file.name.toLowerCase().endsWith('.ex5')) { result.textContent = 'Only compiled MT5 .ex5 files are accepted.'; return; }
+  if (file.size < 1 || file.size > 25 * 1024 * 1024) { result.textContent = 'File must be between 1 byte and 25 MB.'; return; }
+  const form = new FormData();
+  form.append('file', file, file.name);
+  button.disabled = true;
+  button.textContent = 'Uploading securely...';
+  try {
+    const response = await fetch(`${API_URL}/product/${encodeURIComponent(productId)}/upload`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: form
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || data.message || 'EA upload failed.');
+    result.style.color = '#166534';
+    result.textContent = `Private EA file uploaded: ${data.fileName} (${Math.ceil(data.fileSize / 1024)} KB). Protected customer download is now enabled.`;
+    fileInput.value = '';
+    await loadProducts();
+  } catch (error) {
+    result.style.color = '#991b1b';
+    result.textContent = error.message || 'EA upload failed.';
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Upload securely';
   }
 }
 
