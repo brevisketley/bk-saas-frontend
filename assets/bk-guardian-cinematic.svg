@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000" fill="none">
+<defs>
+ <linearGradient id="armor" x1="540" y1="150" x2="1000" y2="900" gradientUnits="userSpaceOnUse"><stop stop-color="#E4FCFF"/><stop offset=".18" stop-color="#79C9E9"/><stop offset=".42" stop-color="#315C91"/><stop offset=".72" stop-color="#101E3D"/><stop offset="1" stop-color="#8B62FF"/></linearGradient>
+ <linearGradient id="edge" x1="500" y1="100" x2="1040" y2="850" gradientUnits="userSpaceOnUse"><stop stop-color="#C9FFFF"/><stop offset=".45" stop-color="#39DFFF"/><stop offset="1" stop-color="#8A75FF"/></linearGradient>
+ <linearGradient id="visor" x1="590" y1="300" x2="930" y2="390" gradientUnits="userSpaceOnUse"><stop stop-color="#35E9FF"/><stop offset=".55" stop-color="#3C89FF"/><stop offset="1" stop-color="#A17BFF"/></linearGradient>
+ <radialGradient id="core"><stop stop-color="#E6FFFF"/><stop offset=".2" stop-color="#6AF3FF"/><stop offset=".65" stop-color="#168BCB"/><stop offset="1" stop-color="#102B61" stop-opacity="0"/></radialGradient>
+ <radialGradient id="halo"><stop stop-color="#13CFFF" stop-opacity=".28"/><stop offset="1" stop-color="#1732A8" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="15" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <filter id="soft" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="35"/></filter>
+ <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" stroke="#58DFFF" stroke-opacity=".18" stroke-width="1"/></pattern>
+</defs>
+<ellipse cx="780" cy="510" rx="570" ry="470" fill="url(#halo)"/>
+<circle cx="790" cy="480" r="410" stroke="#42DDFB" stroke-opacity=".25" stroke-width="2"/>
+<circle cx="790" cy="480" r="350" stroke="#7E7AFF" stroke-opacity=".3" stroke-width="2" stroke-dasharray="4 15"/>
+<circle cx="790" cy="480" r="295" stroke="#4EDFFF" stroke-opacity=".16" stroke-width="18"/>
+<path d="M385 480a405 405 0 0 1 810 0" stroke="#52DFFF" stroke-opacity=".4" stroke-width="2" stroke-dasharray="110 24 16 22"/>
+<path d="M430 680 550 560M1110 280l120-110M1100 740l130 95M460 300 350 200" stroke="#5BEAFF" stroke-opacity=".32" stroke-width="2"/>
+<!-- holographic side panels -->
+<g stroke="#58E8FF" stroke-opacity=".6" fill="#061B39" fill-opacity=".72">
+ <path d="M80 300h260l35 35v230H80Z"/><path d="M80 300h260l35 35" stroke-width="3"/>
+ <path d="M103 352h165M103 380h220M103 408h130" stroke-opacity=".55"/>
+ <path d="M104 485h22v42h-22zM142 460h22v67h-22zM180 440h22v87h-22zM218 470h22v57h-22zM256 425h22v102h-22z" fill="#4BE9FF" fill-opacity=".3"/>
+ <path d="M1080 360h240l35 35v220h-275Z"/><path d="M1080 360h240l35 35" stroke-width="3"/>
+ <path d="M1110 418h175M1110 448h120M1110 478h190" stroke-opacity=".55"/>
+ <circle cx="1150" cy="540" r="26" stroke-width="3"/><circle cx="1150" cy="540" r="13" fill="#4BE9FF" fill-opacity=".4"/>
+ <path d="M1195 525h110M1195 545h80M1195 565h100" stroke-opacity=".55"/>
+</g>
+<!-- robot silhouette -->
+<g filter="url(#glow)" stroke="url(#edge)" stroke-width="5" stroke-linejoin="round">
+ <!-- antenna -->
+ <path d="M790 115V65M775 65h30M790 55v-18" stroke-width="5"/><circle cx="790" cy="34" r="10" fill="#8DFBFF"/>
+ <!-- head -->
+ <path d="m650 170 55-62h170l55 62 15 145-55 83H690l-55-83Z" fill="url(#armor)"/>
+ <path d="m685 202 105-45 105 45-15 85-90 50-90-50Z" fill="#071A35" stroke="#6BEFFF" stroke-width="4"/>
+ <path d="M704 235h50l36 24 36-24h50l-17 40-69 28-69-28Z" fill="url(#visor)" stroke="none"/>
+ <path d="m650 210-68 45v86l66 16M930 210l68 45v86l-66 16" fill="url(#armor)"/>
+ <path d="M665 318 610 360l28 42 65-30M915 318l55 42-28 42-65-30" fill="#10294B"/>
+ <!-- neck -->
+ <path d="M725 390v55h130v-55" fill="#132D53"/>
+ <!-- torso -->
+ <path d="m670 430-100 70-35 190 65 110h380l65-110-35-190-100-70-75 45-90-45Z" fill="url(#armor)"/>
+ <path d="m670 456 120 48 120-48 54 144-174 112-174-112Z" fill="#081B39" stroke="#66E8FF" stroke-width="4"/>
+ <path d="m790 510 72 90-72 60-72-60Z" fill="url(#core)" stroke="#79F6FF" stroke-width="4"/>
+ <path d="M790 535v100M740 590h100" stroke="#A5FFFF" stroke-width="3"/>
+ <!-- shoulder armour -->
+ <path d="m570 500-95 20-60 125 75 70 105-115M1010 500l95 20 60 125-75 70-105-115" fill="url(#armor)"/>
+ <!-- arms -->
+ <path d="m490 650-55 115 60 105 70-30-28-92 55-75M1090 650l55 115-60 105-70-30 28-92-55-75" fill="#172D55"/>
+ <path d="m495 835-20 62 35 30 90-18-10-56M1085 835l20 62-35 30-90-18 10-56" fill="url(#armor)"/>
+ <!-- waist and legs -->
+ <path d="m680 735-35 95 70 75h150l70-75-35-95" fill="#10294D"/>
+ <path d="m700 820-35 120 40 30 80-15 5-130M880 820l35 120-40 30-80-15-5-130" fill="url(#armor)"/>
+ <path d="m705 950-50 24-15 35h155l-5-38M875 950l50 24 15 35H785l5-38" fill="#081A36"/>
+</g>
+<!-- circuit details -->
+<g stroke="#6AEAFF" stroke-width="2" stroke-opacity=".7">
+ <path d="M685 180h-65v-35h-55M895 180h65v-35h55M680 465h-90v55h-65M900 465h90v55h65"/>
+ <path d="M700 700h-90v60h-70M880 700h90v60h70"/>
+ <path d="M790 120v-35h-65M790 120v-35h65"/>
+</g>
+<g fill="#8AF7FF" filter="url(#glow)"><circle cx="565" cy="145" r="5"/><circle cx="1015" cy="145" r="5"/><circle cx="525" cy="520" r="5"/><circle cx="1055" cy="520" r="5"/><circle cx="540" cy="760" r="5"/><circle cx="1040" cy="760" r="5"/></g>
+<!-- HUD typography -->
+<g fill="#91F0FF" font-family="Arial,sans-serif" letter-spacing="5">
+ <text x="88" y="265" font-size="18">BK // AI CORE</text>
+ <text x="1100" y="325" font-size="16">LIVE SYSTEM</text>
+ <text x="1100" y="610" font-size="13">NEURAL LINK: ACTIVE</text>
+ <text x="84" y="620" font-size="13">EA CONTROL MATRIX</text>
+ <text x="600" y="930" font-size="16">AUTONOMOUS INTELLIGENCE</text>
+</g>
+<rect x="0" y="0" width="1400" height="1000" fill="url(#grid)" opacity=".22"/>
+</svg>
