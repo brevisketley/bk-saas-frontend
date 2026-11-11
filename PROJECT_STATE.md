@@ -51,3 +51,14 @@ Every meaningful change must be tested, cross-reviewed, deployed where applicabl
 
 ## Last updated
 2026-08-12 — architecture audit continued; actual backend and Render service confirmed; compiled EA artifact found but source remains unavailable; shared swarm control plane established.
+
+
+## 2026-11-11 — Customer Resource Centre and EA visual system
+
+- Added /resources/ with authenticated My Licences, EA Library, Presets, Brokers and MT5 WebRequest setup sections.
+- Added admin controls for creating/uploading presets, updating versions, publishing/drafting, replacing files, archiving/restoring, and editing/enabling/disabling broker records.
+- Added customer navigation links from sign-in and the authenticated application shell.
+- Added four original SVG covers for BK Corp Club EA, Brevo Quantum EA, Gold Quantum Sniper EA and BTC Quantum Velocity EA. The resource centre uses product-name mapping; the storefront bundle now maps the same covers to its EA cards.
+- The customer EA library consumes the backend's protected download proxy URL rather than exposing the raw storage URL in the UI.
+- Frontend commits auto-deploy through Render. Confirm the newest storefront bundle/style commits are live before release sign-off.
+- Syntax checks passed for the resource page script and modified storefront bundle. Browser-level regression is still required; do not treat syntax validation as end-to-end proof.
