@@ -59,12 +59,3 @@ table{color:#e7f4ff!important}th{color:#89c8e8!important;background:rgba(9,34,62
 .min-h-screen.bg-gray-50 .text-center.mb-12 a{display:inline-flex;align-items:center;margin-top:14px;padding:12px 18px;border:1px solid rgba(88,223,255,.45);border-radius:10px;background:rgba(5,88,130,.25);color:#9bf2ff!important;font:700 10px Orbitron;letter-spacing:.08em}
 .min-h-screen.bg-gray-50 .grid.md\\:grid-cols-2>div{min-height:270px}
 @media(max-width:700px){.min-h-screen.bg-gray-50 .text-center.mb-12{padding:24px 20px!important}.min-h-screen.bg-gray-50 .text-center.mb-12:after{font-size:8px}}
-
-/* Cinematic artwork layer — real BK guardian illustration integrated across application routes */
-body:after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.42!important;background-image:linear-gradient(90deg,rgba(2,7,19,.95) 0%,rgba(2,7,19,.52) 45%,rgba(2,7,19,.18) 100%),url('/assets/bk-guardian-cinematic.svg')!important;background-repeat:no-repeat!important;background-position:center, right 1vw center!important;background-size:cover,min(72vw,1050px) auto!important}
-#root{position:relative;z-index:1}
-.min-h-screen.bg-gray-50{position:relative;isolation:isolate}
-.min-h-screen.bg-gray-50:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('/assets/bk-guardian-cinematic.svg') no-repeat right -100px top 100px/ min(62vw,780px) auto;opacity:.22}
-.min-h-screen.bg-gray-50 .max-w-6xl>div:first-child{background-image:linear-gradient(90deg,rgba(3,16,36,.98) 0%,rgba(4,18,44,.82) 48%,rgba(5,15,38,.45) 100%),url('/assets/bk-guardian-cinematic.svg')!important;background-position:center,right center!important;background-size:cover,auto 150%!important}
-.min-h-screen.bg-gray-50 .grid>div.bg-white{background-image:linear-gradient(145deg,rgba(5,20,43,.9),rgba(4,12,30,.97)),url('/assets/bk-guardian-cinematic.svg')!important;background-position:center,right bottom!important;background-size:cover,auto 115%!important}
-@media(max-width:760px){body:after{opacity:.22!important;background-position:center,right -180px center!important;background-size:cover,650px auto!important}.min-h-screen.bg-gray-50:before{background-position:right -210px top 120px;background-size:650px auto;opacity:.13}}
