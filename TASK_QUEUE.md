@@ -90,3 +90,13 @@ The project is 100% only when all critical P0/P1 release gates are production ve
 - [ ] Verify welcome email templates and password setup flow in test inboxes.
 - [ ] Complete browser responsiveness, accessibility and checkout regression.
 - [ ] Confirm payment availability messaging is clear while production payment is not configured.
+
+
+## 2026-11-11 — Legal and launch gates
+
+- [x] Add Terms, Privacy and Refund policy draft pages with storefront/resource-centre links.
+- [x] Require checkout acknowledgement of the policy links before form submission.
+- [x] Add illustrated MT5 WebRequest setup guides to the Resource Centre and transactional emails.
+- [ ] Complete and approve legal entity/contact details, privacy notice and governing-law terms with qualified counsel.
+- [ ] Browser-test that the terms checkbox blocks checkout until selected and that all legal links resolve.
+- [ ] Keep live checkout disabled until the selected payment provider's production credentials and webhook verification are configured.

@@ -72,3 +72,12 @@ Every meaningful change must be tested, cross-reviewed, deployed where applicabl
 - The backend stores new .ex5 uploads privately and protects customer downloads with licence entitlement checks. Legacy public copies are not deleted automatically.
 - Render shows the latest frontend deployment as live. Syntax checks passed for the Resource Centre script and storefront bundle; authenticated browser regression remains outstanding.
 - Production checkout is still unavailable until a live payment provider is configured; do not present the site as commercially ready yet.
+
+
+## 2026-11-11 — Legal pages and checkout consent
+
+- Added public Terms of Service, Privacy Notice and Refund & Cancellation Policy pages at /terms/, /privacy/ and /refunds/, with links in the storefront and customer Resource Centre.
+- Added a required checkout checkbox linking to all three policy pages.
+- Added illustrated MT5 WebRequest setup diagrams to the customer Resource Centre and transactional welcome/licence emails.
+- Legal pages are intentionally marked as drafts pending the operator's verified legal entity/registration/address, privacy contact and qualified legal review. Do not enable live checkout until these details and applicable jurisdictional terms are confirmed.
+- The backend preflight still reports no production payment rail configured; the connected Stripe account is test mode only, and PayFast/Yoco live configuration is not confirmed.

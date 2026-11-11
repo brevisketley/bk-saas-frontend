@@ -47,3 +47,13 @@ This repository follows the backend release-gate checklist. A frontend gate is G
 - [ ] Admin-only controls remain hidden from customers and enforced by backend authorization.
 - [ ] Protected EA download path never exposes raw storage URLs to customer responses.
 - [ ] Payment checkout state is accurately represented; no claim of commercial readiness before live payment configuration.
+
+
+## 2026-11-11 — Legal, consent and MT5 onboarding gates
+
+- [ ] Legal entity, registration/address and privacy contact verified and published.
+- [ ] Terms, Privacy and Refund pages reviewed by qualified counsel for South Africa and target markets.
+- [ ] Required checkout checkbox tested in a browser and records consent if required by the chosen checkout flow.
+- [ ] All policy links resolve on desktop and mobile.
+- [ ] MT5 illustrated guide assets load; written steps and exact URL remain readable when images are blocked.
+- [ ] Production payment provider configured and end-to-end tested before enabling live checkout.

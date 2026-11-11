@@ -17,3 +17,9 @@ The repository audit has not yet established that the complete frontend/backend 
 - Added customer Resource Centre, support tickets and admin email-template controls.
 - Added private EA file migration controls and four distinct EA cover assets.
 - Commercial readiness remains blocked until live payment credentials and purchase-to-licence E2E are verified.
+
+
+## 2026-11-11 follow-up
+- Added legal policy draft pages and required checkout acknowledgement.
+- Added illustrated MT5 WebRequest onboarding diagrams to the customer portal and emails.
+- Legal approval and live payment configuration remain explicit release gates.

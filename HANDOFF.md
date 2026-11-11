@@ -63,3 +63,12 @@ Continue, don't stall. Work independent lanes in parallel, cross-review, red-tea
 - Commercial launch remains blocked by missing live payment credentials and an unverified purchase-to-licence flow.
 
 Next: sign in as customer and admin, verify each Resource Centre tab, migrate legacy EA files, test email templates and support tickets, then validate the complete sandbox purchase flow once a separate test environment/provider is available.
+
+
+## 2026-11-11 — Legal and MT5 onboarding update
+
+- Added public policy draft pages at /terms/, /privacy/ and /refunds/ and linked them from the storefront and Resource Centre.
+- Added required checkout acknowledgement linking to the policy pages.
+- Added three illustrated MT5 setup diagrams to the Resource Centre and transactional emails; the email retains the exact server URL https://bk-saas-backend.onrender.com and written instructions for clients that block images.
+- Policy pages are drafts, not legal approval. The operator must provide verified legal entity, registration/address and privacy contact details and obtain qualified review before live checkout.
+- Production payment remains unconfigured; checkout is not commercially operational.
