@@ -11,3 +11,9 @@
 
 ### Notes
 The repository audit has not yet established that the complete frontend/backend licensing system is production-ready. The next work item is an evidence-based architecture and implementation audit followed by continuous execution of the task queue.
+
+
+## 2026-11-11 follow-up
+- Added customer Resource Centre, support tickets and admin email-template controls.
+- Added private EA file migration controls and four distinct EA cover assets.
+- Commercial readiness remains blocked until live payment credentials and purchase-to-licence E2E are verified.

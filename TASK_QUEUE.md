@@ -78,3 +78,15 @@ The project is 100% only when all critical P0/P1 release gates are production ve
 - [ ] Test customer and admin workflows against live backend with authenticated sessions.
 - [ ] Confirm existing EA download URLs are supported by the approved-host proxy; migrate files from public raw URLs where required.
 - [ ] Finish purchase-to-licence-to-email-to-download E2E and security gates before commercial-readiness sign-off.
+
+
+## 2026-11-11 — Current frontend release gates
+
+- [x] Resource Centre tabs: licences, EA library, presets, brokers, MT5 setup, account and support.
+- [x] Admin tools: preset management, broker editing, legacy EA private-file migration, support queue and email templates.
+- [x] Four distinct EA covers integrated into the resource centre and storefront.
+- [ ] Test customer/admin roles and tenant isolation with real authenticated sessions.
+- [ ] Verify file upload/download and migration controls against the deployed backend.
+- [ ] Verify welcome email templates and password setup flow in test inboxes.
+- [ ] Complete browser responsiveness, accessibility and checkout regression.
+- [ ] Confirm payment availability messaging is clear while production payment is not configured.

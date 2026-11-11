@@ -62,3 +62,13 @@ Every meaningful change must be tested, cross-reviewed, deployed where applicabl
 - The customer EA library consumes the backend's protected download proxy URL rather than exposing the raw storage URL in the UI.
 - Frontend commits auto-deploy through Render. Confirm the newest storefront bundle/style commits are live before release sign-off.
 - Syntax checks passed for the resource page script and modified storefront bundle. Browser-level regression is still required; do not treat syntax validation as end-to-end proof.
+
+
+## 2026-11-11 — Current Resource Centre deployment status
+
+- Resource Centre is deployed with My Licences, EA Library, Presets, Brokers, MT5 setup, My Account and Support.
+- Admin Resource Centre includes preset upload/replace/version/publish/archive, broker editing/enablement, legacy EA private-storage migration, support queue and email-template editing.
+- Four original SVG EA covers are integrated into both the customer EA library and storefront product cards.
+- The backend stores new .ex5 uploads privately and protects customer downloads with licence entitlement checks. Legacy public copies are not deleted automatically.
+- Render shows the latest frontend deployment as live. Syntax checks passed for the Resource Centre script and storefront bundle; authenticated browser regression remains outstanding.
+- Production checkout is still unavailable until a live payment provider is configured; do not present the site as commercially ready yet.

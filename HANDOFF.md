@@ -53,3 +53,13 @@ Continue, don't stall. Work independent lanes in parallel, cross-review, red-tea
 3. Test the storefront covers for all four current EAs and confirm mobile layout.
 4. Verify the dashboard shortcut does not obscure controls on small screens.
 5. Test admin and customer role behavior against the live backend; report exact errors and fix them.
+
+
+## 2026-11-11 — Current frontend handoff
+
+- The latest frontend deployment is live with the Resource Centre, four EA covers, support ticket UI and admin email-template controls.
+- The backend's private EA storage, support-ticket and email-template migrations are live.
+- Static syntax checks passed; authenticated browser-level testing has not been performed through this connector session.
+- Commercial launch remains blocked by missing live payment credentials and an unverified purchase-to-licence flow.
+
+Next: sign in as customer and admin, verify each Resource Centre tab, migrate legacy EA files, test email templates and support tickets, then validate the complete sandbox purchase flow once a separate test environment/provider is available.

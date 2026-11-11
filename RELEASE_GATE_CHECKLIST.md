@@ -37,3 +37,13 @@ This repository follows the backend release-gate checklist. A frontend gate is G
 - [ ] Responsive layout, keyboard navigation, contrast and accessible labels tested in browser.
 - [ ] Product cards display the correct cover for each EA and preserve pricing/checkout behavior.
 - [ ] Protected download flow works with backend entitlements; no raw URL leaks to non-admin API responses.
+
+
+## 2026-11-11 — Additional frontend release gates
+
+- [ ] Customer/admin authenticated browser tests pass.
+- [ ] All four EA SVG covers load and map to the correct product.
+- [ ] Presets, broker referrals, support tickets and email templates function end-to-end.
+- [ ] Admin-only controls remain hidden from customers and enforced by backend authorization.
+- [ ] Protected EA download path never exposes raw storage URLs to customer responses.
+- [ ] Payment checkout state is accurately represented; no claim of commercial readiness before live payment configuration.
