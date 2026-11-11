@@ -50,3 +50,12 @@ table{color:#e7f4ff!important}th{color:#89c8e8!important;background:rgba(9,34,62
 /* motion accents */
 @media(prefers-reduced-motion:no-preference){.min-h-screen.bg-gray-50 .grid>div.bg-white{animation:bkRise .55s both}.min-h-screen.bg-gray-50 .grid>div.bg-white:nth-child(2){animation-delay:.08s}.min-h-screen.bg-gray-50 .grid>div.bg-white:nth-child(3){animation-delay:.16s}@keyframes bkRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}}
 @media(max-width:700px){.min-h-screen.bg-gray-50 .max-w-6xl>div:first-child{padding:24px 20px!important}.min-h-screen.bg-gray-50 .max-w-6xl>div:first-child:after{display:none}}
+
+/* Storefront hero uses the actual React component structure */
+.min-h-screen.bg-gray-50 .text-center.mb-12{position:relative;overflow:hidden;text-align:left!important;padding:38px 38px 34px!important;border:1px solid rgba(72,213,255,.4)!important;border-radius:24px!important;background:radial-gradient(ellipse at 85% 50%,rgba(79,68,229,.32),transparent 34%),linear-gradient(105deg,rgba(3,22,46,.98),rgba(15,24,67,.95))!important;box-shadow:0 24px 80px rgba(0,0,0,.4),inset 0 0 70px rgba(25,152,216,.08)!important}
+.min-h-screen.bg-gray-50 .text-center.mb-12:after{content:"⚙  BK CORP CLUB  /  NEXT-GEN EA SYSTEMS";display:block;margin-top:20px;color:rgba(104,229,255,.65);font:700 10px Orbitron;letter-spacing:.2em}
+.min-h-screen.bg-gray-50 .text-center.mb-12 h1{font-size:clamp(2.2rem,5vw,4rem)!important;line-height:1.15!important}
+.min-h-screen.bg-gray-50 .text-center.mb-12 p{color:#b1c9e4!important;max-width:760px}
+.min-h-screen.bg-gray-50 .text-center.mb-12 a{display:inline-flex;align-items:center;margin-top:14px;padding:12px 18px;border:1px solid rgba(88,223,255,.45);border-radius:10px;background:rgba(5,88,130,.25);color:#9bf2ff!important;font:700 10px Orbitron;letter-spacing:.08em}
+.min-h-screen.bg-gray-50 .grid.md\\:grid-cols-2>div{min-height:270px}
+@media(max-width:700px){.min-h-screen.bg-gray-50 .text-center.mb-12{padding:24px 20px!important}.min-h-screen.bg-gray-50 .text-center.mb-12:after{font-size:8px}}
