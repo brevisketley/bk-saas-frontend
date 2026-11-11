@@ -1,0 +1,52 @@
+/* BK CORP CLUB — CINEMATIC PLATFORM SYSTEM */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+:root{--bk-bg:#030815;--bk-panel:rgba(5,17,38,.88);--bk-line:rgba(67,218,255,.26);--bk-cyan:#53edff;--bk-blue:#3f9dff;--bk-violet:#906bff;--bk-gold:#f5c66b;--bk-text:#eef7ff;--bk-muted:#9db5d1}
+html,body,#root{min-height:100%;background-color:var(--bk-bg)}
+body{background:radial-gradient(ellipse at 12% 8%,rgba(0,205,245,.17),transparent 32%),radial-gradient(ellipse at 85% 20%,rgba(95,62,255,.2),transparent 36%),radial-gradient(ellipse at 50% 100%,rgba(0,95,150,.15),transparent 45%),linear-gradient(145deg,#020611,#07152d 56%,#090d26)!important;color:var(--bk-text)!important;font-family:'Rajdhani',system-ui,sans-serif!important}
+body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.19;background-image:linear-gradient(rgba(91,203,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(91,203,255,.1) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(#000,transparent 92%)}
+#root{position:relative;isolation:isolate}
+#root:before{content:"";position:fixed;z-index:-1;pointer-events:none;inset:0;background:radial-gradient(ellipse at 78% 38%,rgba(41,150,255,.09),transparent 30%),linear-gradient(90deg,transparent 49.8%,rgba(77,223,255,.045) 50%,transparent 50.2%)}
+button,[role=button],a{transition:transform .2s ease,filter .2s ease,border-color .2s ease,box-shadow .2s ease}
+button:hover,[role=button]:hover{filter:brightness(1.12)}
+/* app shell, admin, dashboards */
+.bg-white,.bg-gray-50,.bg-gray-100{background:linear-gradient(145deg,rgba(7,21,44,.96),rgba(3,10,25,.98))!important}
+.bg-white\/80,.bg-white\/90{background:rgba(5,17,38,.86)!important}
+.text-gray-900,.text-gray-800,.text-gray-700{color:#eef7ff!important}
+.text-gray-600,.text-gray-500,.text-gray-400{color:#9bb4d0!important}
+.border-gray-100,.border-gray-200,.border-gray-300{border-color:rgba(73,196,240,.2)!important}
+.shadow,.shadow-sm,.shadow-md,.shadow-lg,.shadow-xl{box-shadow:0 18px 55px rgba(0,0,0,.28),0 0 24px rgba(24,165,225,.055)!important}
+.rounded-xl,.rounded-2xl,.rounded-3xl{border-color:rgba(73,196,240,.22)}
+input,select,textarea{background:rgba(1,8,22,.82)!important;color:#eef7ff!important;border-color:rgba(73,196,240,.3)!important}
+input::placeholder,textarea::placeholder{color:#708ba8!important}
+button.bg-blue-600,button.bg-indigo-600,a.bg-blue-600,.bg-blue-600{background:linear-gradient(105deg,#087caa,#2855cb 58%,#6545cb)!important;color:#fff!important;box-shadow:0 8px 28px rgba(27,131,231,.24)!important}
+button.bg-green-600,.bg-green-600{background:linear-gradient(105deg,#087d84,#0b9c91)!important}
+button.bg-red-600,.bg-red-600{background:linear-gradient(105deg,#a42b52,#dc4660)!important}
+.bg-blue-50,.bg-indigo-50,.bg-cyan-50{background:rgba(18,92,132,.2)!important}
+.bg-gray-200,.bg-gray-300{background:rgba(48,80,116,.34)!important}
+.text-blue-600,.text-indigo-600,.text-cyan-600{color:#5de8ff!important}
+.text-blue-700,.text-indigo-700{color:#83caff!important}
+nav{border-color:rgba(73,196,240,.22)!important}
+aside{background:rgba(3,12,29,.85)!important}
+table{color:#e7f4ff!important}th{color:#89c8e8!important;background:rgba(9,34,62,.8)!important}td{border-color:rgba(73,196,240,.16)!important}
+[class*=recharts]{color:#dceeff}
+/* public EA store */
+.min-h-screen.bg-gray-50{background:radial-gradient(ellipse at 50% 0%,rgba(0,174,225,.17),transparent 38%),radial-gradient(ellipse at 100% 30%,rgba(104,65,245,.16),transparent 32%),linear-gradient(145deg,#020611,#07162d 55%,#0c1030)!important}
+.min-h-screen.bg-gray-50 header{background:rgba(3,12,29,.94)!important;border-bottom:1px solid rgba(75,217,255,.3)!important;box-shadow:0 10px 35px rgba(0,0,0,.3)}
+.min-h-screen.bg-gray-50 header a{color:#bfefff!important}
+.min-h-screen.bg-gray-50 h1,.min-h-screen.bg-gray-50 h2,.min-h-screen.bg-gray-50 h3{font-family:'Orbitron','Rajdhani',sans-serif!important;color:#f2f8ff!important;letter-spacing:.015em}
+.min-h-screen.bg-gray-50 h1{font-size:clamp(2rem,5vw,3.8rem)!important;text-shadow:0 0 32px rgba(65,208,255,.22)}
+.min-h-screen.bg-gray-50 .max-w-6xl>div:first-child{text-align:left!important;max-width:1200px;margin:0 auto 42px!important;padding:34px 34px 32px;border:1px solid rgba(72,213,255,.34);border-radius:24px;background:linear-gradient(105deg,rgba(3,22,46,.96),rgba(17,25,66,.88));box-shadow:0 24px 80px rgba(0,0,0,.35),inset 0 0 70px rgba(25,152,216,.08);position:relative;overflow:hidden}
+.min-h-screen.bg-gray-50 .max-w-6xl>div:first-child:after{content:"BK / AUTONOMOUS EA SYSTEMS";position:absolute;right:28px;bottom:22px;color:rgba(94,223,255,.22);font:700 11px Orbitron;letter-spacing:.22em}
+.min-h-screen.bg-gray-50 .max-w-6xl>div:first-child p{color:#a9c3de!important}
+.min-h-screen.bg-gray-50 .grid>div.bg-white,.min-h-screen.bg-gray-50 .max-w-md.bg-white{background:linear-gradient(145deg,rgba(7,24,49,.97),rgba(4,12,30,.98))!important;border:1px solid rgba(74,209,255,.32)!important;border-radius:20px!important;box-shadow:0 20px 60px rgba(0,0,0,.34),inset 0 0 50px rgba(26,133,200,.07)!important;color:#eef7ff!important;position:relative;overflow:hidden}
+.min-h-screen.bg-gray-50 .grid>div.bg-white:before{content:"";display:block;height:116px;margin:-24px -24px 20px;background:radial-gradient(ellipse at 50% 80%,rgba(40,204,255,.28),transparent 42%),linear-gradient(120deg,rgba(5,51,88,.8),rgba(31,25,89,.8));border-bottom:1px solid rgba(83,237,255,.24)}
+.min-h-screen.bg-gray-50 .grid>div.bg-white:after{content:"◈  BK CORP CLUB  /  EA UNIT";position:absolute;top:17px;left:18px;color:#79eaff;font:700 10px Orbitron;letter-spacing:.12em}
+.min-h-screen.bg-gray-50 .grid>div.bg-white button{background:linear-gradient(105deg,rgba(4,111,151,.32),rgba(57,66,161,.38))!important;color:#eafaff!important;border:1px solid rgba(91,221,255,.42)!important;border-radius:10px!important}
+.min-h-screen.bg-gray-50 .grid>div.bg-white button:hover{box-shadow:0 0 24px rgba(54,202,255,.24)!important;transform:translateY(-2px)}
+.min-h-screen.bg-gray-50 .max-w-md.bg-white{padding:28px!important}
+.min-h-screen.bg-gray-50 .max-w-md.bg-white .bg-blue-50{background:rgba(12,76,119,.28)!important;border:1px solid rgba(80,205,255,.25)}
+.min-h-screen.bg-gray-50 form label{color:#c9e9ff!important}
+.min-h-screen.bg-gray-50 form button[type=submit]{background:linear-gradient(100deg,#0789b4,#3157d1 55%,#7445cf)!important;color:#fff!important;border:1px solid rgba(111,226,255,.5)!important;min-height:52px;border-radius:12px!important;font:800 13px Orbitron!important;letter-spacing:.06em;box-shadow:0 12px 32px rgba(18,143,225,.28)!important}
+/* motion accents */
+@media(prefers-reduced-motion:no-preference){.min-h-screen.bg-gray-50 .grid>div.bg-white{animation:bkRise .55s both}.min-h-screen.bg-gray-50 .grid>div.bg-white:nth-child(2){animation-delay:.08s}.min-h-screen.bg-gray-50 .grid>div.bg-white:nth-child(3){animation-delay:.16s}@keyframes bkRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}}
+@media(max-width:700px){.min-h-screen.bg-gray-50 .max-w-6xl>div:first-child{padding:24px 20px!important}.min-h-screen.bg-gray-50 .max-w-6xl>div:first-child:after{display:none}}
