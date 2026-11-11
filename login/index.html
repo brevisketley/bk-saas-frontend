@@ -42,6 +42,7 @@ button:hover{transform:translateY(-2px);filter:brightness(1.13)}button:disabled{
 @media(prefers-reduced-motion:no-preference){.login-card{animation:cardIn .7s cubic-bezier(.2,.75,.2,1) both}@keyframes cardIn{from{opacity:0;transform:translateY(15px) scale(.985)}to{opacity:1;transform:none}}}
 .storefront-cta a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:110px;padding:22px 18px;border:2px solid rgba(103,232,249,.9);border-radius:14px;background:linear-gradient(105deg,#008bb5,#2354d6 54%,#7643d4);color:#fff;text-align:center;text-decoration:none;font-size:17px;font-weight:900;letter-spacing:.09em;box-shadow:0 0 0 6px rgba(42,196,255,.09),0 17px 48px rgba(8,145,178,.42),inset 0 1px rgba(255,255,255,.25);animation:shopPulse 2.8s ease-in-out infinite}.storefront-cta span{font-size:12px;font-weight:700;letter-spacing:.02em;color:#d4fbff}
 .login-guardian{height:190px;max-width:420px;position:relative;margin:24px 0 0;display:flex;align-items:center;justify-content:center;overflow:hidden}.login-guardian svg{height:205px;position:relative;z-index:1;filter:drop-shadow(0 0 18px rgba(77,228,255,.36));animation:guardianFloat 5s ease-in-out infinite}.guardian-ring{position:absolute;width:180px;height:180px;border:1px solid rgba(93,231,255,.36);border-radius:50%;box-shadow:0 0 0 25px rgba(67,193,255,.045),0 0 0 54px rgba(67,193,255,.025),inset 0 0 40px rgba(67,193,255,.08);animation:guardianSpin 28s linear infinite}.login-guardian span{position:absolute;bottom:5px;left:0;color:#72eaff;font:700 9px Orbitron;letter-spacing:.18em}@keyframes guardianFloat{50%{transform:translateY(-9px)}}@keyframes guardianSpin{to{transform:rotate(360deg)}}@media(max-width:850px){.login-guardian{height:140px;margin-top:12px}.login-guardian svg{height:150px}.guardian-ring{width:130px;height:130px}}
+.storefront-cta a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:112px;padding:22px 18px;border:2px solid rgba(103,232,249,.95);border-radius:15px;background:linear-gradient(105deg,#0094bd,#245ce1 54%,#7846db);color:#fff;text-align:center;text-decoration:none;font-size:18px;font-weight:900;letter-spacing:.09em;box-shadow:0 0 0 6px rgba(42,196,255,.1),0 18px 50px rgba(8,145,178,.48),inset 0 1px rgba(255,255,255,.28);animation:shopPulse 2.8s ease-in-out infinite}.storefront-cta span{font-size:12px;font-weight:700;letter-spacing:.02em;color:#e0fcff}
 </style></head>
 <body>
 <div class="scene">
@@ -55,6 +56,7 @@ button:hover{transform:translateY(-2px);filter:brightness(1.13)}button:disabled{
 </section>
 <main class="login-card">
 <div class="card-brand"><img src="/assets/bk-code-club-mark.svg" alt=""><div><strong>BK CORP CLUB</strong><small>SECURE WORKSPACE ACCESS</small></div></div>
+<div class="storefront-cta"><a href="/buy/">⚡ PURCHASE YOUR EA NOW <span>Explore BK Corp Club EAs · Compare rental prices · Get started →</span></a></div>
 <h2>Welcome back</h2><p class="sub">Sign in to your licensing dashboard.</p>
 <div id="message" class="message"></div>
 <form id="loginForm">
@@ -64,7 +66,6 @@ button:hover{transform:translateY(-2px);filter:brightness(1.13)}button:disabled{
 <a class="forgot" href="/reset-password.html">Forgot password?</a>
 <button id="submit" type="submit">SIGN IN&nbsp; →</button>
 </form>
-<div class="storefront-cta"><a href="/buy/">SHOP &amp; RENT BK CORP CLUB EAs <span>Browse EAs and rental prices&nbsp; →</span></a></div>
 <div class="links"><a href="/register/">Create a licensing account</a> &nbsp;·&nbsp; <a href="/">Back to platform</a></div>
 <div id="status" class="status">Encrypted session · secure licensing platform</div>
 </main>
