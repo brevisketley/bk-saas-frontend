@@ -64,3 +64,17 @@ After every material change: inspect full system -> cross-review -> test -> fix 
 
 ## Completion gate
 The project is 100% only when all critical P0/P1 release gates are production verified and the full purchase-to-activation-to-management journey works without manual intervention from this chat.
+
+
+## 2026-11-11 — Customer Resource Centre workstream
+
+- [x] Build customer Resource Centre route with My Licences, EA Library, Presets, Brokers and MT5 setup.
+- [x] Add visible customer entry points from login and authenticated app shell.
+- [x] Add admin controls for preset upload/version/publish/replace/archive and broker edit/enable/disable.
+- [x] Add four unique SVG EA covers and integrate product-name mapping into customer EA library and storefront cards.
+- [x] Route customer EA downloads through backend entitlement-checking endpoint.
+- [ ] Verify latest Render deployment contains all cover art, styling and route updates.
+- [ ] Browser-test sign-in, customer isolation, admin controls, responsive layout, accessibility and error states.
+- [ ] Test customer and admin workflows against live backend with authenticated sessions.
+- [ ] Confirm existing EA download URLs are supported by the approved-host proxy; migrate files from public raw URLs where required.
+- [ ] Finish purchase-to-licence-to-email-to-download E2E and security gates before commercial-readiness sign-off.
