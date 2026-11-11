@@ -59,3 +59,12 @@ table{color:#e7f4ff!important}th{color:#89c8e8!important;background:rgba(9,34,62
 .min-h-screen.bg-gray-50 .text-center.mb-12 a{display:inline-flex;align-items:center;margin-top:14px;padding:12px 18px;border:1px solid rgba(88,223,255,.45);border-radius:10px;background:rgba(5,88,130,.25);color:#9bf2ff!important;font:700 10px Orbitron;letter-spacing:.08em}
 .min-h-screen.bg-gray-50 .grid.md\\:grid-cols-2>div{min-height:270px}
 @media(max-width:700px){.min-h-screen.bg-gray-50 .text-center.mb-12{padding:24px 20px!important}.min-h-screen.bg-gray-50 .text-center.mb-12:after{font-size:8px}}
+
+/* BK Corp Club EA catalogue cards */
+.bk-product-card{background:linear-gradient(145deg,rgba(10,29,52,.97),rgba(5,13,28,.98))!important;border:1px solid rgba(213,179,107,.32)!important;box-shadow:0 20px 60px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.06)!important;color:#f3f7fc!important;transition:transform .2s,border-color .2s,box-shadow .2s}
+.bk-product-card:hover{transform:translateY(-4px);border-color:rgba(105,230,245,.55)!important;box-shadow:0 28px 72px rgba(0,0,0,.42),0 0 24px rgba(75,210,240,.08)!important}
+.bk-product-card h3{color:#f8fbff!important;font-family:"Space Grotesk",Arial,sans-serif!important;font-size:1.15rem!important;letter-spacing:-.02em}
+.bk-product-card p{color:#a9bfd4!important}
+.bk-product-card button{background:linear-gradient(120deg,#10263d,#102039)!important;border-color:rgba(213,179,107,.3)!important;color:#f0d59a!important}
+.bk-product-card button:hover{background:linear-gradient(120deg,#1b3b55,#1b2b4a)!important;border-color:#69e6f5!important}
+.bk-product-card button span{color:#f0d59a!important}
