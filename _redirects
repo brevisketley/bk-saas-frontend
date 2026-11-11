@@ -32,4 +32,10 @@
 /rep-dashboard/* /rep-dashboard/index.html 200
 /profile /dashboard/index.html 200
 /reports /dashboard/index.html 200
+/terms /legal/terms/index.html 200
+/terms/ /legal/terms/index.html 200
+/privacy /legal/privacy/index.html 200
+/privacy/ /legal/privacy/index.html 200
+/refunds /legal/refunds/index.html 200
+/refunds/ /legal/refunds/index.html 200
 /* /index.html 200
