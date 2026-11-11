@@ -37,3 +37,19 @@ Continue, don't stall. Work independent lanes in parallel, cross-review, red-tea
 5. Finish payment/licence provisioning and dashboard verification.
 6. Implement lead workflow in the dashboard while licensing gates are being tested.
 7. Restart full-system audit after each material change.
+
+
+## 2026-11-11 — Latest frontend handoff
+
+- Added /resources/ as a customer resource hub and wired it to the existing backend/authentication model.
+- Added the Presets and Brokers admin UI, including preset file replacement/version/visibility/archive controls and broker editing/enablement.
+- Added four original SVG EA covers and integrated product-name mapping into the customer EA library and storefront bundle.
+- The resource centre is live on the existing Render static-site deployment. The latest storefront bundle and CSS changes are rolling through auto-deploy; check the current deployment before declaring them live.
+- Static JavaScript syntax checks passed. Browser-level regression and live customer/admin integration are not yet proven.
+
+### Next actions
+1. Verify the latest frontend deployment is live.
+2. Open /resources/ after sign-in and test each tab.
+3. Test the storefront covers for all four current EAs and confirm mobile layout.
+4. Verify the dashboard shortcut does not obscure controls on small screens.
+5. Test admin and customer role behavior against the live backend; report exact errors and fix them.
