@@ -108,26 +108,30 @@ jobs:
           sleep 45
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
-          const base = 'https://www.bkcorpclub.com';
+          const hosts = [
+            { label: 'branded', base: 'https://www.bkcorpclub.com' },
+            { label: 'legacy', base: 'https://bk-saas-backend.onrender.com' }
+          ];
           const paths = ['/license/activate-v2', '/license/heartbeat-v2', '/license/deactivate-v2'];
           const results = [];
-          for (const path of paths) {
-            const response = await fetch(base + path, {
-              method: 'POST',
-              headers: { 'content-type': 'application/json', 'accept': 'application/json', 'x-tenant-domain': 'bkcorp' },
-              body: '{}',
-              redirect: 'manual',
-              cache: 'no-store',
-              signal: AbortSignal.timeout(15000)
-            });
-            const body = await response.text();
-            const contentType = response.headers.get('content-type') || '';
-            assert.notEqual(response.status, 404, `${path} returned 404: ${body.slice(0, 250)}`);
-            assert.ok(response.status < 500, `${path} returned ${response.status}: ${body.slice(0, 250)}`);
-            assert.match(contentType, /application\/json/i, `${path} returned non-JSON response: ${contentType}`);
-            results.push({ path, status: response.status, contentType });
+          for (const host of hosts) {
+            for (const path of paths) {
+              const response = await fetch(host.base + path, {
+                method: 'POST',
+                headers: { 'content-type': 'application/json', 'accept': 'application/json', 'x-tenant-domain': 'bkcorp' },
+                body: '{}',
+                redirect: 'manual',
+                cache: 'no-store',
+                signal: AbortSignal.timeout(15000)
+              });
+              const body = await response.text();
+              const contentType = response.headers.get('content-type') || '';
+              assert.equal(response.status, 400, `${host.label} ${path} expected safe 400 for empty payload, got ${response.status}: ${body.slice(0, 250)}`);
+              assert.match(contentType, /application\\/json/i, `${host.label} ${path} returned non-JSON response: ${contentType}`);
+              results.push({ host: host.label, path, status: response.status, contentType });
+            }
           }
-          console.log(JSON.stringify({ ok: true, host: base, checks: results }, null, 2));
+          console.log(JSON.stringify({ ok: true, checks: results }, null, 2));
           NODE
 
       - name: Install browser test runtime
