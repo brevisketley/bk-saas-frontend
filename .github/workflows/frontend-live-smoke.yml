@@ -127,7 +127,7 @@ jobs:
               const body = await response.text();
               const contentType = response.headers.get('content-type') || '';
               assert.equal(response.status, 400, `${host.label} ${path} expected safe 400 for empty payload, got ${response.status}: ${body.slice(0, 250)}`);
-              assert.match(contentType, /application\\/json/i, `${host.label} ${path} returned non-JSON response: ${contentType}`);
+              assert.match(contentType, /application\/json/i, `${host.label} ${path} returned non-JSON response: ${contentType}`);
               results.push({ host: host.label, path, status: response.status, contentType });
             }
           }
