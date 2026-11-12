@@ -69,6 +69,6 @@ Next: sign in as customer and admin, verify each Resource Centre tab, migrate le
 
 - Added public policy draft pages at /terms/, /privacy/ and /refunds/ and linked them from the storefront and Resource Centre.
 - Added required checkout acknowledgement linking to the policy pages.
-- Added three illustrated MT5 setup diagrams to the Resource Centre and transactional emails; the email retains the exact server URL https://bk-saas-backend.onrender.com and written instructions for clients that block images.
+- Added three illustrated MT5 setup diagrams to the Resource Centre and transactional emails. As of 2026-11-12, the branded endpoint `https://www.bkcorpclub.com` is primary for rebuilt EAs; `https://bk-saas-backend.onrender.com` remains the legacy endpoint for existing compiled builds during the transition.
 - Policy pages are drafts, not legal approval. The operator must provide verified legal entity, registration/address and privacy contact details and obtain qualified review before live checkout.
 - Production payment remains unconfigured; checkout is not commercially operational.
