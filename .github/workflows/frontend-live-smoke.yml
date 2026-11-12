@@ -123,7 +123,7 @@ jobs:
             const contentType = response.headers.get('content-type') || '';
             assert.notEqual(response.status, 404, `${path} returned 404: ${body.slice(0, 250)}`);
             assert.ok(response.status < 500, `${path} returned ${response.status}: ${body.slice(0, 250)}`);
-            assert.match(contentType, /application\\/json/i, `${path} returned non-JSON response: ${contentType}`);
+            assert.match(contentType, /application\/json/i, `${path} returned non-JSON response: ${contentType}`);
             results.push({ path, status: response.status, contentType });
           }
           console.log(JSON.stringify({ ok: true, host: base, checks: results }, null, 2));
