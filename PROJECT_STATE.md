@@ -81,3 +81,15 @@ Every meaningful change must be tested, cross-reviewed, deployed where applicabl
 - Added illustrated MT5 WebRequest setup diagrams to the customer Resource Centre and transactional welcome/licence emails.
 - Legal pages are intentionally marked as drafts pending the operator's verified legal entity/registration/address, privacy contact and qualified legal review. Do not enable live checkout until these details and applicable jurisdictional terms are confirmed.
 - The backend preflight still reports no production payment rail configured; the connected Stripe account is test mode only, and PayFast/Yoco live configuration is not confirmed.
+
+
+## 2026-11-12 — Branded MT5 licensing endpoint migration
+
+- Added a Render static-site external rewrite for `/license/*` from the public website host to the existing `bk-saas-backend.onrender.com` service. The existing frontend and backend services and database were retained.
+- Render frontend deployment for the routing configuration is live.
+- Live POST smoke checks were sent through `https://www.bkcorpclub.com` to `/license/activate-v2`, `/license/heartbeat-v2`, and `/license/deactivate-v2`. Backend logs confirm all three requests arrived with host `www.bkcorpclub.com`; each returned HTTP 400 for the deliberately empty test payload. This verifies forwarding and route reachability, not a successful activation using a real test key.
+- Existing direct backend access remains available for previously distributed EA builds. No licence records or customer records were deleted or modified.
+- Updated the Resource Centre MT5 allowlist instructions, copy button, step-3 setup illustration, and backend-generated licence/customer welcome email instructions to use `https://www.bkcorpclub.com`.
+- Updated the shared MQL5 licensing client and the available Gold Quantum Sniper licensed `.mq5` source to use the branded endpoint.
+- Release limitation: existing compiled `.ex5` binaries are not automatically changed by source edits. The repository does not contain the source for every distributed EA binary, and no MetaEditor compilation has been completed here. Recompile each affected EA from its corresponding source and upload the rebuilt private `.ex5` before claiming every customer binary has migrated.
+- Release limitation: the full frontend CI workflow still has a separate browser regression failure because password recovery reports that Resend delivery is not configured. The dedicated branded proxy test step passed.
