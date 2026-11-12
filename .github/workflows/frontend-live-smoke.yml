@@ -117,7 +117,8 @@ jobs:
               headers: { 'content-type': 'application/json', 'accept': 'application/json', 'x-tenant-domain': 'bkcorp' },
               body: '{}',
               redirect: 'manual',
-              cache: 'no-store'
+              cache: 'no-store',
+              signal: AbortSignal.timeout(15000)
             });
             const body = await response.text();
             const contentType = response.headers.get('content-type') || '';
