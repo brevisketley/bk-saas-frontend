@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: bk-saas-licensing-frontend
+    runtime: static
+    buildCommand: "echo 'Prebuilt frontend — no build required'"
+    staticPublishPath: ./
+    routes:
+      - type: rewrite
+        source: /license/*
+        destination: https://bk-saas-backend.onrender.com/license/*
