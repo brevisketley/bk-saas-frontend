@@ -1,0 +1,59 @@
+name: MT5 branded licensing proxy smoke test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proxy-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Allow Render deploy propagation
+        run: sleep 45
+
+      - name: Verify all MT5 licence routes proxy to the backend
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+
+          const base = 'https://www.bkcorpclub.com';
+          const paths = [
+            '/license/activate-v2',
+            '/license/heartbeat-v2',
+            '/license/deactivate-v2'
+          ];
+
+          const results = [];
+          for (const path of paths) {
+            const response = await fetch(base + path, {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json',
+                'x-tenant-domain': 'bkcorp'
+              },
+              body: '{}',
+              redirect: 'manual',
+              cache: 'no-store'
+            });
+            const body = await response.text();
+            const contentType = response.headers.get('content-type') || '';
+
+            assert.notEqual(response.status, 404, `${path} returned 404; proxy route not found: ${body.slice(0, 300)}`);
+            assert.ok(response.status < 500, `${path} returned server/proxy failure ${response.status}: ${body.slice(0, 300)}`);
+            assert.match(contentType, /application\\/json/i, `${path} did not return backend JSON (content-type: ${contentType}): ${body.slice(0, 300)}`);
+
+            results.push({ path, status: response.status, contentType });
+          }
+
+          console.log(JSON.stringify({
+            ok: true,
+            host: 'www.bkcorpclub.com',
+            checks: results
+          }, null, 2));
+          NODE
