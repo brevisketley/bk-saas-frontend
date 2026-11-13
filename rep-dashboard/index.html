@@ -1,78 +1,21 @@
 <!doctype html>
 <html lang="en">
-  <head><meta name="robots" content="noindex, nofollow"><script src="/bk-private.js"></script>
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="BK Corp Club Licensing — secure software licensing infrastructure." />
-    <title>BK Corp Club Licensing</title>
-    <style>
-      :root{color-scheme:dark;--bk-cyan:#62edff;--bk-muted:#9db4ce}
-      html,body{min-height:100%;background:#030713}
-      body{margin:0;font-family:'DM Sans',Inter,system-ui,sans-serif;color:#edf7ff;background:radial-gradient(ellipse at 14% 0%,rgba(0,190,220,.17),transparent 34%),radial-gradient(ellipse at 88% 18%,rgba(93,65,230,.18),transparent 35%),linear-gradient(145deg,#020611 0%,#071326 48%,#0b1030 100%) fixed}
-      body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;background-image:linear-gradient(rgba(113,190,235,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(113,190,235,.08) 1px,transparent 1px);background-size:54px 54px}
-      body:after{content:"";position:fixed;width:560px;height:560px;right:-290px;top:8%;border:1px solid rgba(72,213,244,.12);border-radius:50%;box-shadow:0 0 0 48px rgba(72,213,244,.025),0 0 0 105px rgba(72,213,244,.018);pointer-events:none}
-      #root{position:relative;z-index:1;min-height:100vh}
-      .fallback-card{background:linear-gradient(145deg,rgba(10,29,54,.96),rgba(5,12,31,.97));border:1px solid rgba(103,232,249,.34);border-radius:24px;box-shadow:0 35px 100px rgba(0,0,0,.55),0 0 65px rgba(34,211,238,.12);color:#f2f8ff}
-      .fallback-card p{color:#9db4ce}
-      .fallback-form input{background:rgba(5,18,39,.9);border:1px solid rgba(125,211,252,.28);color:#f2f8ff}
-      .fallback-form button{background:linear-gradient(105deg,#087f9f,#3155bd 58%,#684bc0);color:#fff;border:1px solid rgba(103,232,249,.55);border-radius:10px}
-      #root{min-height:100vh}
-      .fallback{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box}
-      .fallback-card{width:100%;max-width:420px;background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:32px;box-shadow:0 8px 30px rgba(0,0,0,.06);text-align:center}
-      .fallback-card h1{margin:0 0 8px;font-size:24px}.fallback-card p{margin:0;color:#6b7280}
-      .fallback-form{margin-top:24px;text-align:left}.fallback-form label{display:block;font-size:14px;font-weight:600;margin:14px 0 6px}.fallback-form input{box-sizing:border-box;width:100%;height:44px;border:1px solid #d1d5db;border-radius:9px;padding:0 12px;font-size:15px}.fallback-form button{width:100%;height:44px;margin-top:18px;border:0;border-radius:9px;background:#2563eb;color:#fff;font-weight:600;cursor:pointer}.fallback-note{margin-top:14px;font-size:12px;color:#9ca3af}
-      .fallback-error{display:none;margin-top:16px;padding:10px;border-radius:8px;background:#fef2f2;color:#b91c1c;font-size:13px}
-    </style>
-    <script>
-      window.__BK_LICENSING_BOOT__ = { startedAt: Date.now() };
-      window.addEventListener('error', function(event){
-        var box=document.getElementById('boot-error');
-        if(box){box.style.display='block';box.textContent='Application failed to initialize. Please refresh and try again.';}
-      });
-      window.addEventListener('unhandledrejection', function(){
-        var box=document.getElementById('boot-error');
-        if(box){box.style.display='block';box.textContent='Application failed to initialize. Please refresh and try again.';}
-      });
-      setTimeout(function(){
-        var root=document.getElementById('root');
-        var loaded=window.__BK_LICENSING_APP_LOADED__===true;
-        if(root && !loaded){
-          var box=document.getElementById('boot-error');
-          if(box){box.style.display='block';box.textContent='The secure application did not finish loading. Refresh the page or contact support.';}
-        }
-      }, 8000);
-    </script>
-    <script>
-      (function () {
-        var path = window.location.pathname; while (path.length > 1 && path.charAt(path.length - 1) === '/') path = path.slice(0, -1);
-        var protectedPaths = ['/admin', '/dashboard', '/rep-dashboard', '/settings', '/rep', '/licenses', '/customers', '/products', '/billing', '/pricing', '/profile', '/reports'];
-        if (protectedPaths.indexOf(path) === -1) return;
-        var token = '';
-        try { token = window.localStorage.getItem('saas_token') || window.sessionStorage.getItem('saas_token') || ''; } catch (_) {}
-        if (!token) window.location.replace('/login/');
-      })();
-    </script>
-    <script type="module" crossorigin src="/assets/index-DhaHI4J3.js" onload="window.__BK_LICENSING_APP_LOADED__=true"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CXrYC43P.css">
-  <link rel="stylesheet" href="/assets/bk-cinematic-upgrade.css?v=20261111-cinematic-1">
-</head>
+    <meta name="theme-color" content="#02040c" />
+    <meta name="description" content="BK Corp Club — Expert Advisors for MetaTrader 5 with secure, automated licensing. Choose your EA, pick a rental term and manage your licences in one command centre." />
+    <link rel="icon" type="image/svg+xml" href="/assets/bk-code-club-mark.svg" />
+    <title>BK Corp Club | Expert Advisors &amp; EA Licensing Platform</title>
+    <style>html,body{margin:0;background:#02040c;color:#eef6ff}</style>
+    <script type="module" crossorigin src="/assets/index-DDMyNrDb.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/motion-D1ALzKYF.js">
+    <link rel="modulepreload" crossorigin href="/assets/three-bQ5Tmi33.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-G3ywzA4L.css">
+  </head>
   <body>
-    <div id="root">
-      <main class="fallback">
-        <section class="fallback-card" aria-label="Licensing SaaS login">
-          <h1>BK Corp Club</h1>
-          <p>Licensing Platform</p>
-          <form class="fallback-form" onsubmit="return false">
-            <label for="fallback-email">Email</label>
-            <input id="fallback-email" type="email" autocomplete="username" placeholder="Email address">
-            <label for="fallback-password">Password</label>
-            <input id="fallback-password" type="password" autocomplete="current-password" placeholder="Password">
-            <button type="submit">Sign In</button>
-          </form>
-          <div id="boot-error" class="fallback-error" role="alert"></div>
-          <div class="fallback-note">Loading secure application…</div>
-        </section>
-      </main>
-    </div>
+    <div id="root"></div>
+    <noscript>BK Corp Club needs JavaScript enabled to load the licensing platform.</noscript>
   </body>
 </html>

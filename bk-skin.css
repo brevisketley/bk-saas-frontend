@@ -1,0 +1,31 @@
+/* BK Corp Club v2 skin for the standalone consoles (Resource Centre, Licence Manager, HQ).
+   Their markup and scripts are carried over unchanged; this sheet only re-themes them. */
+:root{color-scheme:dark;--bg:#02040c;--panel:rgba(10,20,44,.78);--panel2:rgba(14,28,58,.8);--card:rgba(10,20,44,.78);
+  --line:rgba(120,190,255,.18);--border:rgba(120,190,255,.18);--text:#eef6ff;--muted:#9fb4d0;--cyan:#5ee7ff;--blue:#4a8dff;
+  --primary:#5ee7ff;--accent:#8b6cff;--gold:#e8c57a;--green:#35e0a1;--red:#ff5c7a;--amber:#ffc46b}
+html{background:#02040c}
+body{color:var(--text)!important;font-family:"DM Sans",system-ui,sans-serif!important;
+  background:radial-gradient(ellipse 60% 45% at 12% -5%,rgba(34,190,230,.16),transparent 60%),
+  radial-gradient(ellipse 55% 45% at 92% 8%,rgba(120,88,255,.18),transparent 60%),
+  linear-gradient(160deg,#02040c 0%,#050b1c 55%,#080a22 100%) fixed!important}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;z-index:0;
+  background-image:linear-gradient(rgba(120,190,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(120,190,255,.09) 1px,transparent 1px);
+  background-size:56px 56px;-webkit-mask-image:linear-gradient(to bottom,#000,transparent 85%);mask-image:linear-gradient(to bottom,#000,transparent 85%)}
+body>*{position:relative;z-index:1}
+h1,h2,h3,h4,.brand,.logo{font-family:"Space Grotesk","DM Sans",system-ui,sans-serif!important;letter-spacing:-.01em;color:var(--text)}
+code,pre,.mono,td code{font-family:"JetBrains Mono",ui-monospace,monospace}
+a{color:var(--cyan)}
+.card,.panel,section.card,.box,.modal-content,table{backdrop-filter:blur(14px)}
+.card,.panel,.box{background:linear-gradient(155deg,rgba(14,28,58,.72),rgba(5,10,26,.78))!important;border:1px solid var(--line)!important;
+  border-radius:16px!important;box-shadow:0 24px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05)!important;color:var(--text)}
+input,select,textarea{background:rgba(5,10,24,.85)!important;color:var(--text)!important;border:1px solid var(--line)!important;border-radius:12px!important}
+input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(94,231,255,.7)!important;box-shadow:0 0 0 3px rgba(94,231,255,.14)}
+button,.btn{border-radius:12px!important;font-weight:600;transition:filter .2s,box-shadow .2s}
+button[type=submit],button.primary,.btn-primary{background:linear-gradient(100deg,#5ee7ff,#6fb0ff 55%,#a48bff)!important;color:#02040c!important;border:0!important;
+  box-shadow:0 0 0 1px rgba(94,231,255,.5),0 10px 34px rgba(74,141,255,.3)}
+button:hover{filter:brightness(1.1)}
+th{color:var(--muted)!important;background:rgba(255,255,255,.03)!important;text-transform:uppercase;letter-spacing:.12em;font-size:11px}
+td,th{border-color:var(--line)!important}
+label,small,.muted,.hint{color:var(--muted)!important}
+header,.topbar,nav{background:rgba(5,10,24,.7)!important;border-color:var(--line)!important;backdrop-filter:blur(16px)}
+::selection{background:rgba(94,231,255,.3)}

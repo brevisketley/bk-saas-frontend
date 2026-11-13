@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta name="robots" content="noindex, nofollow"><script src="/bk-private.js"></script>
+<head><meta name="robots" content="noindex, nofollow" /><script>(function(){var ADMINS=["admin@bkcorpclub.com"];try{var t=localStorage.getItem('saas_token')||sessionStorage.getItem('saas_token');var u=JSON.parse(localStorage.getItem('bk_user')||sessionStorage.getItem('bk_user')||'{}');var r=String(u.role||'').toLowerCase();var m=String(u.email||'').trim().toLowerCase();if(!t||(r!=='admin'&&r!=='superadmin')||ADMINS.indexOf(m)<0){location.replace('/login');}}catch(e){location.replace('/login');}})();</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>License Manager — BK Corp Club</title>
@@ -39,13 +39,11 @@
   .badge.inactive, .badge.suspended, .badge.expired { background:#fef2f2; color:var(--red); }
   .action-btn { background:none; border:1px solid var(--border); border-radius:5px; padding:4px 8px; cursor:pointer; font-size:12px; margin-right:4px; }
   .action-btn:hover { background:#f3f4f6; }
-  .action-btn.danger { color:#b91c1c; border-color:#fecaca; }
-  .action-btn.copy-key { white-space:nowrap; flex-shrink:0; }
   .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#111827; color:#fff; padding:10px 18px; border-radius:6px; font-size:13px; opacity:0; transition:opacity 0.2s; pointer-events:none; }
   .toast.show { opacity:1; }
   .muted { color:var(--muted); }
 </style>
-</head>
+<link rel="stylesheet" href="/bk-skin.css"></head>
 <body>
 
 <header>
@@ -67,8 +65,10 @@
     </div>
     <button class="submit" style="margin-top:12px;" onclick="createProduct()">+ Add EA</button>
     <div id="prodResult" style="margin-top:10px; font-size:13px;"></div>
-    <h3 style="margin:18px 0 8px;font-size:14px;">EA products on this site</h3>
-    <div style="overflow-x:auto;"><table><thead><tr><th>EA</th><th>Status</th><th>File</th><th>Action</th></tr></thead><tbody id="productTableBody"><tr><td colspan="4" class="muted">Loading products…</td></tr></tbody></table></div>
+    <div style="margin-top:18px;">
+      <h3 style="font-size:14px;margin-bottom:8px;">EA inventory</h3>
+      <div id="productList" style="display:grid;gap:8px;"><p class="muted">Loading EA inventory…</p></div>
+    </div>
   </div>
 
   <div class="card">
@@ -154,7 +154,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const API_URL = 'https://bk-saas-backend.onrender.com';
+const API_URL =((location.hostname.endsWith('bkcorpclub.com')||location.hostname==='bk-saas-licensing-frontend.onrender.com')?'https://bk-saas-backend.onrender.com':'/api'); /* v2: same-origin proxy on hosts outside the backend CORS allow-list */
 const TENANT_DOMAIN = 'bkcorp';
 let currentAdmin = null;
 
@@ -170,21 +170,8 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-async function copyToClipboard(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-    showToast('License key copied');
-  } catch (error) {
-    const field = document.createElement('textarea');
-    field.value = text;
-    field.style.position = 'fixed';
-    field.style.opacity = '0';
-    document.body.appendChild(field);
-    field.select();
-    const copied = document.execCommand('copy');
-    field.remove();
-    showToast(copied ? 'License key copied' : 'Copy failed — select the key manually');
-  }
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => showToast('Copied: ' + text));
 }
 
 // Assign-to toggle
@@ -214,16 +201,20 @@ async function loadProducts() {
     const data = await res.json();
     const allProducts = Array.isArray(data.products) ? data.products : [];
     const activeProducts = allProducts.filter(p => p.status === 'active');
-    const productBody = document.getElementById('productTableBody');
-    if (productBody) {
-      productBody.innerHTML = allProducts.map(p => {
-        const status = String(p.status || 'unknown');
-        const fileState = p.hasSecureFile ? 'Private file stored' : (p.downloadUrl ? 'External URL' : 'No file');
-        const action = status === 'active'
-          ? '<button class="action-btn danger" onclick="removeProduct(\''+p.id+'\', \''+String(p.name||'').replace(/\\\\/g,'\\\\\\\\').replace(/'/g,"\\\\'")+'\', this)">Delete</button>'
-          : '<span class="muted">Removed</span>';
-        return '<tr><td>'+String(p.name||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'</td><td><span class="badge '+(status==='active'?'active':'inactive')+'">'+status+'</span></td><td>'+fileState+'</td><td>'+action+'</td></tr>';
-      }).join('') || '<tr><td colspan="4" class="muted">No EA products found</td></tr>';
+    const productList = document.getElementById('productList');
+    if (productList) {
+      const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+      productList.innerHTML = allProducts.map(p => {
+        const active = p.status === 'active';
+        const fileState = p.hasSecureFile ? 'Private file stored' : (p.downloadUrl ? 'External URL attached' : 'No file attached');
+        return '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px;border:1px solid #263244;border-radius:10px;background:#0b1220;">' +
+          '<div><strong>'+esc(p.name)+'</strong><div class="muted" style="font-size:12px;margin-top:4px;">'+esc(p.status)+' · '+esc(fileState)+'</div></div>' +
+          (active ? '<button type="button" data-delete-product="'+esc(p.id)+'" data-product-name="'+esc(p.name)+'" style="background:#991b1b;color:#fff;border:0;border-radius:7px;padding:8px 12px;cursor:pointer;">Delete EA</button>' : '<span class="muted" style="font-size:12px;">Removed from site</span>') +
+          '</div>';
+      }).join('') || '<p class="muted">No EAs have been added yet.</p>';
+      productList.querySelectorAll('[data-delete-product]').forEach(button => {
+        button.addEventListener('click', () => deleteProduct(button.dataset.deleteProduct, button.dataset.productName, button));
+      });
     }
     const select = document.getElementById('productId');
     select.innerHTML = '<option value="">Select the EA this licence belongs to (required)</option>' +
@@ -236,6 +227,31 @@ async function loadProducts() {
     select.onchange = updateSelectedProductIdentity;
     updateSelectedProductIdentity();
   } catch (e) { /* ignore */ }
+}
+
+async function deleteProduct(productId, productName, button) {
+  const message = 'Remove "' + productName + '" from the customer catalogue? Existing licences, licence validation, EA binary and historical orders will be preserved. New checkouts will be blocked.';
+  if (!window.confirm(message)) return;
+  button.disabled = true;
+  button.textContent = 'Removing…';
+  try {
+    const res = await fetch(`${API_URL}/admin/products/${encodeURIComponent(productId)}`, {
+      method: 'DELETE',
+      headers: authHeaders({ 'Content-Type': 'application/json' })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || 'EA removal failed.');
+    const resultBox = document.getElementById('prodResult');
+    resultBox.style.color = '#166534';
+    resultBox.textContent = 'EA hidden from the customer catalogue. Existing licences, validation and EA binary were preserved; new purchases are blocked.';
+    await loadProducts();
+  } catch (error) {
+    button.disabled = false;
+    button.textContent = 'Delete EA';
+    const resultBox = document.getElementById('prodResult');
+    resultBox.style.color = '#991b1b';
+    resultBox.textContent = error.message || 'EA removal failed.';
+  }
 }
 
 async function createProduct() {
@@ -265,25 +281,6 @@ async function createProduct() {
     }
   } catch (e) {
     resultBox.textContent = 'Network error';
-  }
-}
-
-async function removeProduct(productId, productName, button) {
-  const message = 'Remove "' + productName + '" from the live site? This disables its licences and downloads, deletes its stored EA binary, and removes it from the shop. Historical orders and licence records will be retained. This cannot be undone for the binary.';
-  if (!window.confirm(message)) return;
-  if (button) { button.disabled = true; button.textContent = 'Removing...'; }
-  try {
-    const response = await fetch(`${API_URL}/admin/products/${encodeURIComponent(productId)}`, {
-      method: 'DELETE',
-      headers: authHeaders()
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'EA removal failed.');
-    showToast('EA removed from the live site');
-    await loadProducts();
-  } catch (error) {
-    showToast(error.message || 'EA removal failed');
-    if (button) { button.disabled = false; button.textContent = 'Delete'; }
   }
 }
 
@@ -451,24 +448,6 @@ async function resendEmail(licenseId, btnEl) {
   btnEl.disabled = false;
 }
 
-async function deleteLicense(licenseId, button) {
-  if (!window.confirm('Permanently delete this licence? Its MT5 activations and sessions will also be removed. This cannot be undone.')) return;
-  if (button) { button.disabled = true; button.textContent = 'Deleting...'; }
-  try {
-    const response = await fetch(`${API_URL}/admin/licenses/${encodeURIComponent(licenseId)}`, {
-      method: 'DELETE',
-      headers: authHeaders()
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'License deletion failed');
-    showToast('License permanently deleted');
-    await loadLicenses();
-  } catch (error) {
-    showToast(error.message || 'License deletion failed');
-    if (button) { button.disabled = false; button.textContent = 'Delete'; }
-  }
-}
-
 async function loadClientList() {
   try {
     const res = await fetch(`${API_URL}/admin/customers`, {
@@ -532,13 +511,12 @@ async function loadLicenses() {
       const ea = l.product ? l.product.name : '<span class="muted">—</span>';
       const expiry = l.expiry ? new Date(l.expiry).toLocaleDateString() : 'N/A';
       const canEmail = l.user && l.user.email;
-      const actions = (canEmail
+      const actions = canEmail
         ? `<button class="action-btn" onclick="resendEmail('${l.id}', this)">Email</button>`
-        : `<button class="action-btn" onclick="toggleAssignRow('${l.id}')">Assign</button>`) +
-        `<button class="action-btn danger" onclick="deleteLicense('${l.id}', this)">Delete</button>`;
+        : `<button class="action-btn" onclick="toggleAssignRow('${l.id}')">Assign</button>`;
       return `
         <tr>
-          <td><div class="key-cell"><span>${l.key}</span><button class="action-btn copy-key" type="button" onclick="copyToClipboard('${l.key}')">Copy</button></div></td>
+          <td class="key-cell" onclick="copyToClipboard('${l.key}')" title="Click to copy">📋 ${l.key}</td>
           <td><span class="badge ${l.status}">${l.status}</span></td>
           <td>${ea}</td>
           <td>${l.plan}</td>

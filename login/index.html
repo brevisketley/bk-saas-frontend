@@ -1,75 +1,21 @@
 <!doctype html>
-<html lang="en"><head><meta name="robots" content="noindex, nofollow"><script src="/bk-private.js"></script>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#030713">
-<meta name="description" content="BK Corp Club secure EA licensing platform sign in">
-<title>BK Corp Club — Secure Sign In</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/bk-cinematic-upgrade.css?v=20261111-cinematic-1">
-<style>
-:root{color-scheme:dark;--cyan:#62edff;--blue:#459dff;--violet:#8874ff;--white:#f2f8ff;--muted:#9db4ce}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:grid;place-items:center;padding:36px 5vw;overflow-x:hidden;background:radial-gradient(ellipse at 15% 12%,rgba(0,205,232,.19),transparent 34%),radial-gradient(ellipse at 86% 18%,rgba(94,65,239,.23),transparent 36%),linear-gradient(145deg,#020611,#07162d 54%,#0c1030);color:var(--white);font-family:'DM Sans',system-ui,sans-serif;position:relative}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.19;background-image:linear-gradient(rgba(113,190,235,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(113,190,235,.08) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to bottom,#000,transparent 90%)}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.105;background:url('/assets/bk-code-club-mark.svg') no-repeat 83% 48%/min(54vw,650px),radial-gradient(ellipse at 78% 48%,rgba(0,207,235,.18),transparent 42%)}
-.scene{position:relative;z-index:1;width:min(1180px,100%);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(360px,.72fr);gap:clamp(35px,7vw,100px);align-items:center}
-.story{position:relative;padding:30px 0}
-.brand{display:flex;align-items:center;gap:14px;margin-bottom:58px}
-.brand img{width:58px;height:58px;filter:drop-shadow(0 0 22px rgba(34,211,238,.36))}
-.brand-name{font:800 14px 'Space Grotesk';letter-spacing:.18em}.brand-name small{display:block;color:#83a7c8;font:600 9px 'DM Sans';letter-spacing:.28em;margin-top:5px}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(103,232,249,.28);border-radius:99px;padding:9px 14px;color:#a5f3fc;background:linear-gradient(100deg,rgba(8,145,178,.16),rgba(79,70,229,.12));font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
-.dot{width:7px;height:7px;border-radius:50%;background:#22d3ee;box-shadow:0 0 14px #22d3ee}
-h1{font:700 clamp(42px,5.4vw,72px)/.99 'Space Grotesk';letter-spacing:-.065em;margin:25px 0 20px;max-width:650px}
-h1 span{background:linear-gradient(95deg,#66f0ff,#65b6ff 48%,#ad91ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.story-copy{max-width:540px;color:#a9bdd4;line-height:1.85;font-size:15px}
-.pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}.pill{border:1px solid rgba(125,211,252,.2);border-radius:10px;background:rgba(7,22,43,.64);padding:10px 13px;color:#b8d4ed;font-size:10px;letter-spacing:.08em}
-.login-card{position:relative;overflow:hidden;padding:clamp(27px,3.5vw,42px);border:1px solid rgba(103,232,249,.32);border-radius:24px;background:linear-gradient(145deg,rgba(10,29,54,.94),rgba(5,12,31,.96));box-shadow:0 35px 100px rgba(0,0,0,.55),0 0 65px rgba(34,211,238,.12),inset 0 1px rgba(255,255,255,.12);backdrop-filter:blur(22px)}
-.login-card:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,#4deaff,#8273ff,transparent)}
-.card-brand{display:flex;align-items:center;gap:12px;margin-bottom:27px}.card-brand img{width:38px;height:38px}.card-brand strong{font:700 15px 'Space Grotesk';letter-spacing:.09em}.card-brand small{display:block;color:#82a0bd;font-size:9px;letter-spacing:.17em;margin-top:3px}
-h2{font:700 25px 'Space Grotesk';margin:0 0 7px;letter-spacing:-.035em}.sub{color:#91a9c5;font-size:13px;margin:0 0 27px}
-.field{margin:0 0 17px}.field label{display:block;color:#dbeafe;font-size:12px;font-weight:700;margin-bottom:8px;letter-spacing:.035em}
-.field input{width:100%;height:48px;border:1px solid rgba(125,211,252,.28);background:rgba(2,8,23,.76);color:#f8fafc;border-radius:11px;padding:0 14px;font:14px 'DM Sans';outline:none}
-.field input:focus{border-color:#22d3ee;box-shadow:0 0 0 3px rgba(34,211,238,.14),0 0 22px rgba(34,211,238,.08)}
-.field input::placeholder{color:#6885a3}
-.remember{display:flex;align-items:flex-start;gap:10px;margin:4px 0 20px;color:#b8cbe0;font-size:11px;line-height:1.5}.remember input{width:16px;height:16px;margin:1px 0 0;accent-color:#06b6d4}
-.forgot{display:block;text-align:right;color:#67e8f9;text-decoration:none;font-size:11px;margin:-7px 0 18px}
-button{width:100%;height:49px;border:1px solid rgba(103,232,249,.55);border-radius:11px;background:linear-gradient(105deg,#087f9f,#3155bd 58%,#684bc0);color:#fff;font-size:14px;font-weight:800;letter-spacing:.035em;cursor:pointer;box-shadow:0 12px 34px rgba(8,145,178,.25),inset 0 1px rgba(255,255,255,.2);transition:transform .2s,filter .2s}
-button:hover{transform:translateY(-2px);filter:brightness(1.13)}button:disabled{opacity:.65;cursor:wait}
-.message{display:none;margin:0 0 16px;padding:11px 12px;border-radius:9px;font-size:13px}.error{background:rgba(127,29,29,.28);color:#fecaca;border:1px solid rgba(248,113,113,.25)}.success{background:rgba(6,95,70,.28);color:#a7f3d0;border:1px solid rgba(52,211,153,.25)}
-.storefront-cta{margin-top:19px}.storefront-cta a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:66px;padding:13px 16px;border:1px solid rgba(103,232,249,.68);border-radius:12px;background:linear-gradient(105deg,#075f78,#2149a9 58%,#5b3bb1);color:#fff;text-align:center;text-decoration:none;font-size:13px;font-weight:900;letter-spacing:.045em;box-shadow:0 12px 34px rgba(8,145,178,.23),inset 0 1px rgba(255,255,255,.18);transition:transform .2s,filter .2s}.storefront-cta a:hover{transform:translateY(-2px);filter:brightness(1.15)}.storefront-cta span{font-size:11px;font-weight:600;letter-spacing:0;color:#c8f7ff}.links{text-align:center;margin-top:17px;color:#8ea8c5;font-size:12px;line-height:2}.links a{color:#67e8f9;text-decoration:none;font-weight:700}.status{text-align:center;margin-top:17px;color:#6886a5;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
-@media(max-width:850px){body{padding:25px 18px}.scene{grid-template-columns:1fr;max-width:490px;gap:15px}.story{padding:8px 0 0}.brand{margin-bottom:24px}.story h1{font-size:42px;margin:17px 0 12px}.story-copy{font-size:13px}.pill-row{display:none}.login-card{margin:0 0 10px}body:after{background-position:center,center;background-size:min(90vw,520px),auto;opacity:.07}}
-@media(prefers-reduced-motion:no-preference){.login-card{animation:cardIn .7s cubic-bezier(.2,.75,.2,1) both}@keyframes cardIn{from{opacity:0;transform:translateY(15px) scale(.985)}to{opacity:1;transform:none}}}
-.storefront-cta a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:110px;padding:22px 18px;border:2px solid rgba(103,232,249,.9);border-radius:14px;background:linear-gradient(105deg,#008bb5,#2354d6 54%,#7643d4);color:#fff;text-align:center;text-decoration:none;font-size:17px;font-weight:900;letter-spacing:.09em;box-shadow:0 0 0 6px rgba(42,196,255,.09),0 17px 48px rgba(8,145,178,.42),inset 0 1px rgba(255,255,255,.25);animation:shopPulse 2.8s ease-in-out infinite}.storefront-cta span{font-size:12px;font-weight:700;letter-spacing:.02em;color:#d4fbff}
-.login-guardian{height:190px;max-width:420px;position:relative;margin:24px 0 0;display:flex;align-items:center;justify-content:center;overflow:hidden}.login-guardian svg{height:205px;position:relative;z-index:1;filter:drop-shadow(0 0 18px rgba(77,228,255,.36));animation:guardianFloat 5s ease-in-out infinite}.guardian-ring{position:absolute;width:180px;height:180px;border:1px solid rgba(93,231,255,.36);border-radius:50%;box-shadow:0 0 0 25px rgba(67,193,255,.045),0 0 0 54px rgba(67,193,255,.025),inset 0 0 40px rgba(67,193,255,.08);animation:guardianSpin 28s linear infinite}.login-guardian span{position:absolute;bottom:5px;left:0;color:#72eaff;font:700 9px Orbitron;letter-spacing:.18em}@keyframes guardianFloat{50%{transform:translateY(-9px)}}@keyframes guardianSpin{to{transform:rotate(360deg)}}@media(max-width:850px){.login-guardian{height:140px;margin-top:12px}.login-guardian svg{height:150px}.guardian-ring{width:130px;height:130px}}
-.storefront-cta a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:112px;padding:22px 18px;border:2px solid rgba(103,232,249,.95);border-radius:15px;background:linear-gradient(105deg,#0094bd,#245ce1 54%,#7846db);color:#fff;text-align:center;text-decoration:none;font-size:18px;font-weight:900;letter-spacing:.09em;box-shadow:0 0 0 6px rgba(42,196,255,.1),0 18px 50px rgba(8,145,178,.48),inset 0 1px rgba(255,255,255,.28);animation:shopPulse 2.8s ease-in-out infinite}.storefront-cta span{font-size:12px;font-weight:700;letter-spacing:.02em;color:#e0fcff}
-
-</style></head>
-<body>
-<div class="scene">
-<section class="story">
-<div class="brand"><img src="/assets/bk-code-club-mark.svg" alt="BK Corp Club logo"><div class="brand-name">BK CORP CLUB<small>EA LICENSING PLATFORM</small></div></div>
-<div class="eyebrow"><span class="dot"></span> Secure command access</div>
-<h1>Your business.<br><span>Your command centre.</span></h1>
-<p class="story-copy">Manage your EA products, customers, licences and activations from one powerful, branded workspace. Precision control, built for scale.</p>
-<div class="login-guardian" aria-label="BK Corp Club AI guardian"><div class="guardian-ring"></div><svg viewBox="0 0 280 230" role="img" aria-label="Futuristic AI guardian robot"><defs><linearGradient id="lgArmor" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c8f8ff"/><stop offset=".45" stop-color="#3978b7"/><stop offset="1" stop-color="#876cff"/></linearGradient></defs><path d="M93 44 140 18l47 26 9 48-22 31H106L84 92Z" fill="url(#lgArmor)" stroke="#9df5ff" stroke-width="3"/><path d="m102 72 38-19 38 19-8 28-30 13-30-13Z" fill="#05152c" stroke="#58e9ff" stroke-width="2"/><path d="M112 82h20l8 8 8-8h20l-6 15-22 8-22-8Z" fill="#62edff"/><path d="m106 123-27 25-9 48 26 8 25-48 19-10 19 10 25 48 26-8-9-48-27-25Z" fill="url(#lgArmor)" stroke="#74eaff" stroke-width="3"/><path d="m140 127 22 30-22 18-22-18Z" fill="#07152c" stroke="#65edff" stroke-width="2"/><path d="M140 135v29" stroke="#65edff" stroke-width="5"/></svg><span>AI GUARDIAN // SYSTEM ONLINE</span></div>
-<div class="pill-row"><span class="pill">◈ LICENCE CONTROL</span><span class="pill">⌘ CUSTOMER OPERATIONS</span><span class="pill">▦ LIVE VISIBILITY</span></div>
-</section>
-<main class="login-card">
-<div class="card-brand"><img src="/assets/bk-code-club-mark.svg" alt=""><div><strong>BK CORP CLUB</strong><small>SECURE WORKSPACE ACCESS</small></div></div>
-<div class="storefront-cta"><a href="/buy/">⚡ PURCHASE YOUR EA NOW <span>Explore BK Corp Club EAs · Compare rental prices · Get started →</span></a></div>
-<h2>Welcome back</h2><p class="sub">Sign in to your licensing dashboard.</p>
-<div id="message" class="message"></div>
-<form id="loginForm">
-<div class="field"><label for="email">EMAIL ADDRESS</label><input id="email" name="email" type="email" autocomplete="username" placeholder="Email address" required></div>
-<div class="field"><label for="password">PASSWORD</label><input id="password" name="password" type="password" autocomplete="current-password" placeholder="Your password" required></div>
-<label class="remember" for="rememberDetails"><input id="rememberDetails" type="checkbox"><span>Save login details on this computer and automatically sign in next time</span></label>
-<a class="forgot" href="/reset-password.html">Forgot password?</a>
-<button id="submit" type="submit">SIGN IN&nbsp; →</button>
-</form>
-<div class="links"><a href="/register/">Create a licensing account</a> &nbsp;·&nbsp; <a href="/resources/">Customer resources</a> &nbsp;·&nbsp; <a href="/">Back to platform</a></div>
-<div id="status" class="status">Encrypted session · secure licensing platform</div>
-</main>
-</div>
-<script src="/login-v2.js?v=20261108-cinematic-v4" defer></script>
-</body></html>
+<html lang="en">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#02040c" />
+    <meta name="description" content="BK Corp Club — Expert Advisors for MetaTrader 5 with secure, automated licensing. Choose your EA, pick a rental term and manage your licences in one command centre." />
+    <link rel="icon" type="image/svg+xml" href="/assets/bk-code-club-mark.svg" />
+    <title>BK Corp Club | Expert Advisors &amp; EA Licensing Platform</title>
+    <style>html,body{margin:0;background:#02040c;color:#eef6ff}</style>
+    <script type="module" crossorigin src="/assets/index-DDMyNrDb.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/motion-D1ALzKYF.js">
+    <link rel="modulepreload" crossorigin href="/assets/three-bQ5Tmi33.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-G3ywzA4L.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>BK Corp Club needs JavaScript enabled to load the licensing platform.</noscript>
+  </body>
+</html>
