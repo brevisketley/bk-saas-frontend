@@ -67,6 +67,8 @@
     </div>
     <button class="submit" style="margin-top:12px;" onclick="createProduct()">+ Add EA</button>
     <div id="prodResult" style="margin-top:10px; font-size:13px;"></div>
+    <h3 style="margin:18px 0 8px;font-size:14px;">EA products on this site</h3>
+    <div style="overflow-x:auto;"><table><thead><tr><th>EA</th><th>Status</th><th>File</th><th>Action</th></tr></thead><tbody id="productTableBody"><tr><td colspan="4" class="muted">Loading products…</td></tr></tbody></table></div>
   </div>
 
   <div class="card">
@@ -210,7 +212,19 @@ async function loadProducts() {
   try {
     const res = await fetch(`${API_URL}/product/all`, { headers: { 'x-tenant-domain': TENANT_DOMAIN } });
     const data = await res.json();
-    const activeProducts = (data.products || []).filter(p => p.status === 'active');
+    const allProducts = Array.isArray(data.products) ? data.products : [];
+    const activeProducts = allProducts.filter(p => p.status === 'active');
+    const productBody = document.getElementById('productTableBody');
+    if (productBody) {
+      productBody.innerHTML = allProducts.map(p => {
+        const status = String(p.status || 'unknown');
+        const fileState = p.hasSecureFile ? 'Private file stored' : (p.downloadUrl ? 'External URL' : 'No file');
+        const action = status === 'active'
+          ? '<button class="action-btn danger" onclick="removeProduct(\''+p.id+'\', \''+String(p.name||'').replace(/\\\\/g,'\\\\\\\\').replace(/'/g,"\\\\'")+'\', this)">Delete</button>'
+          : '<span class="muted">Removed</span>';
+        return '<tr><td>'+String(p.name||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'</td><td><span class="badge '+(status==='active'?'active':'inactive')+'">'+status+'</span></td><td>'+fileState+'</td><td>'+action+'</td></tr>';
+      }).join('') || '<tr><td colspan="4" class="muted">No EA products found</td></tr>';
+    }
     const select = document.getElementById('productId');
     select.innerHTML = '<option value="">Select the EA this licence belongs to (required)</option>' +
       activeProducts.map(p => `<option value="${p.id}">${p.name} ${p.price ? `(${p.price})` : ''}</option>`).join('');
@@ -251,6 +265,25 @@ async function createProduct() {
     }
   } catch (e) {
     resultBox.textContent = 'Network error';
+  }
+}
+
+async function removeProduct(productId, productName, button) {
+  const message = 'Remove "' + productName + '" from the live site? This disables its licences and downloads, deletes its stored EA binary, and removes it from the shop. Historical orders and licence records will be retained. This cannot be undone for the binary.';
+  if (!window.confirm(message)) return;
+  if (button) { button.disabled = true; button.textContent = 'Removing...'; }
+  try {
+    const response = await fetch(`${API_URL}/admin/products/${encodeURIComponent(productId)}`, {
+      method: 'DELETE',
+      headers: authHeaders()
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'EA removal failed.');
+    showToast('EA removed from the live site');
+    await loadProducts();
+  } catch (error) {
+    showToast(error.message || 'EA removal failed');
+    if (button) { button.disabled = false; button.textContent = 'Delete'; }
   }
 }
 
