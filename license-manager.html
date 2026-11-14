@@ -154,7 +154,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const API_URL =((location.hostname.endsWith('bkcorpclub.com')||location.hostname==='bk-saas-licensing-frontend.onrender.com')?'https://bk-saas-backend.onrender.com':'/api'); /* v2: same-origin proxy on hosts outside the backend CORS allow-list */
+ const API_URL =(location.hostname.endsWith('bkcorpclub.com')?'/api':'https://bk-saas-backend.onrender.com'); /* company-domain requests are routed through Cloudflare */
 const TENANT_DOMAIN = 'bkcorp';
 let currentAdmin = null;
 
