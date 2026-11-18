@@ -1,25 +1,4 @@
 User-agent: *
-Allow: /
-
-# Keep authenticated account and transaction routes out of search.
-Disallow: /admin
-Disallow: /dashboard
-Disallow: /login
-Disallow: /register
-Disallow: /reset-password
-Disallow: /profile
-Disallow: /settings
-Disallow: /customers
-Disallow: /tenant
-Disallow: /rep
-Disallow: /rep-dashboard
-Disallow: /billing
-Disallow: /checkout
-Disallow: /licenses
-Disallow: /resources
-Disallow: /onboarding
-Disallow: /reports
-Disallow: /api/
-Disallow: /license/
-
-Sitemap: https://www.bkcorpclub.com/sitemap.xml
+Allow: /$
+Allow: /blog
+Disallow: /
