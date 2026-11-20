@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.bkcorpclub.com/</loc>
-  </url>
-  <url>
-    <loc>https://www.bkcorpclub.com/blog/</loc>
-  </url>
+  <url><loc>https://www.bkcorpclub.com/</loc></url>
+  <url><loc>https://www.bkcorpclub.com/buy</loc></url>
+  <url><loc>https://www.bkcorpclub.com/pricing</loc></url>
+  <url><loc>https://www.bkcorpclub.com/products</loc></url>
+  <url><loc>https://www.bkcorpclub.com/blog/</loc></url>
+  <url><loc>https://www.bkcorpclub.com/resources</loc></url>
+  <url><loc>https://www.bkcorpclub.com/terms</loc></url>
+  <url><loc>https://www.bkcorpclub.com/privacy</loc></url>
+  <url><loc>https://www.bkcorpclub.com/refunds</loc></url>
 </urlset>
