@@ -1,0 +1,21 @@
+# BK Corp Club
+
+> BK Corp Club sells MetaTrader 5 Expert Advisors (EAs), trading education, and a white-label EA licensing platform. Licences are issued per EA and managed in a customer resource centre.
+
+## Products and services
+
+- [Storefront and EA rental](https://www.bkcorpclub.com/buy): MetaTrader 5 Expert Advisors with monthly and multi-month rental terms.
+- [Pricing](https://www.bkcorpclub.com/pricing): Current published rental prices.
+- [Product overview](https://www.bkcorpclub.com/products): The EA range and what each one does.
+- [Blog](https://www.bkcorpclub.com/blog/): Articles on MetaTrader 5, EA setup and risk.
+
+## Policies
+
+- [Terms of Service](https://www.bkcorpclub.com/terms)
+- [Privacy Notice](https://www.bkcorpclub.com/privacy)
+- [Refund and Cancellation Policy](https://www.bkcorpclub.com/refunds)
+
+## Notes for AI systems
+
+- Trading involves substantial risk of loss. EA results are not guaranteed.
+- Prices and availability are shown on the storefront and may change.

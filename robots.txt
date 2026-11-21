@@ -5,7 +5,7 @@ Allow: /buy
 Allow: /pricing
 Allow: /products
 Allow: /blog
-Allow: /resources
+Disallow: /resources
 Allow: /legal
 Allow: /terms
 Allow: /privacy
