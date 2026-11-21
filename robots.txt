@@ -1,4 +1,38 @@
 User-agent: *
+# Public storefront, content and legal pages: indexable
 Allow: /$
+Allow: /buy
+Allow: /pricing
+Allow: /products
 Allow: /blog
-Disallow: /
+Disallow: /resources
+Allow: /legal
+Allow: /terms
+Allow: /privacy
+Allow: /refunds
+# Logged-in app and admin pages: not indexed
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /login
+Disallow: /register
+Disallow: /reset-password
+Disallow: /profile
+Disallow: /settings
+Disallow: /billing
+Disallow: /checkout
+Disallow: /customers
+Disallow: /licenses
+Disallow: /onboarding
+Disallow: /reseller
+Disallow: /rep
+Disallow: /rep-dashboard
+Disallow: /reports
+Disallow: /tenant
+Disallow: /brokers
+Disallow: /presets
+Disallow: /license-manager
+Disallow: /license/
+Disallow: /api/
+Disallow: /auth/
+
+Sitemap: https://www.bkcorpclub.com/sitemap.xml
