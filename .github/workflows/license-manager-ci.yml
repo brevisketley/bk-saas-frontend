@@ -27,7 +27,7 @@ jobs:
           required = [
               'id="productId" required',
               'Select the EA this licence belongs to (required)',
-              "const body = { plan, expiryDays, productId }",
+              "const body = { plan, expiryDate, productId }",
               "if (!productId)",
               "p.status === 'active'",
               '<th>EA</th>'
